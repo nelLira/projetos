@@ -36,7 +36,7 @@ public class Principal {
 		
 		Estatisticas est = new Estatisticas();
 		listaTodosJogos = est.lerTodosOsJogos();
-		
+		//teste
 		// 8:214[428]
 		// 9:308 [567]
 		// 10:170[361]
