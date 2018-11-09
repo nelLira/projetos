@@ -43,6 +43,7 @@ public class Principal {
 		// 7;8;9;10;11:849[1658]
 		// 8;9;10:692[1368]
 		// 11:66[139]
+		//simulacao();
 		// novaSimulacao();
 		// simulacaoBoleanos();
 		// consultaSorteio();
@@ -50,13 +51,23 @@ public class Principal {
 		// jogos();
 		// gerarJogos(50);
 		// gerarJogosArq(5);
-		   gerarJogosCSV(50);
+		// gerarJogosCSV(50);
 		// consultarSorteioArq();
-		// estatisticasUltimosSorteioCSV(50);
+		// estatisticasUltimosSorteioCSV(30);
 		// filtaListaJogosBoleanos();
-	    // List<Jogo> jogos = new ArrayList<Jogo>();
-		// consultaSorteio(jogos);
-		// estatSorteio();
+	     List<Jogo> jogos = new ArrayList<Jogo>();
+	     jogos.add(new Jogo(Arrays.asList(3, 5, 6, 7, 8, 9, 10, 11, 12, 16, 19, 20, 21, 23, 25)));
+	     jogos.add(new Jogo(Arrays.asList(2, 3, 4, 7, 8, 9, 10, 11, 14, 15, 18, 19, 21, 23, 24)));
+	     jogos.add(new Jogo(Arrays.asList(1, 2, 3, 6, 7, 9, 13, 14, 15, 16, 17, 18, 20, 23, 25)));
+	     jogos.add(new Jogo(Arrays.asList(2, 3, 5, 6, 7, 8, 9, 10, 13, 14, 18, 22, 23, 24, 25)));
+	     jogos.add(new Jogo(Arrays.asList(1, 2, 3, 4, 5, 6, 10, 12, 13, 14, 15, 17, 23, 24, 25)));
+	     jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 8, 10, 11, 13, 15, 16, 17, 18, 19, 23, 25)));
+	     jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 7, 8, 9, 11, 12, 15, 19, 20, 22, 23, 25)));
+	     jogos.add(new Jogo(Arrays.asList(1, 3, 4, 6, 8, 9, 10, 12, 13, 16, 17, 18, 20, 24, 25)));
+	     jogos.add(new Jogo(Arrays.asList(1, 3, 5, 6, 7, 9, 11, 13, 14, 16, 17, 19, 22, 23, 24)));
+	     jogos.add(new Jogo(Arrays.asList(1, 4, 5, 6, 7, 8, 10, 13, 14, 15, 18, 21, 23, 24, 25)));
+	     consultaSorteio(jogos);
+		 estatSorteio();
 		
 		// próximo 1726
 
@@ -387,7 +398,7 @@ public class Principal {
 			Set<Integer> intersectionDezUltimos = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			intersectionDezUltimos.retainAll(dezUltimos.getJogo());
 			
-			resultCSV.add (i +
+			resultCSV.add ((i + 1) +
 					//"Jogo: " + todosJogos.get(i).getJogo() + 
 					"#Repetidos#" + intersectionRepetidos.size() 
 								+ "#Pares#" + intersectionPares.size() 
@@ -462,7 +473,7 @@ public class Principal {
 		//
 
 		///
-		 jogos.getListaDeJogos().addAll(CombinacoesOitoSete(strUltimoSorteio, strNumerosNaoSorteados));
+		// jogos.getListaDeJogos().addAll(CombinacoesOitoSete(strUltimoSorteio, strNumerosNaoSorteados));
 
 		// Jogo numeros = new Jogo(jogoVinteNumeros().getJogo());
 		// System.out.println(numeros.getJogo());
@@ -471,11 +482,10 @@ public class Principal {
 
 		// jogos.getListaDeJogos().addAll(jogos.combinaDezUltimosPrimeiosMeio());
 
-		// jogos.getListaDeJogos().addAll(CombinacoesNoveSeis(strUltimoSorteio,strNumerosNaoSorteados));
-		//jogos.getListaDeJogos().addAll(jogos.analiseEstatisticasJogo());
+		 jogos.getListaDeJogos().addAll(CombinacoesNoveSeis(strUltimoSorteio,strNumerosNaoSorteados));
+		 //jogos.getListaDeJogos().addAll(jogos.analiseEstatisticasJogo());
 
-		// jogos.getListaDeJogos().addAll(CombinacoesDezCinco(strUltimoSorteio,
-		// strNumerosNaoSorteados));
+	//	 jogos.getListaDeJogos().addAll(CombinacoesDezCinco(strUltimoSorteio,strNumerosNaoSorteados));
 
 		//
 
@@ -933,10 +943,7 @@ public class Principal {
 	        FileWriter outputfile = new FileWriter(file); 
 
 	        // create CSVWriter with ';' as separator 
-	        CSVWriter writer = new CSVWriter(outputfile, ';', 
-	                                         CSVWriter.NO_QUOTE_CHARACTER, 
-	                                         CSVWriter.DEFAULT_ESCAPE_CHARACTER, 
-	                                         CSVWriter.DEFAULT_LINE_END); 
+	        CSVWriter writer = new CSVWriter(outputfile, ';'); 
 
 	        // create a List which contains Data 
 	        List<String[]> data = new ArrayList<String[]>(); 

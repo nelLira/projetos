@@ -89,11 +89,14 @@ public class FiltroJogos extends Filtro {
 		grupo8a11(); // 180=4;612=3;571=2;261=1
 		linha();
 		coluna();
+		
+		gruposQuintos();
+		PrimeiroESegundoGrupos();
+		
 		sequencia();
 		////
 
-		gruposQuintos();
-		PrimeiroESegundoGrupos();
+		
 		// imparesSeguindos();
 		// paresSeguindos();
 
