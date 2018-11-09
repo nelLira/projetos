@@ -711,7 +711,7 @@ public class Principal {
 			Integer posicao = random.nextInt(jogos.size());
 			// if (posicao > 3100 && posicao < 169410) { //7
 			// if (posicao > 1335 && posicao < 437000) { //8
-			if (posicao > 7055 && posicao < 557530) { // 9
+		//	if (posicao > 7055 && posicao < 557530) { // 9
 				// if (posicao > 2355 && posicao < 432000) { //10
 				// if (posicao > 3100 && posicao < 1705010) { //8,9,10
 				// if (posicao > 2600 && posicao < 147970) { //11
@@ -720,7 +720,7 @@ public class Principal {
 					posicoes.add(posicao);
 					jogosSaida.add(jogos.get(posicao));
 				}
-			}
+			//}
 		}
 		
 		Jogo pares = new Jogo(Arrays.asList(1,3,5,7,9,11,13,15,17,19,21,23,25));
@@ -829,7 +829,7 @@ public class Principal {
 			Integer posicao = random.nextInt(jogos.size());
 			// if (posicao > 3100 && posicao < 169410) { //7
 			// if (posicao > 1335 && posicao < 437000) { //8
-			if (posicao > 7055 && posicao < 557530) { // 9
+			//if (posicao > 7055 && posicao < 557530) { // 9
 				// if (posicao > 2355 && posicao < 432000) { //10
 				// if (posicao > 3100 && posicao < 1705010) { //8,9,10
 				// if (posicao > 2600 && posicao < 147970) { //11
@@ -838,7 +838,7 @@ public class Principal {
 					posicoes.add(posicao);
 					jogosSaida.add(jogos.get(posicao));
 				}
-			}
+			//}
 		}
 		
 		Jogo pares = new Jogo(Arrays.asList(1,3,5,7,9,11,13,15,17,19,21,23,25));
