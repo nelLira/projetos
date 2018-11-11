@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import br.com.sorteio.combinacoes.Combinacao;
-import br.com.sorteio.lotofacil.Filtro;
 import br.com.sorteio.numeros.Jogo;
 
 public class FiltroSete extends Filtro{

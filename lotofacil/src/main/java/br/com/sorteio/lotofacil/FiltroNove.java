@@ -2,12 +2,9 @@ package br.com.sorteio.lotofacil;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import br.com.sorteio.combinacoes.Combinacao;
 import br.com.sorteio.numeros.Jogo;
-import br.com.sorteio.util.Estatisticas;
 
 public class FiltroNove extends Filtro {
 	

@@ -72,24 +72,20 @@ public class FiltroJogos extends Filtro {
 		quadrado(7, 12); // {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6}
 		multiplosDeTres(3, 7); // {1=1, 2=33, 3=193, 4=430, 5=541, 6=317, 7=111,8=14}
 		sequenciaDeFibonacci(2, 6); // {1=8, 2=85, 3=330, 4=567,5=453,6=182,7=15}
-		cantos();
-		soma();
-		posicoes();
-		//primeiroEUltimo();
-		////
-
-		// definidos
-		verificaNumerosPrioritarios();
-		numerosAnteriores();
-		numerosImportantes(3, 8); // {1=2,2=9,3=80,4=276,5=492,6=498,7=230,8=49,9=3}
 		primo(3, 8); // {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4}
 		dentro(3, 7); // {2=6, 3=89, 4=281, 5=522, 6=484, 7=212, 8=57, 9=2}
 		pares(5, 10); // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182, 10=41, 11=5}
 		grupo20a25(2, 5); // 2=187;3=524;4=592;5=277 ****
 		grupo8a11(); // 180=4;612=3;571=2;261=1
+		
+		cantos();
+		soma();
+		posicoes();
+		verificaNumerosPrioritarios();
+		numerosAnteriores();
+		numerosImportantes(3, 8); // {1=2,2=9,3=80,4=276,5=492,6=498,7=230,8=49,9=3}
 		linha();
 		coluna();
-		
 		gruposQuintos();
 		PrimeiroESegundoGrupos();
 		

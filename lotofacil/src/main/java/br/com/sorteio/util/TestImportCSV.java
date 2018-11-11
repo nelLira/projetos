@@ -4,13 +4,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 import com.opencsv.CSVWriter;
-
-import br.com.sorteio.numeros.Jogo;
 
 public class TestImportCSV {
 
