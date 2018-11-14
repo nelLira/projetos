@@ -1,8 +1,13 @@
 package br.com.sorteio.util;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
+
+import com.opencsv.CSVWriter;
 
 public class CSVUtils {
     private static final char DEFAULT_SEPARATOR = ',';
@@ -54,4 +59,35 @@ public class CSVUtils {
 
 
     }
+    
+    private static void gerarCSV(List<String> resultCSV, String nomArq) {
+		try { 
+			String arquivo = "c:\\temp\\" + nomArq +".csv";
+			File file = new File(arquivo); 
+	        // create FileWriter object with file as parameter 
+	        FileWriter outputfile = new FileWriter(file); 
+
+	        // create CSVWriter with ';' as separator 
+	        CSVWriter writer = new CSVWriter(outputfile, ';'); 
+
+	        // create a List which contains Data 
+	        List<String[]> data = new ArrayList<String[]>(); 
+	        
+		for (String string : resultCSV) {
+			 String row = string; //sc.nextLine(); 
+             String[] rowdata = row.split("#"); 
+             data.add(rowdata); 
+		}
+		  writer.writeAll(data); 
+
+	        // closing writer connection 
+		  writer.close();
+		  java.awt.Desktop.getDesktop().open( new File(arquivo) );
+
+	    } 
+	    catch (IOException e) { 
+	        // TODO Auto-generated catch block 
+	        e.printStackTrace(); 
+	    }
+	}
 }

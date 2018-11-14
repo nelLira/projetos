@@ -77,18 +77,16 @@ public class FiltroJogos extends Filtro {
 		pares(5, 10); // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182, 10=41, 11=5}
 		grupo20a25(2, 5); // 2=187;3=524;4=592;5=277 ****
 		grupo8a11(); // 180=4;612=3;571=2;261=1
-		
 		cantos();
+		linha();
+		coluna();
+		numerosImportantes(3, 8); // {1=2,2=9,3=80,4=276,5=492,6=498,7=230,8=49,9=3}
 		soma();
 		posicoes();
 		verificaNumerosPrioritarios();
 		numerosAnteriores();
-		numerosImportantes(3, 8); // {1=2,2=9,3=80,4=276,5=492,6=498,7=230,8=49,9=3}
-		linha();
-		coluna();
 		gruposQuintos();
 		PrimeiroESegundoGrupos();
-		
 		sequencia();
 		////
 
@@ -1923,13 +1921,13 @@ public class FiltroJogos extends Filtro {
 		System.out.println("filtrando números importantes...");
 
 		Jogo numerosImportantes = new Jogo(Arrays.asList(5, 6, 7, 12, 14, 19, 20, 21));
-		int qtdOcorrencias = 0;
+	/*	int qtdOcorrencias = 0;
 		if (listaJogosPorDemanda.size() > 0) {
 			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
 			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
 			intersection.retainAll(numerosImportantes.getJogo());
 			qtdOcorrencias = intersection.size();
-		}
+		}*/
 
 		List<Jogo> listaAuxilar = new ArrayList<Jogo>();
 		listaAuxilar.addAll(getListaDeJogos());
@@ -1963,19 +1961,19 @@ public class FiltroJogos extends Filtro {
 			/* quando vem o 7,8,9 dificilmente vem maior */
 			/* quando vem o 1,2,3,7,8,9 dificilmente igual */
 			/* quando vem o 1,2,3,4 dificilmente vem menor */
-
-			if ((qtdOcorrencias >= 8 && qtdOcorrencias <= 9) && cont > qtdOcorrencias) {
-				continue;
-			}
-
-			if (((qtdOcorrencias >= 1 && qtdOcorrencias <= 2) || (qtdOcorrencias >= 8 && qtdOcorrencias <= 9))
-					&& cont == qtdOcorrencias) {
-				continue;
-			}
-
-			if ((qtdOcorrencias >= 1 && qtdOcorrencias <= 3) && cont < qtdOcorrencias) {
-				continue;
-			}
+//
+//			if ((qtdOcorrencias >= 8 && qtdOcorrencias <= 9) && cont > qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if (((qtdOcorrencias >= 1 && qtdOcorrencias <= 2) || (qtdOcorrencias >= 8 && qtdOcorrencias <= 9))
+//					&& cont == qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if ((qtdOcorrencias >= 1 && qtdOcorrencias <= 3) && cont < qtdOcorrencias) {
+//				continue;
+//			}
 
 			if (cont >= maiorQue && cont <= menorQue) {
 				jogo.somaElimina();
