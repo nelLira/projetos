@@ -1288,13 +1288,13 @@ public class FiltroJogos extends Filtro {
 																				// 8=53,
 																				// 9=3}
 
-		int qtdOcorrencias = 0;
-		if (listaJogosPorDemanda.size() > 0) {
-			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
-			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			intersection.retainAll(cruz.getJogo());
-			qtdOcorrencias = intersection.size();
-		}
+//		int qtdOcorrencias = 0;
+//		if (listaJogosPorDemanda.size() > 0) {
+//			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
+//			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			intersection.retainAll(cruz.getJogo());
+//			qtdOcorrencias = intersection.size();
+//		}
 
 		List<Jogo> listaAuxilar = new ArrayList<Jogo>();
 		listaAuxilar.addAll(getListaDeJogos());
@@ -1332,18 +1332,18 @@ public class FiltroJogos extends Filtro {
 			 * quando vez 2,3,4 dificilmente vem uma quantidade menor no próximo
 			 */
 
-			if ((qtdOcorrencias >= 8 && qtdOcorrencias <= 9) && cont > qtdOcorrencias) {
-				continue;
-			}
-
-			if (((qtdOcorrencias >= 2 && qtdOcorrencias <= 2) || (qtdOcorrencias >= 8 && qtdOcorrencias <= 9))
-					&& cont == qtdOcorrencias) {
-				continue;
-			}
-
-			if ((qtdOcorrencias >= 2 && qtdOcorrencias <= 3) && cont < qtdOcorrencias) {
-				continue;
-			}
+//			if ((qtdOcorrencias >= 8 && qtdOcorrencias <= 9) && cont > qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if (((qtdOcorrencias >= 2 && qtdOcorrencias <= 2) || (qtdOcorrencias >= 8 && qtdOcorrencias <= 9))
+//					&& cont == qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if ((qtdOcorrencias >= 2 && qtdOcorrencias <= 3) && cont < qtdOcorrencias) {
+//				continue;
+//			}
 			if (cont >= maiorQue && cont <= menorQue) {
 				jogo.somaElimina();
 				numResult.add(jogo);
@@ -1362,14 +1362,14 @@ public class FiltroJogos extends Filtro {
 
 		// {2=8,// 3=65,// 4=269,// 5=465,// 6=473,// 7=213,// 8=47,// 9=1}
 
-		Jogo x = new Jogo(Arrays.asList(1, 5, 7, 9, 13, 17, 19, 21, 25));
-		int qtdOcorrencias = 0;
-		if (listaJogosPorDemanda.size() > 0) {
-			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
-			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			intersection.retainAll(x.getJogo());
-			qtdOcorrencias = intersection.size();
-		}
+//		Jogo x = new Jogo(Arrays.asList(1, 5, 7, 9, 13, 17, 19, 21, 25));
+//		int qtdOcorrencias = 0;
+//		if (listaJogosPorDemanda.size() > 0) {
+//			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
+//			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			intersection.retainAll(x.getJogo());
+//			qtdOcorrencias = intersection.size();
+//		}
 
 		List<Jogo> listaAuxilar = new ArrayList<Jogo>();
 		listaAuxilar.addAll(getListaDeJogos());
@@ -1404,17 +1404,17 @@ public class FiltroJogos extends Filtro {
 			/* quando vem o 3,8,9 dificilmente igual */
 			/* quando vem o 2,3,4 dificilmente vem menor */
 
-			if ((qtdOcorrencias >= 8 && qtdOcorrencias <= 9) && cont > qtdOcorrencias) {
-				continue;
-			}
-
-			if (((qtdOcorrencias == 3) || (qtdOcorrencias >= 9 && qtdOcorrencias <= 9)) && cont == qtdOcorrencias) {
-				continue;
-			}
-
-			if ((qtdOcorrencias >= 2 && qtdOcorrencias <= 3) && cont < qtdOcorrencias) {
-				continue;
-			}
+//			if ((qtdOcorrencias >= 8 && qtdOcorrencias <= 9) && cont > qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if (((qtdOcorrencias == 3) || (qtdOcorrencias >= 9 && qtdOcorrencias <= 9)) && cont == qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if ((qtdOcorrencias >= 2 && qtdOcorrencias <= 3) && cont < qtdOcorrencias) {
+//				continue;
+//			}
 
 			if (cont >= maiorQue && cont <= menorQue) {
 				jogo.somaElimina();
@@ -1437,13 +1437,13 @@ public class FiltroJogos extends Filtro {
 		// 21, 22, 23, 24, 25))); // {6=2, 7=52,8=199, 9=450, 10=483, 11=261,
 		// 12=88, 13=6}
 
-		int qtdOcorrencias = 0;
-		if (listaJogosPorDemanda.size() > 0) {
-			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
-			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			intersection.retainAll(quadrado.getJogo());
-			qtdOcorrencias = intersection.size();
-		}
+//		int qtdOcorrencias = 0;
+//		if (listaJogosPorDemanda.size() > 0) {
+//			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
+//			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			intersection.retainAll(quadrado.getJogo());
+//			qtdOcorrencias = intersection.size();
+//		}
 
 		List<Jogo> listaAuxilar = new ArrayList<Jogo>();
 		listaAuxilar.addAll(getListaDeJogos());
@@ -1491,18 +1491,18 @@ public class FiltroJogos extends Filtro {
 			/* quando vem o 6,7,12,13 dificilmente igual */
 			/* quando vem o 6,7,8 dificilmente vem menor */
 
-			if ((qtdOcorrencias >= 12 && qtdOcorrencias <= 13) && cont > qtdOcorrencias) {
-				continue;
-			}
-
-			if (((qtdOcorrencias >= 6 && qtdOcorrencias <= 6) || (qtdOcorrencias >= 13 && qtdOcorrencias <= 13))
-					&& cont == qtdOcorrencias) {
-				continue;
-			}
-
-			if ((qtdOcorrencias >= 6 && qtdOcorrencias <= 7) && cont < qtdOcorrencias) {
-				continue;
-			}
+//			if ((qtdOcorrencias >= 12 && qtdOcorrencias <= 13) && cont > qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if (((qtdOcorrencias >= 6 && qtdOcorrencias <= 6) || (qtdOcorrencias >= 13 && qtdOcorrencias <= 13))
+//					&& cont == qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if ((qtdOcorrencias >= 6 && qtdOcorrencias <= 7) && cont < qtdOcorrencias) {
+//				continue;
+//			}
 
 			if (cont >= maiorQue && cont <= menorQue) {
 				jogo.somaElimina();
@@ -1525,14 +1525,14 @@ public class FiltroJogos extends Filtro {
 		List<Jogo> numResult = new ArrayList<Jogo>();
 		// List<Jogo> listaCheia = new ArrayList<Jogo>();
 
-		Jogo multiplosDeTres = new Jogo(Arrays.asList(3, 6, 9, 12, 15, 18, 21, 24));
-		int qtdOcorrencias = 0;
-		if (listaJogosPorDemanda.size() > 0) {
-			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
-			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			intersection.retainAll(multiplosDeTres.getJogo());
-			qtdOcorrencias = intersection.size();
-		}
+//		Jogo multiplosDeTres = new Jogo(Arrays.asList(3, 6, 9, 12, 15, 18, 21, 24));
+//		int qtdOcorrencias = 0;
+//		if (listaJogosPorDemanda.size() > 0) {
+//			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
+//			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			intersection.retainAll(multiplosDeTres.getJogo());
+//			qtdOcorrencias = intersection.size();
+//		}
 
 		for (Jogo jogo : listaAuxilar) {
 			// listaCheia.add(jogo);
@@ -1560,18 +1560,18 @@ public class FiltroJogos extends Filtro {
 			/* quando vem o 1,2,3,7,8 dificilmente igual */
 			/* quando vem o 1,2,3 dificilmente vem menor */
 
-			if ((qtdOcorrencias >= 7 && qtdOcorrencias <= 8) && cont > qtdOcorrencias) {
-				continue;
-			}
-
-			if (((qtdOcorrencias >= 1 && qtdOcorrencias <= 2) || (qtdOcorrencias >= 8 && qtdOcorrencias <= 8))
-					&& cont == qtdOcorrencias) {
-				continue;
-			}
-
-			if ((qtdOcorrencias >= 1 && qtdOcorrencias <= 2) && cont < qtdOcorrencias) {
-				continue;
-			}
+//			if ((qtdOcorrencias >= 7 && qtdOcorrencias <= 8) && cont > qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if (((qtdOcorrencias >= 1 && qtdOcorrencias <= 2) || (qtdOcorrencias >= 8 && qtdOcorrencias <= 8))
+//					&& cont == qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if ((qtdOcorrencias >= 1 && qtdOcorrencias <= 2) && cont < qtdOcorrencias) {
+//				continue;
+//			}
 
 			if (cont >= maiorQue && cont <= menorQue) {
 				jogo.somaElimina();
@@ -1595,14 +1595,14 @@ public class FiltroJogos extends Filtro {
 
 		System.out.println("filtrando números da sequência de Fibonacci...");
 
-		Jogo sequenciaDeFibonacci = new Jogo(Arrays.asList(1, 2, 3, 5, 8, 13, 21));
-		int qtdOcorrencias = 0;
-		if (listaJogosPorDemanda.size() > 0) {
-			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
-			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			intersection.retainAll(sequenciaDeFibonacci.getJogo());
-			qtdOcorrencias = intersection.size();
-		}
+//		Jogo sequenciaDeFibonacci = new Jogo(Arrays.asList(1, 2, 3, 5, 8, 13, 21));
+//		int qtdOcorrencias = 0;
+//		if (listaJogosPorDemanda.size() > 0) {
+//			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
+//			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			intersection.retainAll(sequenciaDeFibonacci.getJogo());
+//			qtdOcorrencias = intersection.size();
+//		}
 
 		List<Jogo> listaAuxilar = new ArrayList<Jogo>();
 		listaAuxilar.addAll(getListaDeJogos());
@@ -1633,18 +1633,18 @@ public class FiltroJogos extends Filtro {
 			/* quando vem o 1,2,6,7 dificilmente igual */
 			/* quando vem o 1,2,3 dificilmente vem menor */
 
-			if ((qtdOcorrencias >= 6 && qtdOcorrencias <= 7) && cont > qtdOcorrencias) {
-				continue;
-			}
-
-			if (((qtdOcorrencias >= 1 && qtdOcorrencias <= 1) || (qtdOcorrencias >= 7 && qtdOcorrencias <= 7))
-					&& cont == qtdOcorrencias) {
-				continue;
-			}
-
-			if ((qtdOcorrencias >= 1 && qtdOcorrencias <= 2) && cont < qtdOcorrencias) {
-				continue;
-			}
+//			if ((qtdOcorrencias >= 6 && qtdOcorrencias <= 7) && cont > qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if (((qtdOcorrencias >= 1 && qtdOcorrencias <= 1) || (qtdOcorrencias >= 7 && qtdOcorrencias <= 7))
+//					&& cont == qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if ((qtdOcorrencias >= 1 && qtdOcorrencias <= 2) && cont < qtdOcorrencias) {
+//				continue;
+//			}
 
 			if (cont >= maiorQue && cont <= menorQue) {
 				jogo.somaElimina();
@@ -1992,14 +1992,14 @@ public class FiltroJogos extends Filtro {
 
 		System.out.println("filtrando números primos...");
 
-		Jogo primo = new Jogo(Arrays.asList(2, 3, 5, 7, 11, 13, 17, 19, 23)); //
-		int qtdOcorrencias = 0;
-		if (listaJogosPorDemanda.size() > 0) {
-			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
-			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			intersection.retainAll(primo.getJogo());
-			qtdOcorrencias = intersection.size();
-		}
+//		Jogo primo = new Jogo(Arrays.asList(2, 3, 5, 7, 11, 13, 17, 19, 23)); //
+//		int qtdOcorrencias = 0;
+//		if (listaJogosPorDemanda.size() > 0) {
+//			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
+//			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			intersection.retainAll(primo.getJogo());
+//			qtdOcorrencias = intersection.size();
+//		}
 
 		List<Jogo> listaAuxilar = new ArrayList<Jogo>();
 		listaAuxilar.addAll(getListaDeJogos());
@@ -2033,19 +2033,19 @@ public class FiltroJogos extends Filtro {
 			/* quando vem o 7,8,9 dificilmente vem maior */
 			/* quando vem o 2,3,8,9 dificilmente igual */
 			/* quando vem o 1,2,3,4 dificilmente vem menor */
-
-			if ((qtdOcorrencias >= 8 && qtdOcorrencias <= 9) && cont > qtdOcorrencias) {
-				continue;
-			}
-
-			if (((qtdOcorrencias >= 2 && qtdOcorrencias <= 2) || (qtdOcorrencias >= 9 && qtdOcorrencias <= 9))
-					&& cont == qtdOcorrencias) {
-				continue;
-			}
-
-			if ((qtdOcorrencias >= 1 && qtdOcorrencias <= 3) && cont < qtdOcorrencias) {
-				continue;
-			}
+//
+//			if ((qtdOcorrencias >= 8 && qtdOcorrencias <= 9) && cont > qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if (((qtdOcorrencias >= 2 && qtdOcorrencias <= 2) || (qtdOcorrencias >= 9 && qtdOcorrencias <= 9))
+//					&& cont == qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if ((qtdOcorrencias >= 1 && qtdOcorrencias <= 3) && cont < qtdOcorrencias) {
+//				continue;
+//			}
 
 			if (cont >= maiorQue && cont <= menorQue) {
 				jogo.somaElimina();
@@ -2064,14 +2064,14 @@ public class FiltroJogos extends Filtro {
 
 		System.out.println("filtrando números dentro...");
 
-		Jogo dentro = new Jogo(Arrays.asList(7, 8, 9, 12, 13, 14, 17, 18, 19));
-		int qtdOcorrencias = 0;
-		if (listaJogosPorDemanda.size() > 0) {
-			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
-			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			intersection.retainAll(dentro.getJogo());
-			qtdOcorrencias = intersection.size();
-		}
+//		Jogo dentro = new Jogo(Arrays.asList(7, 8, 9, 12, 13, 14, 17, 18, 19));
+//		int qtdOcorrencias = 0;
+//		if (listaJogosPorDemanda.size() > 0) {
+//			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
+//			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			intersection.retainAll(dentro.getJogo());
+//			qtdOcorrencias = intersection.size();
+//		}
 
 		List<Jogo> listaAuxilar = new ArrayList<Jogo>();
 		listaAuxilar.addAll(getListaDeJogos());
@@ -2106,18 +2106,18 @@ public class FiltroJogos extends Filtro {
 			/* quando vem o 2,3,7,8,9 dificilmente igual */
 			/* quando vem o 2,3,4 dificilmente vem menor */
 
-			if ((qtdOcorrencias >= 8 && qtdOcorrencias <= 9) && cont > qtdOcorrencias) {
-				continue;
-			}
-
-			if (((qtdOcorrencias >= 2 && qtdOcorrencias <= 2) || (qtdOcorrencias >= 8 && qtdOcorrencias <= 9))
-					&& cont == qtdOcorrencias) {
-				continue;
-			}
-
-			if ((qtdOcorrencias >= 2 && qtdOcorrencias <= 3) && cont < qtdOcorrencias) {
-				continue;
-			}
+//			if ((qtdOcorrencias >= 8 && qtdOcorrencias <= 9) && cont > qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if (((qtdOcorrencias >= 2 && qtdOcorrencias <= 2) || (qtdOcorrencias >= 8 && qtdOcorrencias <= 9))
+//					&& cont == qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if ((qtdOcorrencias >= 2 && qtdOcorrencias <= 3) && cont < qtdOcorrencias) {
+//				continue;
+//			}
 
 			if (cont >= maiorQue && cont <= menorQue) {
 				jogo.somaElimina();
@@ -2137,13 +2137,13 @@ public class FiltroJogos extends Filtro {
 		System.out.println("Filtrando os números pares...");
 
 		Jogo pares = new Jogo(Arrays.asList(2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24));
-		int qtdOcorrencias = 0;
-		if (listaJogosPorDemanda.size() > 0) {
-			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
-			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			intersection.retainAll(pares.getJogo());
-			qtdOcorrencias = intersection.size();
-		}
+//		int qtdOcorrencias = 0;
+//		if (listaJogosPorDemanda.size() > 0) {
+//			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
+//			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			intersection.retainAll(pares.getJogo());
+//			qtdOcorrencias = intersection.size();
+//		}
 
 		List<Jogo> listaAuxilar = new ArrayList<Jogo>();
 		listaAuxilar.addAll(getListaDeJogos());
@@ -2184,14 +2184,14 @@ public class FiltroJogos extends Filtro {
 			/* quando vem o 3,4,5,9,10,11 dificilmente igual */
 			/* quando vem o 3,4,5,6 dificilmente vem menor */
 
-			if (((qtdOcorrencias >= 3 && qtdOcorrencias <= 4) || (qtdOcorrencias >= 10 && qtdOcorrencias <= 11))
-					&& cont == qtdOcorrencias) {
-				continue;
-			}
-
-			if ((qtdOcorrencias >= 3 && qtdOcorrencias <= 5) && cont < qtdOcorrencias) {
-				continue;
-			}
+//			if (((qtdOcorrencias >= 3 && qtdOcorrencias <= 4) || (qtdOcorrencias >= 10 && qtdOcorrencias <= 11))
+//					&& cont == qtdOcorrencias) {
+//				continue;
+//			}
+//
+//			if ((qtdOcorrencias >= 3 && qtdOcorrencias <= 5) && cont < qtdOcorrencias) {
+//				continue;
+//			}
 
 			if (cont >= maiorQue && cont <= menorQue) {
 				jogo.somaElimina();
@@ -2407,14 +2407,14 @@ public class FiltroJogos extends Filtro {
 
 		System.out.println("filtrando o grupo 20 a 25...");
 
-		Jogo grupo20a25 = new Jogo(Arrays.asList(20, 21, 22, 23, 24, 25));
-		int qtdOcorrencias = 0;
-		if (listaJogosPorDemanda.size() > 0) {
-			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
-			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			intersection.retainAll(grupo20a25.getJogo());
-			qtdOcorrencias = intersection.size();
-		}
+//		Jogo grupo20a25 = new Jogo(Arrays.asList(20, 21, 22, 23, 24, 25));
+//		int qtdOcorrencias = 0;
+//		if (listaJogosPorDemanda.size() > 0) {
+//			Jogo strUltimoSorteio = listaJogosPorDemanda.get(listaJogosPorDemanda.size() - 1);
+//			Set<Integer> intersection = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			intersection.retainAll(grupo20a25.getJogo());
+//			qtdOcorrencias = intersection.size();
+//		}
 
 		List<Jogo> listaAuxilar = new ArrayList<Jogo>();
 		listaAuxilar.addAll(getListaDeJogos());
@@ -2452,9 +2452,9 @@ public class FiltroJogos extends Filtro {
 
 			/* quando vem o 2 dificilmente igual */
 
-			if (qtdOcorrencias == 2 && cont == qtdOcorrencias) {
-				continue;
-			}
+//			if (qtdOcorrencias == 2 && cont == qtdOcorrencias) {
+//				continue;
+//			}
 
 			if (cont >= maiorQue && cont <= menorQue) {
 				jogo.somaElimina();
