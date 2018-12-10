@@ -43,7 +43,7 @@ public class Principal {
 		// 7;8;9;10;11:849[1658]
 		// 8;9;10:692[1368]
 		// 11:66[139]
-		simulacao();
+	//	simulacao();
 		// novaSimulacao();
 		// simulacaoBoleanos();
 		// consultaSorteio();
@@ -55,19 +55,23 @@ public class Principal {
 		// consultarSorteioArq();
 		// estatisticasUltimosSorteioCSV(30);
 		// filtaListaJogosBoleanos();
-//	     List<Jogo> jogos = new ArrayList<Jogo>();
-//	     jogos.add(new Jogo(Arrays.asList(3, 5, 6, 7, 8, 9, 10, 11, 12, 16, 19, 20, 21, 23, 25)));
-//	     jogos.add(new Jogo(Arrays.asList(2, 3, 4, 7, 8, 9, 10, 11, 14, 15, 18, 19, 21, 23, 24)));
-//	     jogos.add(new Jogo(Arrays.asList(1, 2, 3, 6, 7, 9, 13, 14, 15, 16, 17, 18, 20, 23, 25)));
-//	     jogos.add(new Jogo(Arrays.asList(2, 3, 5, 6, 7, 8, 9, 10, 13, 14, 18, 22, 23, 24, 25)));
-//	     jogos.add(new Jogo(Arrays.asList(1, 2, 3, 4, 5, 6, 10, 12, 13, 14, 15, 17, 23, 24, 25)));
-//	     jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 8, 10, 11, 13, 15, 16, 17, 18, 19, 23, 25)));
-//	     jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 7, 8, 9, 11, 12, 15, 19, 20, 22, 23, 25)));
-//	     jogos.add(new Jogo(Arrays.asList(1, 3, 4, 6, 8, 9, 10, 12, 13, 16, 17, 18, 20, 24, 25)));
-//	     jogos.add(new Jogo(Arrays.asList(1, 3, 5, 6, 7, 9, 11, 13, 14, 16, 17, 19, 22, 23, 24)));
-//	     jogos.add(new Jogo(Arrays.asList(1, 4, 5, 6, 7, 8, 10, 13, 14, 15, 18, 21, 23, 24, 25)));
-//	     consultaSorteio(jogos);
-//		 estatSorteio();
+	     List<Jogo> jogos = new ArrayList<Jogo>();
+	     jogos.add(new Jogo(Arrays.asList(2, 4, 5, 6, 9, 11, 12, 14, 15, 16, 18, 19, 22, 23, 25)));
+	     jogos.add(new Jogo(Arrays.asList(1, 2, 4, 6, 7, 11, 12, 13, 14, 15, 16, 18, 21, 23, 24)));
+	     jogos.add(new Jogo(Arrays.asList(3, 4, 6, 8, 11, 13, 14, 15, 16, 18, 21, 22, 23, 24, 25)));
+	     jogos.add(new Jogo(Arrays.asList(1, 4, 5, 6, 8, 10, 11, 12, 13, 16, 19, 20, 21, 22, 23)));
+	     jogos.add(new Jogo(Arrays.asList(2, 4, 5, 6, 8, 9, 10, 13, 15, 16, 21, 22, 23, 24, 25)));
+	     jogos.add(new Jogo(Arrays.asList(1, 4, 5, 6, 7, 8, 10, 13, 14, 17, 20, 21, 22, 23, 24)));
+	     jogos.add(new Jogo(Arrays.asList(2, 3, 4, 5, 6, 8, 9, 11, 14, 15, 17, 18, 22, 24, 25)));
+	     jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 9, 10, 11, 12, 14, 15, 16, 19, 20, 22, 23)));
+	     jogos.add(new Jogo(Arrays.asList(2, 3, 6, 7, 8, 10, 12, 13, 14, 16, 17, 19, 20, 23, 25)));
+	     jogos.add(new Jogo(Arrays.asList(2, 4, 5, 6, 10, 11, 12, 13, 14, 16, 17, 19, 20, 21, 23)));
+	     jogos.add(new Jogo(Arrays.asList(2, 3, 4, 5, 6, 8, 11, 12, 14, 16, 17, 19, 20, 21, 23)));
+	     jogos.add(new Jogo(Arrays.asList(2, 3, 5, 6, 7, 8, 10, 11, 12, 14, 16, 17, 20, 21, 23)));
+	     jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 10, 11, 12, 13, 14, 16, 17, 19, 20, 21, 23)));
+	     jogos.add(new Jogo(Arrays.asList(2, 3, 5, 6, 8, 10, 11, 12, 16, 17, 18, 19, 20, 23, 25)));
+	     consultaSorteio(jogos);
+		// estatSorteio();
 		
 		// próximo 1726
 

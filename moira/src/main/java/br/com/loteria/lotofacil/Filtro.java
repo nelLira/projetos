@@ -68,17 +68,23 @@ public class Filtro {
 	public List<Jogo> filtrar() throws FileNotFoundException, IOException {
 		this.listaJogosCheia = new ArrayList<Jogo>();
 		listaJogosCheia.addAll(listaJogosCombinados);
-
+				
+		repetidosJogoAnterior(Arrays.asList(9));
 		pares(Arrays.asList(5, 6, 7, 8, 9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5}
 		primos(Arrays.asList(4, 5, 6, 7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4}
 		quadrado(Arrays.asList(8, 9, 10, 11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6}
 		dezMelhores(Arrays.asList(4, 5, 6, 7, 8)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3}
 		multiplosDeTres(Arrays.asList(3, 4, 5, 6, 7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
 		sequenciaDeFibonacci(Arrays.asList(2, 3, 4, 5, 6));// 2a6 {1=8, 2=85, 3=330,4=567,5=453,6=182,7=15}
-	//	revisarJogosEliminados();
-		linha();
-		coluna();
-	//	cantos();
+		linha(Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5));
+		coluna(Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5));
+
+		
+
+		
+		
+		
+		//	cantos();
 		/*
 		 * numerosImportantes(3, 8); //{1=2,2=9,3=80,4=276,5=492,6=498,7=230,8=49,9=3}
 		 * 
@@ -99,6 +105,28 @@ public class Filtro {
 		 */
 		return this.listaJogosCombinados;
 
+	}
+
+	private void repetidosJogoAnterior(List<Integer> lista) {
+
+		listaJogosCombinados.clear();
+		Jogo ultimosSorteados = todosSorteios.get(todosSorteios.size() - 1);
+
+		listaJogosCombinadosCompleto.forEach(j -> {
+			int interseciton = 0;
+			for (Integer i : j.getJogo()) {
+				if (ultimosSorteados.getJogo().contains(i)) {
+					interseciton++;
+				}
+			}
+			if (lista.contains(interseciton)) {
+				listaJogosCombinados.add(j);
+			}
+			interseciton = 0;
+		});
+
+		System.out.println("Tamaho da lista depois das combinações ->" + listaJogosCombinados.size());
+		
 	}
 
 	private void limpaListasAuxiliares() {
@@ -149,8 +177,7 @@ public class Filtro {
 
 		analisaNumeros(lista, estatisticas.buscarNumerosSequenciaDeFibonacci());
 
-		System.out
-				.println("Tamanho da lista depois de filtrar a SequenciaDeFibonacci -> " + listaJogosCombinados.size());
+		System.out.println("Tamanho da lista depois de filtrar a SequenciaDeFibonacci -> " + listaJogosCombinados.size());
 
 	}
 
@@ -246,84 +273,138 @@ public class Filtro {
 
 	}
 
-	private void linha() {
+	private void linha(List<Integer> primeiraLinha, List<Integer> segundaLinha, List<Integer> terceiraLinha, List<Integer> quartaLinha, List<Integer> quintaLinha) {
 
 		limpaListasAuxiliares();
 		listaParaAnalise.addAll(listaJogosCombinados);
 
 		Jogo strUltimoSorteio = todosSorteios.get(todosSorteios.size() - 1);
-
+		
+		
 		for (Jogo jogo : listaParaAnalise) {
-
-			Set<Integer> primeiraLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			primeiraLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
-
-			Set<Integer> segundaLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			segundaLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha2().getJogo());
-
-			Set<Integer> terceiraLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			terceiraLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha3().getJogo());
-
-			Set<Integer> quartaLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			quartaLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha4().getJogo());
-
-			Set<Integer> quintaLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			quintaLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha5().getJogo());
+			
+			int contPrimeiraLinha = retornaIntersecao(jogo, estatisticas.buscarNumerosLinha1());
+			int contSegundaLinha = retornaIntersecao(jogo, estatisticas.buscarNumerosLinha2());
+			int contTerceiraLinha = retornaIntersecao(jogo, estatisticas.buscarNumerosLinha3());
+			int contQuartaLinha = retornaIntersecao(jogo, estatisticas.buscarNumerosLinha4());
+			int contQuintaLinha = retornaIntersecao(jogo, estatisticas.buscarNumerosLinha5());
+			
+			int contPrimeiraLinhaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosLinha1());
+			int contSegundaLinhaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosLinha2());
+			int contTerceiraLinhaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosLinha3());
+			int contQuartaLinhaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosLinha4());
+			int contQuintaLinhaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosLinha5());
+			
+//
+//			Set<Integer> primeiraLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			primeiraLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
+//
+//			Set<Integer> segundaLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			segundaLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha2().getJogo());
+//
+//			Set<Integer> terceiraLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			terceiraLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha3().getJogo());
+//
+//			Set<Integer> quartaLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			quartaLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha4().getJogo());
+//
+//			Set<Integer> quintaLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			quintaLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha5().getJogo());
 
 			///////////////////////
 
-			Set<Integer> primeiraLinhaProximo = new HashSet<Integer>(jogo.getJogo());
-			primeiraLinhaProximo.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
+//			Set<Integer> primeiraLinhaProximo = new HashSet<Integer>(jogo.getJogo());
+//			primeiraLinhaProximo.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
+//
+//			Set<Integer> segundaLinhaProximo = new HashSet<Integer>(jogo.getJogo());
+//			segundaLinhaProximo.retainAll(estatisticas.buscarNumerosLinha2().getJogo());
+//
+//			Set<Integer> terceiraLinhaProximo = new HashSet<Integer>(jogo.getJogo());
+//			terceiraLinhaProximo.retainAll(estatisticas.buscarNumerosLinha3().getJogo());
+//
+//			Set<Integer> quartaLinhaProximo = new HashSet<Integer>(jogo.getJogo());
+//			quartaLinhaProximo.retainAll(estatisticas.buscarNumerosLinha4().getJogo());
+//
+//			Set<Integer> quintaLinhaProximo = new HashSet<Integer>(jogo.getJogo());
+//			quintaLinhaProximo.retainAll(estatisticas.buscarNumerosLinha5().getJogo());
+//			
+			
+			if (contPrimeiraLinha == contPrimeiraLinhaJogoAnterior
+					&& contSegundaLinha == contSegundaLinhaJogoAnterior
+					&& contTerceiraLinha == contTerceiraLinhaJogoAnterior
+					&& contQuartaLinha == contQuartaLinhaJogoAnterior
+					&& contQuintaLinha == contQuintaLinhaJogoAnterior) {
+				continue;
+			}
+//			if (primeiraLinhaAnterior.size() == primeiraLinhaProximo.size()
+//					&& segundaLinhaAnterior.size() == segundaLinhaProximo.size()
+//					&& terceiraLinhaAnterior.size() == terceiraLinhaProximo.size()
+//					&& quartaLinhaAnterior.size() == quartaLinhaProximo.size()
+//					&& quintaLinhaAnterior.size() == quintaLinhaProximo.size()) {
+//				continue;
+//			}
+			
 
-			Set<Integer> segundaLinhaProximo = new HashSet<Integer>(jogo.getJogo());
-			segundaLinhaProximo.retainAll(estatisticas.buscarNumerosLinha2().getJogo());
-
-			Set<Integer> terceiraLinhaProximo = new HashSet<Integer>(jogo.getJogo());
-			terceiraLinhaProximo.retainAll(estatisticas.buscarNumerosLinha3().getJogo());
-
-			Set<Integer> quartaLinhaProximo = new HashSet<Integer>(jogo.getJogo());
-			quartaLinhaProximo.retainAll(estatisticas.buscarNumerosLinha4().getJogo());
-
-			Set<Integer> quintaLinhaProximo = new HashSet<Integer>(jogo.getJogo());
-			quintaLinhaProximo.retainAll(estatisticas.buscarNumerosLinha5().getJogo());
-
-			if (primeiraLinhaAnterior.size() == primeiraLinhaProximo.size()
-					&& segundaLinhaAnterior.size() == segundaLinhaProximo.size()
-					&& terceiraLinhaAnterior.size() == terceiraLinhaProximo.size()
-					&& quartaLinhaAnterior.size() == quartaLinhaProximo.size()
-					&& quintaLinhaAnterior.size() == quintaLinhaProximo.size()) {
+			if ((contPrimeiraLinha == 1 && contPrimeiraLinhaJogoAnterior == 1)
+					|| (contPrimeiraLinha == 5 && contPrimeiraLinhaJogoAnterior == 5)) {
+				continue;
+			}
+			
+			if ((contSegundaLinha == 1 && contSegundaLinhaJogoAnterior == 1)
+					|| (contSegundaLinha == 5 && contSegundaLinhaJogoAnterior == 5)) {
+				continue;
+			}
+			
+			if ((contTerceiraLinha == 1 && contTerceiraLinhaJogoAnterior == 1)
+					|| (contTerceiraLinha == 5 && contTerceiraLinhaJogoAnterior == 5)) {
+				continue;
+			}
+			
+			if ((contQuartaLinha == 1 && contQuartaLinhaJogoAnterior == 1)
+					|| (contQuartaLinha == 5 && contQuartaLinhaJogoAnterior == 5)) {
+				continue;
+			}
+			
+			if ((contQuintaLinha == 1 && contQuintaLinhaJogoAnterior == 1)
+					|| (contQuintaLinha == 5 && contQuintaLinhaJogoAnterior == 5)) {
 				continue;
 			}
 
-			if ((primeiraLinhaAnterior.size() == 1 && primeiraLinhaProximo.size() == 1)
-					|| (primeiraLinhaAnterior.size() == 5 && primeiraLinhaProximo.size() == 5)) {
-				continue;
-			}
+//			if ((primeiraLinhaAnterior.size() == 1 && primeiraLinhaProximo.size() == 1)
+//					|| (primeiraLinhaAnterior.size() == 5 && primeiraLinhaProximo.size() == 5)) {
+//				continue;
+//			}
 
-			if ((segundaLinhaAnterior.size() == 1 && segundaLinhaProximo.size() == 1)
-					|| (segundaLinhaAnterior.size() == 5 && segundaLinhaProximo.size() == 5)) {
+//			if ((segundaLinhaAnterior.size() == 1 && segundaLinhaProximo.size() == 1)
+//					|| (segundaLinhaAnterior.size() == 5 && segundaLinhaProximo.size() == 5)) {
+//				continue;
+//			}
+//
+//			if ((terceiraLinhaAnterior.size() == 1 && terceiraLinhaProximo.size() == 1)
+//					|| (terceiraLinhaAnterior.size() == 5 && terceiraLinhaProximo.size() == 5)) {
+//				continue;
+//			}
+//
+//			if ((quartaLinhaAnterior.size() == 1 && quartaLinhaProximo.size() == 1)
+//					|| (quartaLinhaAnterior.size() == 5 && quartaLinhaProximo.size() == 5)) {
+//				continue;
+//			}
+//
+//			if ((quintaLinhaAnterior.size() == 1 && quintaLinhaProximo.size() == 1)
+//					|| (quintaLinhaAnterior.size() == 5 && quintaLinhaProximo.size() == 5)) {
+//				continue;
+//			}
+//
+			
+			
+			if (!primeiraLinha.contains(contPrimeiraLinha) || !segundaLinha.contains(contSegundaLinha) || !terceiraLinha.contains(contTerceiraLinha) || !quartaLinha.contains(contQuartaLinha) || !quintaLinha.contains(contQuintaLinha) ) {
 				continue;
 			}
-
-			if ((terceiraLinhaAnterior.size() == 1 && terceiraLinhaProximo.size() == 1)
-					|| (terceiraLinhaAnterior.size() == 5 && terceiraLinhaProximo.size() == 5)) {
-				continue;
-			}
-
-			if ((quartaLinhaAnterior.size() == 1 && quartaLinhaProximo.size() == 1)
-					|| (quartaLinhaAnterior.size() == 5 && quartaLinhaProximo.size() == 5)) {
-				continue;
-			}
-
-			if ((quintaLinhaAnterior.size() == 1 && quintaLinhaProximo.size() == 1)
-					|| (quintaLinhaAnterior.size() == 5 && quintaLinhaProximo.size() == 5)) {
-				continue;
-			}
-
-			if (primeiraLinhaProximo.size() == 0 || segundaLinhaProximo.size() == 0 || terceiraLinhaProximo.size() == 0
-					|| quartaLinhaProximo.size() == 0 || quintaLinhaProximo.size() == 0) {
-				continue;
-			}
+			
+//			if (primeiraLinhaProximo.size() == 0 || segundaLinhaProximo.size() == 0 || terceiraLinhaProximo.size() == 0
+//					|| quartaLinhaProximo.size() == 0 || quintaLinhaProximo.size() == 0) {
+//				continue;
+//			}
 
 			jogo.somaQuantidadeFiltros();
 			listaPorFiltro.add(jogo);
@@ -374,7 +455,7 @@ public class Filtro {
 
 	}
 
-	private void coluna() {
+	private void coluna(List<Integer> primeiraColuna, List<Integer> segundaColuna, List<Integer> terceiraColuna, List<Integer> quartaColuna, List<Integer> quintaColuna) {
 
 		limpaListasAuxiliares();
 		listaParaAnalise.addAll(listaJogosCombinados);
@@ -382,76 +463,128 @@ public class Filtro {
 		Jogo strUltimoSorteio = todosSorteios.get(todosSorteios.size() - 1);
 		for (Jogo jogo : listaParaAnalise) {
 
-			Set<Integer> primeiraColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			primeiraColunaAnterior.retainAll(estatisticas.buscarNumerosColuna1().getJogo());
-
-			Set<Integer> segundaColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			segundaColunaAnterior.retainAll(estatisticas.buscarNumerosColuna2().getJogo());
-
-			Set<Integer> terceiraColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			terceiraColunaAnterior.retainAll(estatisticas.buscarNumerosColuna3().getJogo());
-
-			Set<Integer> quartaColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			quartaColunaAnterior.retainAll(estatisticas.buscarNumerosColuna4().getJogo());
-
-			Set<Integer> quintaColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-			quintaColunaAnterior.retainAll(estatisticas.buscarNumerosColuna5().getJogo());
+			int contPrimeiraColuna = retornaIntersecao(jogo, estatisticas.buscarNumerosColuna1());
+			int contSegundaColuna = retornaIntersecao(jogo, estatisticas.buscarNumerosColuna2());
+			int contTerceiraColuna = retornaIntersecao(jogo, estatisticas.buscarNumerosColuna3());
+			int contQuartaColuna = retornaIntersecao(jogo, estatisticas.buscarNumerosColuna4());
+			int contQuintaColuna = retornaIntersecao(jogo, estatisticas.buscarNumerosColuna5());
+			
+			int contPrimeiraColunaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosColuna1());
+			int contSegundaColunaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosColuna2());
+			int contTerceiraColunaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosColuna3());
+			int contQuartaColunaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosColuna4());
+			int contQuintaColunaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosColuna5());
+			
+//
+//			Set<Integer> primeiraColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			primeiraColunaAnterior.retainAll(estatisticas.buscarNumerosColuna1().getJogo());
+//
+//			Set<Integer> segundaColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			segundaColunaAnterior.retainAll(estatisticas.buscarNumerosColuna2().getJogo());
+//
+//			Set<Integer> terceiraColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			terceiraColunaAnterior.retainAll(estatisticas.buscarNumerosColuna3().getJogo());
+//
+//			Set<Integer> quartaColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			quartaColunaAnterior.retainAll(estatisticas.buscarNumerosColuna4().getJogo());
+//
+//			Set<Integer> quintaColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
+//			quintaColunaAnterior.retainAll(estatisticas.buscarNumerosColuna5().getJogo());
 
 			///////////////////////
 
-			Set<Integer> primeiraColunaProximo = new HashSet<Integer>(jogo.getJogo());
-			primeiraColunaProximo.retainAll(estatisticas.buscarNumerosColuna1().getJogo());
+//			Set<Integer> primeiraColunaProximo = new HashSet<Integer>(jogo.getJogo());
+//			primeiraColunaProximo.retainAll(estatisticas.buscarNumerosColuna1().getJogo());
+//
+//			Set<Integer> segundaColunaProximo = new HashSet<Integer>(jogo.getJogo());
+//			segundaColunaProximo.retainAll(estatisticas.buscarNumerosColuna2().getJogo());
+//
+//			Set<Integer> terceiraColunaProximo = new HashSet<Integer>(jogo.getJogo());
+//			terceiraColunaProximo.retainAll(estatisticas.buscarNumerosColuna3().getJogo());
+//
+//			Set<Integer> quartaColunaProximo = new HashSet<Integer>(jogo.getJogo());
+//			quartaColunaProximo.retainAll(estatisticas.buscarNumerosColuna4().getJogo());
+//
+//			Set<Integer> quintaColunaProximo = new HashSet<Integer>(jogo.getJogo());
+//			quintaColunaProximo.retainAll(estatisticas.buscarNumerosColuna5().getJogo());
+//			
+			
+			if (contPrimeiraColuna == contPrimeiraColunaJogoAnterior
+					&& contSegundaColuna == contSegundaColunaJogoAnterior
+					&& contTerceiraColuna == contTerceiraColunaJogoAnterior
+					&& contQuartaColuna == contQuartaColunaJogoAnterior
+					&& contQuintaColuna == contQuintaColunaJogoAnterior) {
+				continue;
+			}
+//			if (primeiraColunaAnterior.size() == primeiraColunaProximo.size()
+//					&& segundaColunaAnterior.size() == segundaColunaProximo.size()
+//					&& terceiraColunaAnterior.size() == terceiraColunaProximo.size()
+//					&& quartaColunaAnterior.size() == quartaColunaProximo.size()
+//					&& quintaColunaAnterior.size() == quintaColunaProximo.size()) {
+//				continue;
+//			}
+			
 
-			Set<Integer> segundaColunaProximo = new HashSet<Integer>(jogo.getJogo());
-			segundaColunaProximo.retainAll(estatisticas.buscarNumerosColuna2().getJogo());
-
-			Set<Integer> terceiraColunaProximo = new HashSet<Integer>(jogo.getJogo());
-			terceiraColunaProximo.retainAll(estatisticas.buscarNumerosColuna3().getJogo());
-
-			Set<Integer> quartaColunaProximo = new HashSet<Integer>(jogo.getJogo());
-			quartaColunaProximo.retainAll(estatisticas.buscarNumerosColuna4().getJogo());
-
-			Set<Integer> quintaColunaProximo = new HashSet<Integer>(jogo.getJogo());
-			quintaColunaProximo.retainAll(estatisticas.buscarNumerosColuna5().getJogo());
-
-			if (primeiraColunaAnterior.size() == primeiraColunaProximo.size()
-					&& segundaColunaAnterior.size() == segundaColunaProximo.size()
-					&& terceiraColunaAnterior.size() == terceiraColunaProximo.size()
-					&& quartaColunaAnterior.size() == quartaColunaProximo.size()
-					&& quintaColunaAnterior.size() == quintaColunaProximo.size()) {
+			if ((contPrimeiraColuna == 1 && contPrimeiraColunaJogoAnterior == 1)
+					|| (contPrimeiraColuna == 5 && contPrimeiraColunaJogoAnterior == 5)) {
+				continue;
+			}
+			
+			if ((contSegundaColuna == 1 && contSegundaColunaJogoAnterior == 1)
+					|| (contSegundaColuna == 5 && contSegundaColunaJogoAnterior == 5)) {
+				continue;
+			}
+			
+			if ((contTerceiraColuna == 1 && contTerceiraColunaJogoAnterior == 1)
+					|| (contTerceiraColuna == 5 && contTerceiraColunaJogoAnterior == 5)) {
+				continue;
+			}
+			
+			if ((contQuartaColuna == 1 && contQuartaColunaJogoAnterior == 1)
+					|| (contQuartaColuna == 5 && contQuartaColunaJogoAnterior == 5)) {
+				continue;
+			}
+			
+			if ((contQuintaColuna == 1 && contQuintaColunaJogoAnterior == 1)
+					|| (contQuintaColuna == 5 && contQuintaColunaJogoAnterior == 5)) {
 				continue;
 			}
 
-			if ((primeiraColunaAnterior.size() == 1 && primeiraColunaProximo.size() == 1)
-					|| (primeiraColunaAnterior.size() == 5 && primeiraColunaProximo.size() == 5)) {
-				continue;
-			}
+//			if ((primeiraColunaAnterior.size() == 1 && primeiraColunaProximo.size() == 1)
+//					|| (primeiraColunaAnterior.size() == 5 && primeiraColunaProximo.size() == 5)) {
+//				continue;
+//			}
 
-			if ((segundaColunaAnterior.size() == 1 && segundaColunaProximo.size() == 1)
-					|| (segundaColunaAnterior.size() == 5 && segundaColunaProximo.size() == 5)) {
+//			if ((segundaColunaAnterior.size() == 1 && segundaColunaProximo.size() == 1)
+//					|| (segundaColunaAnterior.size() == 5 && segundaColunaProximo.size() == 5)) {
+//				continue;
+//			}
+//
+//			if ((terceiraColunaAnterior.size() == 1 && terceiraColunaProximo.size() == 1)
+//					|| (terceiraColunaAnterior.size() == 5 && terceiraColunaProximo.size() == 5)) {
+//				continue;
+//			}
+//
+//			if ((quartaColunaAnterior.size() == 1 && quartaColunaProximo.size() == 1)
+//					|| (quartaColunaAnterior.size() == 5 && quartaColunaProximo.size() == 5)) {
+//				continue;
+//			}
+//
+//			if ((quintaColunaAnterior.size() == 1 && quintaColunaProximo.size() == 1)
+//					|| (quintaColunaAnterior.size() == 5 && quintaColunaProximo.size() == 5)) {
+//				continue;
+//			}
+//
+			
+			
+			if (!primeiraColuna.contains(contPrimeiraColuna) || !segundaColuna.contains(contSegundaColuna) || !terceiraColuna.contains(contTerceiraColuna) || !quartaColuna.contains(contQuartaColuna) || !quintaColuna.contains(contQuintaColuna) ) {
 				continue;
 			}
-
-			if ((terceiraColunaAnterior.size() == 1 && terceiraColunaProximo.size() == 1)
-					|| (terceiraColunaAnterior.size() == 5 && terceiraColunaProximo.size() == 5)) {
-				continue;
-			}
-
-			if ((quartaColunaAnterior.size() == 1 && quartaColunaProximo.size() == 1)
-					|| (quartaColunaAnterior.size() == 5 && quartaColunaProximo.size() == 5)) {
-				continue;
-			}
-
-			if ((quintaColunaAnterior.size() == 1 && quintaColunaProximo.size() == 1)
-					|| (quintaColunaAnterior.size() == 5 && quintaColunaProximo.size() == 5)) {
-				continue;
-			}
-
-			if (primeiraColunaProximo.size() == 0 || segundaColunaProximo.size() == 0
-					|| terceiraColunaProximo.size() == 0 || quartaColunaProximo.size() == 0
-					|| quintaColunaProximo.size() == 0) {
-				continue;
-			}
+			
+//			if (primeiraColunaProximo.size() == 0 || segundaColunaProximo.size() == 0 || terceiraColunaProximo.size() == 0
+//					|| quartaColunaProximo.size() == 0 || quintaColunaProximo.size() == 0) {
+//				continue;
+//			}
 
 			jogo.somaQuantidadeFiltros();
 			listaPorFiltro.add(jogo);
@@ -1157,38 +1290,38 @@ public class Filtro {
 	}
 
 	public List<Jogo> bucaListaJogosFiltrados() throws FileNotFoundException, IOException {
-		listaJogosCombinados.clear();
-
-		Jogo ultimosSorteados = todosSorteios.get(todosSorteios.size() - 1);
-
-		Jogo ultimosNaoSorteados = ultimosSorteados.numerosNaoSorteados(ultimosSorteados);
-		// Jogo todosNumeros = new Jogo(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9,
-		// 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,20, 21, 22, 23, 24, 25));
-		// Combinacoes combinacoes = new Combinacoes(todosNumeros.getJogo(),
-		// 15);
-		// List<Jogo> listAux = new ArrayList<Jogo>();
-		// listAux.addAll(combinacoes.geraListaCombinacoes());
-		/*
-		 * listaJogosCombinados .addAll(combinacoes.combinacoes( new
-		 * Combinacoes(ultimosSorteados.getJogo(), 9).geraListaCombinacoes(),
-		 * new Combinacoes(ultimosNaoSorteados.getJogo(),
-		 * 6).geraListaCombinacoes()));
-		 */
-
-		listaJogosCombinadosCompleto.forEach(j -> {
-			int interseciton = 0;
-			for (Integer i : j.getJogo()) {
-				if (ultimosSorteados.getJogo().contains(i)) {
-					interseciton++;
-				}
-			}
-			if (interseciton == 10) {
-				listaJogosCombinados.add(j);
-			}
-			interseciton = 0;
-		});
-
-		System.out.println("Tamaho da lista depois das combinações ->" + listaJogosCombinados.size());
+//		listaJogosCombinados.clear();
+//
+//		Jogo ultimosSorteados = todosSorteios.get(todosSorteios.size() - 1);
+//
+//		Jogo ultimosNaoSorteados = ultimosSorteados.numerosNaoSorteados(ultimosSorteados);
+//		// Jogo todosNumeros = new Jogo(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9,
+//		// 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,20, 21, 22, 23, 24, 25));
+//		// Combinacoes combinacoes = new Combinacoes(todosNumeros.getJogo(),
+//		// 15);
+//		// List<Jogo> listAux = new ArrayList<Jogo>();
+//		// listAux.addAll(combinacoes.geraListaCombinacoes());
+//		/*
+//		 * listaJogosCombinados .addAll(combinacoes.combinacoes( new
+//		 * Combinacoes(ultimosSorteados.getJogo(), 9).geraListaCombinacoes(),
+//		 * new Combinacoes(ultimosNaoSorteados.getJogo(),
+//		 * 6).geraListaCombinacoes()));
+//		 */
+//
+//		listaJogosCombinadosCompleto.forEach(j -> {
+//			int interseciton = 0;
+//			for (Integer i : j.getJogo()) {
+//				if (ultimosSorteados.getJogo().contains(i)) {
+//					interseciton++;
+//				}
+//			}
+//			if (interseciton > 8 && interseciton < 10) {
+//				listaJogosCombinados.add(j);
+//			}
+//			interseciton = 0;
+//		});
+//
+//		System.out.println("Tamaho da lista depois das combinações ->" + listaJogosCombinados.size());
 
 		return filtrar();
 
