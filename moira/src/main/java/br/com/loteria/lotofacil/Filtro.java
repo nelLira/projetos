@@ -13,6 +13,9 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import org.apache.commons.collections.ArrayStack;
+import org.apache.commons.lang3.ArrayUtils;
+
 import br.com.loteria.combinacoes.Combinacoes;
 import br.com.loteria.jogo.Jogo;
 
@@ -68,7 +71,9 @@ public class Filtro {
 	public List<Jogo> filtrar() throws FileNotFoundException, IOException {
 		this.listaJogosCheia = new ArrayList<Jogo>();
 		listaJogosCheia.addAll(listaJogosCombinados);
-				
+		
+		
+		
 		repetidosJogoAnterior(Arrays.asList(9));
 		pares(Arrays.asList(5, 6, 7, 8, 9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5}
 		primos(Arrays.asList(4, 5, 6, 7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4}
@@ -76,12 +81,18 @@ public class Filtro {
 		dezMelhores(Arrays.asList(4, 5, 6, 7, 8)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3}
 		multiplosDeTres(Arrays.asList(3, 4, 5, 6, 7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
 		sequenciaDeFibonacci(Arrays.asList(2, 3, 4, 5, 6));// 2a6 {1=8, 2=85, 3=330,4=567,5=453,6=182,7=15}
-		linha(Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5));
-		coluna(Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5),Arrays.asList(1, 2, 3, 4, 5));
-
 		
-
+		linha(Arrays.asList(1, 2, 3, 4, 5),
+			  Arrays.asList(1, 2, 3, 4, 5),
+			  Arrays.asList(1, 2, 3, 4, 5),
+			  Arrays.asList(1, 2, 3, 4, 5),
+			  Arrays.asList(1, 2, 3, 4, 5));
 		
+		coluna(Arrays.asList(1, 2, 3, 4, 5),
+			   Arrays.asList(1, 2, 3, 4, 5),
+			   Arrays.asList(1, 2, 3, 4, 5),
+			   Arrays.asList(1, 2, 3, 4, 5),
+			   Arrays.asList(1, 2, 3, 4, 5));
 		
 		
 		//	cantos();
@@ -125,7 +136,7 @@ public class Filtro {
 			interseciton = 0;
 		});
 
-		System.out.println("Tamaho da lista depois das combinaÃ§Ãµes ->" + listaJogosCombinados.size());
+		System.out.println("Tamaho da lista depois das combinações ->" + listaJogosCombinados.size());
 		
 	}
 
@@ -169,7 +180,7 @@ public class Filtro {
 
 		analisaNumeros(lista, estatisticas.buscarNumerosMultiplosDeTres());
 
-		System.out.println("Tamanho da lista depois de filtrar a multiplos de trÃªs -> " + listaJogosCombinados.size());
+		System.out.println("Tamanho da lista depois de filtrar a multiplos de três -> " + listaJogosCombinados.size());
 
 	}
 
