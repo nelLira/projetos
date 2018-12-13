@@ -20,17 +20,6 @@ import br.com.loteria.util.Utils;
 
 public class Estatisticas {
 	
-	private List<Estatisticas> listaEstatisticas;
-	private String repetidos;
-	private String pares;
-	private String primos;
-	private String fibonacci;
-	private String quadrado;
-	private String multiplosDeTres;
-	private String dezMais;
-	private String linhas;
-	private String colunas;
-	
 	private Jogo numerosCruz;
 	private Jogo numerosX;
 	private Jogo numerosQuadrado;
@@ -90,7 +79,6 @@ public class Estatisticas {
 	}
 	
 	public void iniciarListas(){
-		this.listaEstatisticas = new ArrayList<>();
 		this.numerosCruz = new Jogo(Arrays.asList(3, 8, 11, 12, 13, 14, 15, 18, 23));
 		this.numerosX  = new Jogo(Arrays.asList(1, 5, 7, 9, 13, 17, 19, 21, 25));
 		this.numerosQuadrado = new Jogo(Arrays.asList(1, 2, 3, 4, 5, 6, 10, 11, 15, 16, 20, 21, 22, 23, 24, 25));
@@ -153,86 +141,6 @@ public class Estatisticas {
 		
 		
 		this.numerosImportantes = null;
-	}
-	
-	public List<Estatisticas> getListaEstatisticas() {
-		return listaEstatisticas;
-	}
-
-	public void setListaEstatisticas(List<Estatisticas> listaEstatisticas) {
-		this.listaEstatisticas = listaEstatisticas;
-	}
-
-	public String getRepetidos() {
-		return repetidos;
-	}
-
-	public void setRepetidos(String repetidos) {
-		this.repetidos = repetidos;
-	}
-
-	public String getPares() {
-		return pares;
-	}
-
-	public void setPares(String pares) {
-		this.pares = pares;
-	}
-
-	public String getPrimos() {
-		return primos;
-	}
-
-	public void setPrimos(String primos) {
-		this.primos = primos;
-	}
-
-	public String getFibonacci() {
-		return fibonacci;
-	}
-
-	public void setFibonacci(String fibonacci) {
-		this.fibonacci = fibonacci;
-	}
-
-	public String getQuadrado() {
-		return quadrado;
-	}
-
-	public void setQuadrado(String quadrado) {
-		this.quadrado = quadrado;
-	}
-
-	public String getMultiplosDeTres() {
-		return multiplosDeTres;
-	}
-
-	public void setMultiplosDeTres(String multiplosDeTres) {
-		this.multiplosDeTres = multiplosDeTres;
-	}
-
-	public String getDezMais() {
-		return dezMais;
-	}
-
-	public void setDezMais(String dezMais) {
-		this.dezMais = dezMais;
-	}
-
-	public String getLinhas() {
-		return linhas;
-	}
-
-	public void setLinhas(String linhas) {
-		this.linhas = linhas;
-	}
-
-	public String getColunas() {
-		return colunas;
-	}
-
-	public void setColunas(String colunas) {
-		this.colunas = colunas;
 	}
 
 	public Jogo buscarNumerosCruz() {
@@ -835,90 +743,6 @@ public class Estatisticas {
 			}
 		}
 		
-	}
-	
-public List<Estatisticas> listaEstatisticasUltimosSorteio(int qtdJogos, boolean gerarAquivo) throws FileNotFoundException, IOException {
-		
-		System.out.println("gerando estatíisticas dos últimos jogos...");
-		Estatisticas estatisticas = new Estatisticas();
-		estatisticas.iniciarListas();
-		List<Jogo> todosJogos = estatisticas.lerTodosOsJogos();
-		Jogo pares = estatisticas.buscarNumerosPares();
-		Jogo primos = estatisticas.buscarNumerosPrimos();
-		Jogo fibonacci = estatisticas.buscarNumerosSequenciaDeFibonacci();
-		Jogo quadrado = estatisticas.buscarNumerosQuadrado();
-		Jogo multiplosDeTres = estatisticas.buscarNumerosMultiplosDeTres();
-		
-		List<String> resultCSV = new ArrayList<String>();
-		for (int i = todosJogos.size() - (qtdJogos); i < todosJogos.size(); i++) {
-			Set<Integer> intersectionRepetidos = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			intersectionRepetidos.retainAll(todosJogos.get(i-1).getJogo());
-						
-			Set<Integer> intersectionPares = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			intersectionPares.retainAll(pares.getJogo());
-			
-			Set<Integer> intersectionPrimos = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			intersectionPrimos.retainAll(primos.getJogo());
-			
-			Set<Integer> intersectionFibonacci = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			intersectionFibonacci.retainAll(fibonacci.getJogo());
-			
-			Set<Integer> intersectionQuadrado = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			intersectionQuadrado.retainAll(quadrado.getJogo());
-			
-			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
-			
-			Map<Integer, Integer> mapaEstatisticasJogos = estatisticas.estatisticasJogos(i);
-			
-			Set<Integer> intersectionDezMais = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			intersectionDezMais.retainAll(buscarDezMais(todosJogos).getJogo());
-			
-			Set<Integer> primeiraLinha = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			primeiraLinha.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
-
-			Set<Integer> segundaLinha = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			segundaLinha.retainAll(estatisticas.buscarNumerosLinha2().getJogo());
-
-			Set<Integer> terceiraLinha = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			terceiraLinha.retainAll(estatisticas.buscarNumerosLinha3().getJogo());
-
-			Set<Integer> quartaLinha = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			quartaLinha.retainAll(estatisticas.buscarNumerosLinha4().getJogo());
-
-			Set<Integer> quintaLinha = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			quintaLinha.retainAll(estatisticas.buscarNumerosLinha5().getJogo());
-			
-			
-			Set<Integer> primeiraColuna = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			primeiraColuna.retainAll(estatisticas.buscarNumerosColuna1().getJogo());
-
-			Set<Integer> segundaColuna = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			segundaColuna.retainAll(estatisticas.buscarNumerosColuna2().getJogo());
-
-			Set<Integer> terceiraColuna = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			terceiraColuna.retainAll(estatisticas.buscarNumerosColuna3().getJogo());
-
-			Set<Integer> quartaColuna = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			quartaColuna.retainAll(estatisticas.buscarNumerosColuna4().getJogo());
-
-			Set<Integer> quintaColuna = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			quintaColuna.retainAll(estatisticas.buscarNumerosColuna5().getJogo());
-			
-			Estatisticas estatistica = new Estatisticas();
-			
-			estatistica.setRepetidos(repetidos = String.valueOf(intersectionRepetidos.size())); 
-			estatistica.setPares(String.valueOf(intersectionPares.size()));
-			estatistica.setPrimos(String.valueOf(intersectionPrimos.size()));
-			estatistica.setFibonacci(String.valueOf(intersectionFibonacci.size())); 
-			estatistica.setQuadrado(String.valueOf(intersectionQuadrado.size()));
-			estatistica.setMultiplosDeTres(String.valueOf(intersectionMultiplosDeTres.size())); 
-			estatistica.setDezMais(String.valueOf(intersectionDezMais.size()));
-			estatistica.setLinhas(String.valueOf(segundaLinha.size() +  "" + terceiraLinha.size() +  "" + quartaLinha.size() +  "" + quintaLinha.size()));
-			estatistica.setColunas(String.valueOf(primeiraColuna.size() + "" + segundaColuna.size() +  "" + terceiraColuna.size() +  "" + quartaColuna.size() +  "" + quintaColuna.size()));
-			listaEstatisticas.add(estatistica);
-		}		
-		return listaEstatisticas;
 	}
 
 }
