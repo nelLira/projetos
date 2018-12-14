@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>moira</groupId>
   <artifactId>moira</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>moira Maven Webapp</name>
   <url>http://maven.apache.org</url>
@@ -29,7 +29,7 @@
     <finalName>moira</finalName>
     <resources>
 			<resource>
-				<directory>src/main/java/br/com/loteria/util</directory>
+				<directory>src/main/java/br/com/loteria/lotofacil</directory>
 				<includes>
 					<include>sorteios.txt</include>
 				</includes>
@@ -43,7 +43,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>br.com.loteria.lotofacil.Principal</mainClass>
+							<mainClass>br.com.loteria.frontEnd.Principal</mainClass>
 						</manifest>
 					</archive>
 					<executions>
@@ -58,7 +58,7 @@
 								<outputDirectory>${basedir}</outputDirectory>
 								<resources>
 									<resource>
-										<directory>src/main/java/br/com/loteria/util</directory>
+										<directory>src/main/java/</directory>
 										<filtering>true</filtering>
 									</resource>
 								</resources>

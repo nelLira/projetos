@@ -10,7 +10,7 @@ import br.com.loteria.lotofacil.Estatisticas;
 public class EstatisticasTableModel  extends AbstractTableModel {
    
 	private static final long serialVersionUID = -1804256298978611846L;
-	String[] columnNames = {"Repetidos", "Pares", "Primos", "Fibonacci", "Quadrado", "Multiplos de Três", "Dez Mais", "Linhas", "Colunas"};
+	String[] columnNames = {"Sorteio", "Jogo", "Repetidos", "Pares", "Primos", "Fibonacci", "Quadrado", "Multiplos de Três", "Dez Mais", "Linhas", "Colunas"};
     private List<Estatisticas> data;
 
     public EstatisticasTableModel(List<Estatisticas> data) {
@@ -35,7 +35,7 @@ public class EstatisticasTableModel  extends AbstractTableModel {
     public String getColumnName(int columnIndex){
       return columnNames[columnIndex];
     }    
-     
+      
      @Override  
     public Class<?> getColumnClass(int columnIndex) {  
         return String.class;  
@@ -49,8 +49,6 @@ public class EstatisticasTableModel  extends AbstractTableModel {
      
     @Override  
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {  
-    	Estatisticas estatisticas = data.get(rowIndex);
-   
     	fireTableCellUpdated(rowIndex, columnIndex);  
      }      
      
@@ -59,15 +57,17 @@ public class EstatisticasTableModel  extends AbstractTableModel {
     	Estatisticas estatisticas = data.get(rowIndex);
         String valueObject = null;
         switch(columnIndex){
-            case 0: valueObject = estatisticas.getRepetidos(); break;
-            case 1: valueObject = estatisticas.getPares(); break;
-            case 2 : valueObject = estatisticas.getPrimos(); break;
-            case 3 : valueObject = estatisticas.getFibonacci(); break;
-            case 4 : valueObject = estatisticas.getQuadrado(); break;
-            case 5 : valueObject = estatisticas.getMultiplosDeTres(); break;
-            case 6 : valueObject = estatisticas.getDezMais(); break;
-            case 7 : valueObject = estatisticas.getLinhas(); break;
-            case 8 : valueObject = estatisticas.getColunas(); break;
+        	case 0 : valueObject = estatisticas.getNumeroSorteio(); break;
+        	case 1 : valueObject = estatisticas.getJogo().getJogo().toString(); break;
+            case 2 : valueObject = estatisticas.getRepetidos(); break;
+            case 3 : valueObject = estatisticas.getPares(); break;
+            case 4 : valueObject = estatisticas.getPrimos(); break;
+            case 5 : valueObject = estatisticas.getFibonacci(); break;
+            case 6 : valueObject = estatisticas.getQuadrado(); break;
+            case 7 : valueObject = estatisticas.getMultiplosDeTres(); break;
+            case 8 : valueObject = estatisticas.getDezMais(); break;
+            case 9 : valueObject = estatisticas.getLinhas(); break;
+            case 10 : valueObject = estatisticas.getColunas(); break;
 
             default: System.err.println("Índice inválido para propriedade do bean Estatistica.class");
         }
