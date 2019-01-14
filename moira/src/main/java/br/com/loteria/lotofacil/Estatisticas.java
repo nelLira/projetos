@@ -18,6 +18,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import javax.swing.JOptionPane;
+
 import br.com.loteria.combinacoes.Combinacoes;
 import br.com.loteria.jogo.Jogo;
 import br.com.loteria.util.Utils;
@@ -65,23 +67,13 @@ public class Estatisticas {
 	private Jogo numerosImportantes;
 
 	public List<Jogo> lerTodosOsJogos() throws FileNotFoundException, IOException {
-
-		//String path = ClassLoader.getSystemResource("").getPath() + "/sorteios.txt";
-		Path modulesFolder = Paths.get("");
-		Path modulePath = modulesFolder.resolve("sorteios.txt");
-		
-		// produção
-		//String path = "sorteios.txt";
-
-//		File file = new File(path);
-//		byte[] bytes = new byte[(int) file.length()];
-//		FileInputStream fis = new FileInputStream(file);
-		
-		File file = new File(modulePath.toString());
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		String path =  s + "\\target\\sorteios.txt";
+	
+		File file = new File(path.replace("\\target\\target", "\\target"));
 		byte[] bytes = new byte[(int) file.length()];
 		FileInputStream fis = new FileInputStream(file);
-
-
 
 		fis.read(bytes);
 		fis.close();
@@ -98,7 +90,7 @@ public class Estatisticas {
 				lista = new ArrayList<Integer>();
 			}
 		}
-
+		
 		return jogos;
 
 	}
@@ -726,7 +718,7 @@ public class Estatisticas {
 	}
 
 	public void estatisticasUltimosSorteioCSV(int qtdJogos, boolean gerarAquivo)
-			throws FileNotFoundException, IOException {
+			throws IOException{
 
 		System.out.println("gerando estatÃ­sticas dos Ãºltimos jogos...");
 		Estatisticas estatisticas = new Estatisticas();
@@ -828,10 +820,10 @@ public class Estatisticas {
 						+ intersectionPares.size() + "#Primos#" + intersectionPrimos.size() + "#Fibonacci#"
 						+ intersectionFibonacci.size() + "#Quadrado#" + intersectionQuadrado.size()
 						+ "#Multiplos de Tres#" + intersectionMultiplosDeTres.size() + "#Dez Mais#"
-						+ intersectionDezMais.size() + "#Linhas#" + primeiraLinha.size() + "" + segundaLinha.size() + ""
-						+ terceiraLinha.size() + "" + quartaLinha.size() + "" + quintaLinha.size() + "#Colunas#"
-						+ primeiraColuna.size() + "" + segundaColuna.size() + "" + terceiraColuna.size() + ""
-						+ quartaColuna.size() + "" + quintaColuna.size());
+						+ intersectionDezMais.size() + "#Linhas#" + primeiraLinha.size() + " - " + segundaLinha.size() + " - "
+						+ terceiraLinha.size() + " - " + quartaLinha.size() + " - " + quintaLinha.size() + "#Colunas#"
+						+ primeiraColuna.size() + " - " + segundaColuna.size() + " - " + terceiraColuna.size() + " - "
+						+ quartaColuna.size() + " - " + quintaColuna.size());
 			} else {
 
 				System.out.println(

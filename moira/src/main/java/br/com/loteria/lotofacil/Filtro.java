@@ -21,6 +21,11 @@ import br.com.loteria.jogo.Jogo;
 
 public class Filtro {
 
+	private List<Integer> listaParametrosRepetidos;
+	
+	
+	
+	
 	private List<Jogo> listaJogosCombinados;
 	private List<Jogo> listaJogosCombinadosCompleto;
 	private List<Jogo> listaJogosCheia;
@@ -32,6 +37,11 @@ public class Filtro {
 
 	public Filtro() {
 
+	}
+	
+	
+	public void setParametrosRepetidos (List<Integer> listaParametrosRepetidos) {
+		this.listaParametrosRepetidos = listaParametrosRepetidos;
 	}
 
 	public void iniciaListas() {
@@ -73,26 +83,27 @@ public class Filtro {
 		listaJogosCheia.addAll(listaJogosCombinados);
 		
 		
+		repetidosJogoAnterior(Arrays.asList(8));
+		pares(Arrays.asList(6,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
+		primos(Arrays.asList(4,5,6)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
+		sequenciaDeFibonacci(Arrays.asList(2,4,5,6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
+		quadrado(Arrays.asList(8,9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} ** 11 
+		multiplosDeTres(Arrays.asList(3,4,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
+		dezMais(Arrays.asList(4,5,6,7,8)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3} **8 
+		 
+		 
 		
-		repetidosJogoAnterior(Arrays.asList(9));
-		pares(Arrays.asList(5, 6, 7, 8, 9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5}
-		primos(Arrays.asList(4, 5, 6, 7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4}
-		quadrado(Arrays.asList(8, 9, 10, 11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6}
-		dezMelhores(Arrays.asList(4, 5, 6, 7, 8)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3}
-		multiplosDeTres(Arrays.asList(3, 4, 5, 6, 7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
-		sequenciaDeFibonacci(Arrays.asList(2, 3, 4, 5, 6));// 2a6 {1=8, 2=85, 3=330,4=567,5=453,6=182,7=15}
-		
-		linha(Arrays.asList(1, 2, 3, 4, 5),
-			  Arrays.asList(1, 2, 3, 4, 5),
-			  Arrays.asList(1, 2, 3, 4, 5),
-			  Arrays.asList(1, 2, 3, 4, 5),
+		linha(Arrays.asList(1, 2, 3),
+			  Arrays.asList(1, 2, 3, 4, 5), //3 
+			  Arrays.asList(1, 2, 3, 4, 5), 
+			  Arrays.asList(1, 2, 3, 5),
 			  Arrays.asList(1, 2, 3, 4, 5));
 		
-		coluna(Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 4, 5));
+		coluna(Arrays.asList(2, 3, 4, 5),
+			   Arrays.asList(1, 3, 4),
+			   Arrays.asList(1, 2, 3, 4),
+			   Arrays.asList(1, 2, 3, 4, 5), 
+			   Arrays.asList(2, 3, 4, 5));
 		
 		
 		//	cantos();
@@ -117,6 +128,57 @@ public class Filtro {
 		return this.listaJogosCombinados;
 
 	}
+	
+	public List<Jogo> filtrarLista() throws FileNotFoundException, IOException {
+		this.listaJogosCheia = new ArrayList<Jogo>();
+		listaJogosCheia.addAll(listaJogosCombinados);
+		
+		
+		
+		repetidosJogoAnterior(listaParametrosRepetidos);
+		/*6 ï¿½ forte*/	pares(Arrays.asList(6, 7, 8)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
+		primos(Arrays.asList(5, 6, 7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4}
+		/*10 ï¿½ forte*/ quadrado(Arrays.asList(8, 10)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
+		dezMais(Arrays.asList(4, 5, 6, 7)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3}
+		/*5 ï¿½ forte*/multiplosDeTres(Arrays.asList(5, 6)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
+		sequenciaDeFibonacci(Arrays.asList(4, 5, 6));// 2a6 {1=8, 2=85, 3=330,4=567,5=453,6=182,7=15}
+		
+		linha(Arrays.asList(1, 2, 3, 4, 5),
+			  Arrays.asList(2, 4, 5),
+			  Arrays.asList(1, 2, 4, 5),
+			  Arrays.asList(1, 3, 4),
+			  Arrays.asList(1, 2, 4));
+		
+		coluna(Arrays.asList(1, 3, 4, 5),
+			   Arrays.asList(1, 2, 3, 5),
+			   Arrays.asList(1, 2, 3, 4, 5),
+			   Arrays.asList(1, 2, 3, 5),
+			   Arrays.asList(1, 2, 3, 4));
+		
+		
+		//	cantos();
+		/*
+		 * numerosImportantes(3, 8); //{1=2,2=9,3=80,4=276,5=492,6=498,7=230,8=49,9=3}
+		 * 
+		 * sequencia(); 
+		 
+		
+		 posicoes();
+		 soma();
+ 		 * cruz(3, 8);// {2=5, 3=75, 4=243, 5=493, 6=451, 7=218, 8=53,
+		 * 9=3} x(3, 8); // {2=8, 3=65, 4=269, 5=465, 6=473, 7=213, 8=47, 9=1}
+		 * dentro(3, 7); // {2=6, 3=89, 4=281, 5=522, 6=484, 7=212, 8=57, 9=2}
+		 * grupo20a25(2, 5); // 2=187;3=524;4=592;5=277 **** grupo8a11(1, 4); //
+		 * 180=4;612=3;571=2;261=1 
+		 * verificaNumerosPrioritarios(); numerosAnteriores();
+		 * PrimeiroESegundoGrupos(); gruposQuintos();
+		 * 
+		 * revisarJogosEliminados();
+		 */
+		return this.listaJogosCombinados;
+
+	}
+	
 
 	private void repetidosJogoAnterior(List<Integer> lista) {
 
@@ -136,7 +198,7 @@ public class Filtro {
 			interseciton = 0;
 		});
 
-		System.out.println("Tamaho da lista depois das combinações ->" + listaJogosCombinados.size());
+		System.out.println("Tamaho da lista depois das combinaï¿½ï¿½es ->" + listaJogosCombinados.size());
 		
 	}
 
@@ -180,7 +242,7 @@ public class Filtro {
 
 		analisaNumeros(lista, estatisticas.buscarNumerosMultiplosDeTres());
 
-		System.out.println("Tamanho da lista depois de filtrar a multiplos de três -> " + listaJogosCombinados.size());
+		System.out.println("Tamanho da lista depois de filtrar a multiplos de trï¿½s -> " + listaJogosCombinados.size());
 
 	}
 
@@ -217,7 +279,7 @@ public class Filtro {
 
 	}
 
-	private void dezMelhores(List<Integer> lista) throws FileNotFoundException, IOException {
+	private void dezMais(List<Integer> lista) throws FileNotFoundException, IOException {
 
 		if (todosSorteios.size() < 15)
 			return;
@@ -1301,43 +1363,12 @@ public class Filtro {
 	}
 
 	public List<Jogo> bucaListaJogosFiltrados() throws FileNotFoundException, IOException {
-//		listaJogosCombinados.clear();
-//
-//		Jogo ultimosSorteados = todosSorteios.get(todosSorteios.size() - 1);
-//
-//		Jogo ultimosNaoSorteados = ultimosSorteados.numerosNaoSorteados(ultimosSorteados);
-//		// Jogo todosNumeros = new Jogo(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9,
-//		// 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,20, 21, 22, 23, 24, 25));
-//		// Combinacoes combinacoes = new Combinacoes(todosNumeros.getJogo(),
-//		// 15);
-//		// List<Jogo> listAux = new ArrayList<Jogo>();
-//		// listAux.addAll(combinacoes.geraListaCombinacoes());
-//		/*
-//		 * listaJogosCombinados .addAll(combinacoes.combinacoes( new
-//		 * Combinacoes(ultimosSorteados.getJogo(), 9).geraListaCombinacoes(),
-//		 * new Combinacoes(ultimosNaoSorteados.getJogo(),
-//		 * 6).geraListaCombinacoes()));
-//		 */
-//
-//		listaJogosCombinadosCompleto.forEach(j -> {
-//			int interseciton = 0;
-//			for (Integer i : j.getJogo()) {
-//				if (ultimosSorteados.getJogo().contains(i)) {
-//					interseciton++;
-//				}
-//			}
-//			if (interseciton > 8 && interseciton < 10) {
-//				listaJogosCombinados.add(j);
-//			}
-//			interseciton = 0;
-//		});
-//
-//		System.out.println("Tamaho da lista depois das combinaÃ§Ãµes ->" + listaJogosCombinados.size());
-
 		return filtrar();
-
 	}
-
+	
+	public List<Jogo> listaJogosFiltrados() throws FileNotFoundException, IOException {
+		return filtrarLista();
+	}
 	public List<Jogo> getListaJogosCombinadosCompleto() {
 		return listaJogosCombinadosCompleto;
 	}

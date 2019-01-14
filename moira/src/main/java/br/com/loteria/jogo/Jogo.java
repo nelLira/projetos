@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 public class Jogo {
+	
+	private Integer qtdRepetidos;
 
 	private List<Integer> jogo;
 	private int quantidadeFiltros;
@@ -84,5 +86,13 @@ public class Jogo {
 		this.setJogo(lista);
 
 		return this;
+	}
+
+	public Integer getqtdRepetidos() {
+		return qtdRepetidos;
+	}
+
+	public void setqtdRepetidos(Integer qtdRepetidos) {
+		this.qtdRepetidos = qtdRepetidos;
 	}
 }

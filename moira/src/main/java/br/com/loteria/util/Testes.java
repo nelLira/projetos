@@ -2,6 +2,7 @@ package br.com.loteria.util;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -16,7 +17,7 @@ import br.com.loteria.lotofacil.Filtro;
 
 public class Testes {
 
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
 
 		Estatisticas estatisticas = new Estatisticas();
 		estatisticas.iniciarListas();
@@ -53,7 +54,7 @@ public class Testes {
 
 	}
 
-	public void teste3() throws FileNotFoundException, IOException {
+	public void teste3() throws FileNotFoundException, IOException, URISyntaxException {
 		Estatisticas estatisticas = new Estatisticas();
 		estatisticas.iniciarListas();
 
@@ -149,7 +150,7 @@ public class Testes {
 
 	}
 
-	public static void teste1() throws FileNotFoundException, IOException {
+	public static void teste1() throws FileNotFoundException, IOException, URISyntaxException {
 		/// pega o último jogo, divide em três grupos de cinco [na sequência
 		/// mesmo) e verifica quanto de cada grupo saem no próximo jogo
 
@@ -197,7 +198,7 @@ public class Testes {
 		}
 	}
 
-	public static void teste2() throws FileNotFoundException, IOException {
+	public static void teste2() throws FileNotFoundException, IOException, URISyntaxException {
 		Estatisticas estatisticas = new Estatisticas();
 
 		List<Jogo> listaTodosJogos = estatisticas.lerTodosOsJogos();

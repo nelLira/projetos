@@ -1,4 +1,4 @@
-package br.com.loteria.frontEnd;
+package br.com.loteria.swing;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;

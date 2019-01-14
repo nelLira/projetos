@@ -1,4 +1,4 @@
-package br.com.loteria.frontEnd;
+package br.com.loteria.swing;
 
 import java.util.ArrayList;
 import java.util.List;
