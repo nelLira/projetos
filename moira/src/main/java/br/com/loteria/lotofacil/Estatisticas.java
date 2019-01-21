@@ -650,6 +650,46 @@ public class Estatisticas {
 		System.out.println("FIM");
 
 	}
+	
+	public String estatSorteio(Jogo ultimoJogo, int numeroUltimoSorteio ) throws FileNotFoundException, IOException {
+
+		Filtro filtro = new Filtro();
+		filtro.iniciaListas();
+		Estatisticas estisticas = new Estatisticas();
+		estisticas.limparListas();
+		filtro.setaListaTodosSorteios(estisticas.lerTodosOsJogos());
+		String retorno = "";
+		while (filtro.buscaListaTodosSorteios().size() > numeroUltimoSorteio) { 
+		
+			filtro.buscaListaTodosSorteios().remove(filtro.buscaListaTodosSorteios().size() - 1);
+		
+		}
+		
+		System.out.println(filtro.buscaListaTodosSorteios().size());
+
+		Combinacoes combinacoes = new Combinacoes();
+		filtro.setListaJogosCombinadosCompleto(combinacoes.todosCombinacoesLotoFacil());
+
+		List<Jogo> listaJogosFiltrados = filtro.bucaListaJogosFiltrados();
+
+		TreeMap<Integer, Integer> trmap = new TreeMap<Integer, Integer>();
+
+		for (Jogo jogo : listaJogosFiltrados) {
+			Set<Integer> intersection = new HashSet<Integer>(jogo.getJogo());
+			intersection.retainAll(ultimoJogo.getJogo());
+
+			int chave = intersection.size();
+			if (chave == 15) {
+				retorno = "Sim";
+				break;
+			}
+		}
+		
+		filtro.limpaListas();
+		estisticas.limparListas();
+		return retorno; 
+
+	}
 
 	public int quantidadeNumerosRepetidos(Jogo strUltimoSorteio, Jogo strSorteioAnterior) {
 		Set<Integer> intersection = new HashSet<Integer>(strSorteioAnterior.getJogo());
@@ -816,8 +856,11 @@ public class Estatisticas {
 			// );
 
 			if (gerarAquivo) {
-				resultCSV.add((i + 1) + "#Repetidos#" + intersectionRepetidos.size() + "#Pares#"
-						+ intersectionPares.size() + "#Primos#" + intersectionPrimos.size() + "#Fibonacci#"
+				resultCSV.add((i + 1) + 
+						"#Repetidos#" + intersectionRepetidos.size()
+						+ "#Jogo#" + todosJogos.get(i).getJogo()
+						+ "#Saiu?#" + estatSorteio(todosJogos.get(i), i)
+						+ "#Pares#"   + intersectionPares.size() + "#Primos#" + intersectionPrimos.size() + "#Fibonacci#"
 						+ intersectionFibonacci.size() + "#Quadrado#" + intersectionQuadrado.size()
 						+ "#Multiplos de Tres#" + intersectionMultiplosDeTres.size() + "#Dez Mais#"
 						+ intersectionDezMais.size() + "#Linhas#" + primeiraLinha.size() + " - " + segundaLinha.size() + " - "
