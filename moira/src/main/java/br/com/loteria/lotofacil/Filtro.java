@@ -83,25 +83,25 @@ public class Filtro {
 		listaJogosCheia.addAll(listaJogosCombinados);
 		
 		
-		repetidosJogoAnterior(Arrays.asList(8,9));
-		pares(Arrays.asList(5,6,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
+		repetidosJogoAnterior(Arrays.asList(9));
+		pares(Arrays.asList(5,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
 		primos(Arrays.asList(4,5,6,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
-		sequenciaDeFibonacci(Arrays.asList(2,3,4,5,6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
-		quadrado(Arrays.asList(8,9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} ** 11 
-		multiplosDeTres(Arrays.asList(3,4,5,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
-		dezMais(Arrays.asList(4,5,6,7,8)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3} **8 
+		sequenciaDeFibonacci(Arrays.asList(3,4,5,6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
+		quadrado(Arrays.asList(8,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
+		multiplosDeTres(Arrays.asList(4,5,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
+		dezMais(Arrays.asList(4,5,6,7)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3} 
 		 
 		 
 		
-		linha(Arrays.asList(1, 2, 3, 4, 5),
+		linha(Arrays.asList(1, 2, 3, 4),
 			  Arrays.asList(1, 2, 3, 4, 5),  
-			  Arrays.asList(1, 2, 3, 4, 5), 
-			  Arrays.asList(1, 2, 3, 4, 5),
+			  Arrays.asList(1, 2, 3, 4), 
+			  Arrays.asList(3, 4, 5),
 			  Arrays.asList(1, 2, 3, 4, 5));
 		
 		coluna(Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 4, 5),
+			   Arrays.asList(2, 3, 4, 5),
+			   Arrays.asList(2, 3, 5),
 			   Arrays.asList(1, 2, 3, 4, 5), 
 			   Arrays.asList(1, 2, 3, 4, 5));
 		
