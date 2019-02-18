@@ -79,7 +79,7 @@ public class Filtro {
 		
 		
 		repetidosJogoAnterior(Arrays.asList(7));
-		pares(Arrays.asList(5,6,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
+		pares(Arrays.asList(5,6,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
 		primos(Arrays.asList(4,5,6,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
 		sequenciaDeFibonacci(Arrays.asList(2,4,5,6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
 		quadrado(Arrays.asList(9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
@@ -96,7 +96,7 @@ public class Filtro {
 		
 		coluna(Arrays.asList(1, 2, 3, 4),
 			   Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 4, 5),
+			   Arrays.asList(1, 2, 3, 5),
 			   Arrays.asList(1, 2, 3, 4, 5), 
 			   Arrays.asList(2, 3, 4, 5));
 		
