@@ -18,7 +18,57 @@ import br.com.loteria.lotofacil.Filtro;
 public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
+		Estatisticas estatisticas = new Estatisticas();
+		estatisticas.iniciarListas();
+		List<Jogo> listaTodosJogos = estatisticas.lerTodosOsJogos();
+		Jogo primeiroJogo = null;
+		int contJogos=0;
+		int contNumero=0;
+		int qtdMax = 0;
+		//1=6; 2=6; 3=6; 4=6
+		for (Jogo jogo : listaTodosJogos) {
+			if (!jogo.getJogo().contains(4)) {
+				contNumero++;
+			} else {
+				if (contNumero > 2) {
+				System.out.println(contNumero);
+				}
+//				if (qtdMax < contNumero) {
+//					qtdMax = contNumero;
+//				}
+				contNumero=0;
+			}
+		}
+		
 
+	}
+	
+	public void teste5() throws FileNotFoundException, IOException {
+		Estatisticas estatisticas = new Estatisticas();
+		estatisticas.iniciarListas();
+		List<Jogo> listaTodosJogos = estatisticas.lerTodosOsJogos();
+		Jogo primeiroJogo = null;
+		int contJogos=0;
+		int contNumero=0;
+		int qtdMax = 0;
+		//1=11; 2=11; 3=11; 4=10; 5=11; 6=10; 7=10; 8=9;
+		for (Jogo jogo : listaTodosJogos) {
+			if (jogo.getJogo().contains(8)) {
+				contNumero++;
+			} else {
+				if (contNumero > 5) {
+				System.out.println(contNumero);
+				}
+//				if (qtdMax < contNumero) {
+//					qtdMax = contNumero;
+//				}
+				contNumero=0;
+			}
+		}
+		
+	}
+	
+	public void teste4() throws FileNotFoundException, IOException {
 		Estatisticas estatisticas = new Estatisticas();
 		estatisticas.iniciarListas();
 		List<Jogo> listaTodosJogos = estatisticas.lerTodosOsJogos();
@@ -51,7 +101,6 @@ public class Testes {
 			}
 		}
 		System.out.println(contJogos);
-
 	}
 
 	public void teste3() throws FileNotFoundException, IOException, URISyntaxException {
