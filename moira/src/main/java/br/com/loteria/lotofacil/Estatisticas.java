@@ -1,11 +1,9 @@
 package br.com.loteria.lotofacil;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -17,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-
-import javax.swing.JOptionPane;
 
 import br.com.loteria.combinacoes.Combinacoes;
 import br.com.loteria.jogo.Jogo;
@@ -361,7 +357,7 @@ public class Estatisticas {
 	}
 
 	public Jogo buscarDezMais(List<Jogo> todosSorteios) throws FileNotFoundException, IOException {
-
+		
 		Map<Integer, Integer> jogosEst = estatisticasJogosListaDinamica(todosSorteios, 15);
 
 		Jogo dezMais = new Jogo();
@@ -793,7 +789,12 @@ public class Estatisticas {
 			Map<Integer, Integer> mapaEstatisticasJogos = estatisticas.estatisticasJogos(i);
 
 			Set<Integer> intersectionDezMais = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			intersectionDezMais.retainAll(buscarDezMais(todosJogos).getJogo());
+			
+			List<Jogo> todosJogosAux = new ArrayList(); 
+			todosJogosAux.addAll(todosJogos);
+			todosJogosAux.remove(todosJogos.size() - 1);
+			
+			intersectionDezMais.retainAll(buscarDezMais(todosJogosAux).getJogo());
 
 			Set<Integer> primeiraLinha = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			primeiraLinha.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
