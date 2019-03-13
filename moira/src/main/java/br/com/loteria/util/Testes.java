@@ -24,20 +24,29 @@ public class Testes {
 		Jogo primeiroJogo = null;
 		int contJogos=0;
 		int contNumero=0;
+		int numeroAnterior = 0;
+		int sequencia=0;
 		int qtdMax = 0;
+		String  sequencias = null;
 		//1=6; 2=6; 3=6; 4=6
 		for (Jogo jogo : listaTodosJogos) {
-			if (!jogo.getJogo().contains(4)) {
-				contNumero++;
-			} else {
-				if (contNumero > 2) {
-				System.out.println(contNumero);
-				}
-//				if (qtdMax < contNumero) {
-//					qtdMax = contNumero;
-//				}
-				contNumero=0;
+			for (Integer numero : jogo.getJogo()) {
+				if (numeroAnterior > 0 ) {
+					if (numero == numeroAnterior + 1) {
+						sequencia++;
+					}else {
+						if (sequencias == null) {
+							sequencias = Integer.toString(sequencia);
+						} else {
+							sequencias = sequencias + " - " + Integer.toString(sequencia);
+						}
+						sequencia = 0;
+					}
+				} 
+				numeroAnterior = numero;
 			}
+			System.out.println(sequencias);
+			sequencias = null;
 		}
 		
 
