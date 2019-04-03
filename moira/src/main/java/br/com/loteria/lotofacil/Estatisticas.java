@@ -765,6 +765,7 @@ public class Estatisticas {
 		Jogo fibonacci = estatisticas.buscarNumerosSequenciaDeFibonacci();
 		Jogo quadrado = estatisticas.buscarNumerosQuadrado();
 		Jogo multiplosDeTres = estatisticas.buscarNumerosMultiplosDeTres();
+		Jogo numerosImportantes = estatisticas.buscarNumerosImportantes();
 
 		List<String> resultCSV = new ArrayList<String>();
 		for (int i = todosJogos.size() - (qtdJogos); i < todosJogos.size(); i++) {
@@ -785,8 +786,8 @@ public class Estatisticas {
 
 			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
-
-			Map<Integer, Integer> mapaEstatisticasJogos = estatisticas.estatisticasJogos(i);
+			
+			
 
 			Set<Integer> intersectionDezMais = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			
@@ -795,6 +796,9 @@ public class Estatisticas {
 			todosJogosAux.remove(todosJogos.size() - 1);
 			
 			intersectionDezMais.retainAll(buscarDezMais(todosJogosAux).getJogo());
+			
+			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(todosJogos.get(i).getJogo());
+			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
 
 			Set<Integer> primeiraLinha = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			primeiraLinha.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
@@ -858,16 +862,17 @@ public class Estatisticas {
 
 			if (gerarAquivo) {
 				resultCSV.add((i + 1) + 
-						"#Repetidos#" + intersectionRepetidos.size()
-						+ "#Jogo#" + todosJogos.get(i).getJogo()
-						+ "#Saiu?#" + estatSorteio(todosJogos.get(i), i)
-						+ "#Pares#"   + intersectionPares.size() + "#Primos#" + intersectionPrimos.size() + "#Fibonacci#"
-						+ intersectionFibonacci.size() + "#Quadrado#" + intersectionQuadrado.size()
-						+ "#Multiplos de Tres#" + intersectionMultiplosDeTres.size() + "#Dez Mais#"
-						+ intersectionDezMais.size() + "#Linhas#" + primeiraLinha.size() + " - " + segundaLinha.size() + " - "
-						+ terceiraLinha.size() + " - " + quartaLinha.size() + " - " + quintaLinha.size() + "#Colunas#"
-						+ primeiraColuna.size() + " - " + segundaColuna.size() + " - " + terceiraColuna.size() + " - "
-						+ quartaColuna.size() + " - " + quintaColuna.size());
+						"#Repetidos#" + intersectionRepetidos.size()+ 
+						"#Jogo#" + todosJogos.get(i).getJogo()+ 
+						"#Saiu?#" + estatSorteio(todosJogos.get(i), i)+ 
+						"#Pares#"   + intersectionPares.size() + 
+						"#Primos#" + intersectionPrimos.size() + 
+						"#Fibonacci#" + intersectionFibonacci.size() + 
+						"#Quadrado#" + intersectionQuadrado.size()+ 
+						"#Multiplos de Tres#" + intersectionNumerosImportantes.size() + "#Dez Mais#" + intersectionDezMais.size() + 
+						"#N�meros Importantes#" +intersectionNumerosImportantes.size() +
+						"#Linhas#" + primeiraLinha.size() + " - " + segundaLinha.size() + " - " + terceiraLinha.size() + " - " + quartaLinha.size() + " - " + quintaLinha.size() + 
+						"#Colunas#" + primeiraColuna.size() + " - " + segundaColuna.size() + " - " + terceiraColuna.size() + " - " + quartaColuna.size() + " - " + quintaColuna.size());
 			} else {
 
 				System.out.println(
@@ -875,7 +880,7 @@ public class Estatisticas {
 						" Repetidos: " + intersectionRepetidos.size() + "; Pares -> " + intersectionPares.size()
 								+ "; Primos -> " + intersectionPrimos.size() + "; Fibonacci -> "
 								+ intersectionFibonacci.size() + "; Quadrado -> " + intersectionQuadrado.size()
-								+ "; Multiplos de Três -> " + intersectionMultiplosDeTres.size() + "; Dez Mais -> "
+								+ "; Multiplos de Três -> " + intersectionNumerosImportantes.size() + "; Dez Mais -> "
 								+ intersectionDezMais.size() + "; Linhas -> " + primeiraLinha.size() + ""
 								+ segundaLinha.size() + "" + terceiraLinha.size() + "" + quartaLinha.size() + ""
 								+ quintaLinha.size() + "; Colunas -> " + primeiraColuna.size() + ""

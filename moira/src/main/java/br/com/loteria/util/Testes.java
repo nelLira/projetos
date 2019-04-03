@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,47 @@ import br.com.loteria.lotofacil.Filtro;
 public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
+		
+		Estatisticas estatisticas = new Estatisticas();
+		estatisticas.iniciarListas();
+		List<Jogo> listaTodosJogos = estatisticas.lerTodosOsJogos();
+		
+		Jogo primeiroGrupo = new Jogo(Arrays.asList(5,6,7,12,13,14,19,20,21)); //{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3}
+		Jogo segundoGrupo = new Jogo(Arrays.asList(1,2,3,4,8,9,10,11,15,16,17,18,22,23,24,25)); //{6=3, 7=50, 8=254, 9=549, 10=538, 11=303, 12=84, 13=12, 14=2}
+		HashMap<Integer,Integer> mapaPrimeiroGrupo = new HashMap<>();
+		int conte = 0;
+		
+		for (Jogo jogo : listaTodosJogos) {
+			Set<Integer> intersectionPrimeiroGrupo = new HashSet<Integer>(jogo.getJogo());
+			intersectionPrimeiroGrupo.retainAll(primeiroGrupo.getJogo());
+			Integer chavePrimeiroGrupo = intersectionPrimeiroGrupo.size();
+			
+			Set<Integer> intersectionSegundoGrupo = new HashSet<Integer>(jogo.getJogo());
+			intersectionSegundoGrupo.retainAll(segundoGrupo.getJogo());
+			Integer chaveSegundoGrupo = intersectionSegundoGrupo.size();
+			
+			if ((chavePrimeiroGrupo > 2 && chavePrimeiroGrupo < 9) && (chaveSegundoGrupo > 6 && chaveSegundoGrupo < 13)) {
+				conte++;
+			}
+			
+			
+			
+			//	if (chavePrimeiroGrupo > 0 && chaveSegundoGrupo > 0) conte++;
+
+//			if (mapaPrimeiroGrupo.containsKey(chaveSegundoGrupo)) {
+//				
+//				Integer valor = mapaPrimeiroGrupo.get(chaveSegundoGrupo).intValue() + 1;
+//				mapaPrimeiroGrupo.put(chaveSegundoGrupo, valor);
+//				
+//			}else {
+//				mapaPrimeiroGrupo.put(chaveSegundoGrupo, 1);
+//				}
+			}
+//		
+			System.out.println(conte);
+	}
+	
+	public void testes6() throws FileNotFoundException, IOException {
 		Estatisticas estatisticas = new Estatisticas();
 		estatisticas.iniciarListas();
 		List<Jogo> listaTodosJogos = estatisticas.lerTodosOsJogos();
@@ -48,8 +90,6 @@ public class Testes {
 			System.out.println(sequencias);
 			sequencias = null;
 		}
-		
-
 	}
 	
 	public void teste5() throws FileNotFoundException, IOException {

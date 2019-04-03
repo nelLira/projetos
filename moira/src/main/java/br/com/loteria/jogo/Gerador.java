@@ -50,6 +50,7 @@ public class Gerador {
 			Jogo fibonacci = estatisticas.buscarNumerosSequenciaDeFibonacci();
 			Jogo quadrado = estatisticas.buscarNumerosQuadrado();
 			Jogo multiplosDeTres = estatisticas.buscarNumerosMultiplosDeTres();
+			Jogo numerosImportantes = estatisticas.buscarNumerosImportantes();
 	
 			List<String> resultCSV = new ArrayList<String>();
 	
@@ -76,11 +77,12 @@ public class Gerador {
 				Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(jogo.getJogo());
 				intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
 	
-				Map<Integer, Integer> mapaEstatisticasJogos = estatisticas
-						.estatisticasJogos(filtro.buscaListaTodosSorteios().size());
-				
 				Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
 				intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios()).getJogo());
+				
+				Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
+				intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
+				
 				
 				Set<Integer> primeiraLinha = new HashSet<Integer>(jogo.getJogo());
 				primeiraLinha.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
@@ -145,8 +147,9 @@ public class Gerador {
 						+ "#Primos#" + intersectionPrimos.size() 
 						+ "#Fibonacci#" + intersectionFibonacci.size()
 						+ "#Quadrado#" + intersectionQuadrado.size() 
-						+ "#Multiplos de Tres#" + intersectionMultiplosDeTres.size() 
+						+ "#Multiplos de Tres#" + intersectionNumerosImportantes.size() 
 						+ "#Dez Mais#" + intersectionDezMais.size()
+						+ "#Numeros Importantes#" + intersectionNumerosImportantes.size()
 						+ "#Linhas#" + primeiraLinha.size() + "" + segundaLinha.size() +  "" + terceiraLinha.size() +  "" + quartaLinha.size() +  "" + quintaLinha.size()
 					 	+ "#Colunas#" + primeiraColuna.size() + "" + segundaColuna.size() +  "" + terceiraColuna.size() +  "" + quartaColuna.size() +  "" + quintaColuna.size()
 						);
