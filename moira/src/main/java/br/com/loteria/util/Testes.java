@@ -19,7 +19,26 @@ import br.com.loteria.lotofacil.Filtro;
 public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
+		String conteudo = "<p><p class=\"principalStyle\"><a name=\"333324\"></a><span><b>A SRA. BENEDITA DA SILVA </b>(PT - RJ. Sem revisão da oradora.) -  Sra. Presidenta, Sras. e Srs. Deputados, quero, desta tribuna, falar da importância de termos recebido a notícia da prisão dos policiais suspeitos de matarem Marielle.\n" + 
+				"</span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span>No Rio de Janeiro, há muito tempo estamos trabalhando contra o feminicídio, porque não apenas Marielle, mas muitas de nossas mulheres estão sendo assassinadas no Estado. Essas mulheres estão sendo vítimas de um Estado, no qual o poder de Estado não dá segurança para essas mulheres.\n" + 
+				"</span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span>Pois bem, Marielle foi um caso político. Está comprovado: foi um caso político.\n" + 
+				"</span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span>Nós queremos aqui reafirmar que esse foi um grande passo da investigação. Agora nós temos que encontrar, que é tão perverso quanto, o mandante desse crime. Quem mandou matar Marielle? Por que mataram Marielle se ela tinha pura e simplesmente uma bandeira? Era uma bandeira de mulher negra da comunidade, uma bandeira de mulher que defendia os direitos humanos, o que não é defender bandido. Eu tenho aqui uma história de Marielle. Ela sempre acompanhou as mulheres dos policiais mortos. Ela tinha dignidade enquanto Parlamentar e liderança comunitária.\n" + 
+				"</span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span>Portanto, não aceitamos qualquer outro subterfúgio.\n" + 
+				"</span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span>Sra. Presidente, solicito que o meu pronunciamento seja divulgado nos meios de comunicação da Casa e no programa <i>A Voz do Brasil.\n" + 
+				"</i></span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span>Obrigada.\n" + 
+				"</span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span><b>A SRA. PRESIDENTE </b>(Geovania de Sá. Bloco/PSDB - SC) - Deferido o seu pedido, nobre Deputada Benedita da Silva.\n" + 
+				"</span></p><p class=\"insercaoSegueIntegraStyle\"><a name=\"333324\"></a><span><b>DISCURSO NA ÍNTEGRA ENCAMINHADO PELA SRA. DEPUTADA BENEDITA DA SILVA.\n" + 
+				"</b></span></p><p class=\"rtf\"><a name=\"333324\"></a><span>#cod_item_insercao=333326#</span></p></p>";
 		
+		
+		
+		conteudo = conteudo.replace("\n", "\\n");
+		boolean valor = conteudo.matches(".*#cod_item_insercao=.*#."); 
+	        System.out.println(valor);
+		
+	}
+	
+	public void teste7() throws FileNotFoundException, IOException {
 		Estatisticas estatisticas = new Estatisticas();
 		estatisticas.iniciarListas();
 		List<Jogo> listaTodosJogos = estatisticas.lerTodosOsJogos();
