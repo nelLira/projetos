@@ -22,14 +22,15 @@ public class Lotofacil {
 		//estatisticasUltimosSorteios(50, true);
 
 		 List<Jogo> jogos = new ArrayList<Jogo>();
-		 jogos.add(new Jogo(Arrays.asList(2, 3, 4, 5, 7, 8, 11, 12, 14, 18, 20, 21, 22, 23, 25)));
-		 jogos.add(new Jogo(Arrays.asList(1, 2, 4, 6, 7, 8, 11, 12, 13, 14, 15, 16, 21, 23, 25)));
-		 jogos.add(new Jogo(Arrays.asList(1, 2, 4, 8, 11, 12, 13, 14, 15, 17, 19, 20, 22, 24, 25)));
-		 jogos.add(new Jogo(Arrays.asList(1, 2, 4, 5, 7, 8, 9, 11, 12, 13, 16, 18, 21, 22, 25)));
-		 jogos.add(new Jogo(Arrays.asList(2, 3, 5, 8, 9, 12, 13, 15, 17, 18, 20, 21, 22, 23, 24)));
-		 jogos.add(new Jogo(Arrays.asList(1, 2, 4, 5, 6, 7, 8, 13, 15, 16, 18, 21, 22, 23, 25)));
-		 jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 7, 9, 12, 13, 14, 18, 20, 21, 22, 23, 25)));
-		 consultaSorteio(jogos);
+		jogos.add(new Jogo(Arrays.asList(1, 4, 5, 8, 11, 12, 15, 17, 18, 20, 21, 22, 23, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 6, 8, 10, 11, 12, 14, 19, 20, 21, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 6, 8, 12, 14, 17, 18, 20, 21, 22, 23, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 4, 6, 7, 8, 10, 12, 13, 15, 16, 17, 22, 23, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 6, 9, 10, 11, 13, 15, 16, 18, 19, 21, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 6, 10, 11, 12, 15, 16, 17, 18, 19, 21, 23, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 4, 6, 7, 9, 10, 11, 13, 15, 18, 20, 22, 24, 25)));
+		consultaSorteio(jogos);
+
 	}
 
 	private static void consultaSorteio(List<Jogo> jogos) throws FileNotFoundException, IOException {
