@@ -8,10 +8,14 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
+import br.com.loteria.combinacoes.Combinacoes;
 import br.com.loteria.jogo.Jogo;
 
 public class Filtro {
@@ -78,27 +82,27 @@ public class Filtro {
 		listaJogosCheia.addAll(listaJogosCombinados);
 		
 		repetidosJogoAnterior(Arrays.asList(7));
-		pares(Arrays.asList(5,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
-		primos(Arrays.asList(4,5,6)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
-		sequenciaDeFibonacci(Arrays.asList(3,4,5,6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
-		quadrado(Arrays.asList(8,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
+		pares(Arrays.asList(5,6,7,8)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
+		primos(Arrays.asList(5,6,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
+		sequenciaDeFibonacci(Arrays.asList(3,4,5));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
+		quadrado(Arrays.asList(8,9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
 		multiplosDeTres(Arrays.asList(4,5,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
-		dezMais(Arrays.asList(4,5,6,7)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3} 
+		dezMais(Arrays.asList(5,6,7,8)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3} 
 		numerosImportantes(Arrays.asList(4,5,6,7));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
 		 
 		linha(Arrays.asList(1, 2, 3, 4, 5),
 			  Arrays.asList(1, 2, 3, 4, 5),  
-			  Arrays.asList(2, 3, 4, 5), 
+			  Arrays.asList(1, 2, 3, 4, 5), 
 			  Arrays.asList(1, 2, 3, 4, 5),
-			  Arrays.asList(1, 3, 4, 5));
+			  Arrays.asList(1, 2, 3, 4, 5));
 		
-		coluna(Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(2, 3, 4, 5),
+		coluna(Arrays.asList(2, 3, 4, 5),
 			   Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 5), 
+			   Arrays.asList(1, 2, 3, 4, 5),
+			   Arrays.asList(2, 3, 4, 5), 
 			   Arrays.asList(1, 2, 3, 4));
-		
-//		repetidosJogoAnterior(Arrays.asList(7,8,9,10));
+		//412
+//		repetidosJogoAnterior(Arrays.asList(9));
 //		pares(Arrays.asList(5,6,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
 //		primos(Arrays.asList(4,5,6,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
 //		sequenciaDeFibonacci(Arrays.asList(2,3,4,5,6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
@@ -118,6 +122,8 @@ public class Filtro {
 //			   Arrays.asList(1, 2, 3, 4, 5),
 //			   Arrays.asList(1, 2, 3, 4, 5), 
 //			   Arrays.asList(1, 2, 3, 4, 5));
+//		
+		teste();
 		
 		
 		//	cantos();
@@ -143,6 +149,96 @@ public class Filtro {
 
 	}
 	
+	private void teste() throws FileNotFoundException, IOException {
+		
+		//System.out.println("filtrando filtros");
+		// TODO Auto-generated method stub
+		Filtro filtro = new Filtro();
+		Estatisticas estatisticas = new Estatisticas();
+		estatisticas.iniciarListas();
+		filtro.iniciaListas();
+		filtro.setaListaTodosSorteios(estatisticas.lerTodosOsJogos());
+		
+		
+		limpaListasAuxiliares();
+		listaParaAnalise.addAll(listaJogosCombinados);
+
+		Jogo pares = estatisticas.buscarNumerosPares();
+		Jogo primos = estatisticas.buscarNumerosPrimos();
+		Jogo fibonacci = estatisticas.buscarNumerosSequenciaDeFibonacci();
+		Jogo quadrado = estatisticas.buscarNumerosQuadrado();
+		Jogo multiplosDeTres = estatisticas.buscarNumerosMultiplosDeTres();
+		Jogo numerosImportantes = estatisticas.buscarNumerosImportantes();
+
+		List<String> resultCSV = new ArrayList<String>();
+
+		for (Jogo jogo : listaParaAnalise) {
+
+			Set<Integer> intersectionRepetidos = new HashSet<Integer>(jogo.getJogo());
+			intersectionRepetidos.retainAll(
+					filtro.buscaListaTodosSorteios().get(filtro.buscaListaTodosSorteios().size() - 1).getJogo());
+
+			Set<Integer> intersectionPares = new HashSet<Integer>(jogo.getJogo());
+			intersectionPares.retainAll(pares.getJogo());
+
+			Set<Integer> intersectionPrimos = new HashSet<Integer>(jogo.getJogo());
+			intersectionPrimos.retainAll(primos.getJogo());
+
+			Set<Integer> intersectionFibonacci = new HashSet<Integer>(jogo.getJogo());
+			intersectionFibonacci.retainAll(fibonacci.getJogo());
+
+			Set<Integer> intersectionQuadrado = new HashSet<Integer>(jogo.getJogo());
+			intersectionQuadrado.retainAll(quadrado.getJogo());
+
+			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(jogo.getJogo());
+			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
+
+			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
+			intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios()).getJogo());
+			
+			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
+			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
+			
+			List<Integer> lista = new ArrayList<>();
+			lista.add(intersectionPares.size());
+			lista.add(intersectionPrimos.size());
+			lista.add(intersectionFibonacci.size());
+			lista.add(intersectionQuadrado.size());
+			lista.add(intersectionMultiplosDeTres.size());
+			lista.add(intersectionDezMais.size());
+			lista.add(intersectionNumerosImportantes.size());
+			
+			int qtd = 3;
+			
+			
+			if ( Collections.frequency(lista, 1) > qtd  
+				|| Collections.frequency(lista, 2) > qtd
+				|| Collections.frequency(lista, 3) > qtd
+				|| Collections.frequency(lista, 4) > qtd
+				|| Collections.frequency(lista, 5) > qtd
+				|| Collections.frequency(lista, 6) > qtd
+				|| Collections.frequency(lista, 7) > qtd
+				|| Collections.frequency(lista, 8) > qtd
+				|| Collections.frequency(lista, 9) > qtd
+				|| Collections.frequency(lista, 10) > qtd
+				|| Collections.frequency(lista, 11) > qtd
+				|| Collections.frequency(lista, 12) > qtd
+				
+			) {
+				continue;
+			}
+			
+			jogo.somaQuantidadeFiltros();
+			listaPorFiltro.add(jogo);
+			
+			
+			
+		}
+		atualizaListaFiltrada();
+		System.out.println("Tamanho da lista depois de filtrar filtros -> " + listaJogosCombinados.size());
+	}
+
+
 	public List<Jogo> filtrarLista() throws FileNotFoundException, IOException {
 		this.listaJogosCheia = new ArrayList<Jogo>();
 		listaJogosCheia.addAll(listaJogosCombinados);
@@ -550,8 +646,8 @@ public class Filtro {
 
 	}
 
-	private void coluna(List<Integer> primeiraColuna, List<Integer> segundaColuna, List<Integer> terceiraColuna, List<Integer> quartaColuna, List<Integer> quintaColuna) {
 
+	private void coluna(List<Integer> primeiraColuna, List<Integer> segundaColuna, List<Integer> terceiraColuna, List<Integer> quartaColuna, List<Integer> quintaColuna) {
 		limpaListasAuxiliares();
 		listaParaAnalise.addAll(listaJogosCombinados);
 

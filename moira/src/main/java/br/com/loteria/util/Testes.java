@@ -9,9 +9,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 
+import br.com.loteria.combinacoes.Combinacoes;
 import br.com.loteria.jogo.Jogo;
 import br.com.loteria.lotofacil.Estatisticas;
 import br.com.loteria.lotofacil.Filtro;
@@ -19,22 +21,184 @@ import br.com.loteria.lotofacil.Filtro;
 public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
-		String conteudo = "<p><p class=\"principalStyle\"><a name=\"333324\"></a><span><b>A SRA. BENEDITA DA SILVA </b>(PT - RJ. Sem revisão da oradora.) -  Sra. Presidenta, Sras. e Srs. Deputados, quero, desta tribuna, falar da importância de termos recebido a notícia da prisão dos policiais suspeitos de matarem Marielle.\n" + 
-				"</span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span>No Rio de Janeiro, há muito tempo estamos trabalhando contra o feminicídio, porque não apenas Marielle, mas muitas de nossas mulheres estão sendo assassinadas no Estado. Essas mulheres estão sendo vítimas de um Estado, no qual o poder de Estado não dá segurança para essas mulheres.\n" + 
-				"</span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span>Pois bem, Marielle foi um caso político. Está comprovado: foi um caso político.\n" + 
-				"</span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span>Nós queremos aqui reafirmar que esse foi um grande passo da investigação. Agora nós temos que encontrar, que é tão perverso quanto, o mandante desse crime. Quem mandou matar Marielle? Por que mataram Marielle se ela tinha pura e simplesmente uma bandeira? Era uma bandeira de mulher negra da comunidade, uma bandeira de mulher que defendia os direitos humanos, o que não é defender bandido. Eu tenho aqui uma história de Marielle. Ela sempre acompanhou as mulheres dos policiais mortos. Ela tinha dignidade enquanto Parlamentar e liderança comunitária.\n" + 
-				"</span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span>Portanto, não aceitamos qualquer outro subterfúgio.\n" + 
-				"</span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span>Sra. Presidente, solicito que o meu pronunciamento seja divulgado nos meios de comunicação da Casa e no programa <i>A Voz do Brasil.\n" + 
-				"</i></span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span>Obrigada.\n" + 
-				"</span></p><p class=\"principalStyle\"><a name=\"333324\"></a><span><b>A SRA. PRESIDENTE </b>(Geovania de Sá. Bloco/PSDB - SC) - Deferido o seu pedido, nobre Deputada Benedita da Silva.\n" + 
-				"</span></p><p class=\"insercaoSegueIntegraStyle\"><a name=\"333324\"></a><span><b>DISCURSO NA ÍNTEGRA ENCAMINHADO PELA SRA. DEPUTADA BENEDITA DA SILVA.\n" + 
-				"</b></span></p><p class=\"rtf\"><a name=\"333324\"></a><span>#cod_item_insercao=333326#</span></p></p>";
+		System.out.println("gerando jogos...");
+		Filtro filtro = new Filtro();
+		Estatisticas estatisticas = new Estatisticas();
+		estatisticas.iniciarListas();
+		filtro.iniciaListas();
+		filtro.setaListaTodosSorteios(estatisticas.lerTodosOsJogos());
 		
+		Combinacoes combinacoes = new Combinacoes();
+		filtro.setListaJogosCombinadosCompleto(combinacoes.todosCombinacoesLotoFacil());
 		
+		List<Jogo> jogos = filtro.bucaListaJogosFiltrados();
+
+		List<Jogo> jogosSaida = new ArrayList<Jogo>();
+
+		Random random = new Random();
+		List<Integer> posicoes = new ArrayList<Integer>();
+
+		System.out.println("sorteando...");
+
+		jogosSaida.addAll(estatisticas.lerTodosOsJogos());
+
+		Jogo pares = estatisticas.buscarNumerosPares();
+		Jogo primos = estatisticas.buscarNumerosPrimos();
+		Jogo fibonacci = estatisticas.buscarNumerosSequenciaDeFibonacci();
+		Jogo quadrado = estatisticas.buscarNumerosQuadrado();
+		Jogo multiplosDeTres = estatisticas.buscarNumerosMultiplosDeTres();
+		Jogo numerosImportantes = estatisticas.buscarNumerosImportantes();
+
+		List<String> resultCSV = new ArrayList<String>();
+
+		for (
+
+		Jogo jogo : jogosSaida) {
+
+			Set<Integer> intersectionRepetidos = new HashSet<Integer>(jogo.getJogo());
+			intersectionRepetidos.retainAll(
+					filtro.buscaListaTodosSorteios().get(filtro.buscaListaTodosSorteios().size() - 1).getJogo());
+
+			Set<Integer> intersectionPares = new HashSet<Integer>(jogo.getJogo());
+			intersectionPares.retainAll(pares.getJogo());
+
+			Set<Integer> intersectionPrimos = new HashSet<Integer>(jogo.getJogo());
+			intersectionPrimos.retainAll(primos.getJogo());
+
+			Set<Integer> intersectionFibonacci = new HashSet<Integer>(jogo.getJogo());
+			intersectionFibonacci.retainAll(fibonacci.getJogo());
+
+			Set<Integer> intersectionQuadrado = new HashSet<Integer>(jogo.getJogo());
+			intersectionQuadrado.retainAll(quadrado.getJogo());
+
+			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(jogo.getJogo());
+			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
+
+			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
+			intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios()).getJogo());
+			
+			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
+			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
+			
+			
+			List<Integer> lista = new ArrayList<>();
+			lista.add(intersectionPares.size());
+			lista.add(intersectionPrimos.size());
+			lista.add(intersectionFibonacci.size());
+			lista.add(intersectionQuadrado.size());
+			lista.add(intersectionMultiplosDeTres.size());
+			lista.add(intersectionDezMais.size());
+			lista.add(intersectionNumerosImportantes.size());
+			
+			Integer contaUm = 0;
+			Integer contaDois = 0;
+			Integer contaTres = 0;
+			Integer contaQuatro = 0;
+			Integer contaCinco = 0;
+			Integer contaSeis = 0;
+			Integer contaSete = 0;
+			Integer contaOito = 0;
+			Integer contaNove = 0;
+			Integer contaDez = 0;
+			Integer contaOnze = 0;
+			Integer contaDoze = 0;
+			Integer qtd = 3;
+			
+			for (Integer numero : lista) {
+				System.out.println("numero: " + numero);
+				if (numero == 1) contaUm++;
+				if (numero == 2) contaDois++;
+				if (numero == 3) contaTres++;
+				if (numero == 4) contaQuatro++;
+				if (numero == 5) contaCinco++;
+				if (numero == 6) contaSeis++;
+				if (numero == 7) contaSete++;
+				if (numero == 8) contaOito++;
+				if (numero == 9) contaNove++;
+				if (numero == 10) contaDez++;
+				if (numero == 11) contaOnze++;
+				if (numero == 12) contaDoze++;
+				
+				if (contaUm > qtd || contaDois > qtd || contaTres > qtd || contaQuatro > qtd || contaCinco > qtd || contaSeis > qtd 
+					|| contaSete > qtd || contaOito > qtd || contaNove > qtd || contaDez > qtd || contaOnze > qtd || contaDoze > qtd) {
+					System.out.println(Integer.compare(contaQuatro, qtd) > 0);
+					
+				}
+				
+				
+				if (contaQuatro > qtd ) {
+					System.out.println(Integer.compare(contaQuatro, qtd) > 0);
+				}
+			}
+			
 		
-		conteudo = conteudo.replace("\n", "\\n");
-		boolean valor = conteudo.matches(".*#cod_item_insercao=.*#."); 
-	        System.out.println(valor);
+			System.out.println("################### \n");
+			Set<Integer> primeiraLinha = new HashSet<Integer>(jogo.getJogo());
+			primeiraLinha.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
+
+			Set<Integer> segundaLinha = new HashSet<Integer>(jogo.getJogo());
+			segundaLinha.retainAll(estatisticas.buscarNumerosLinha2().getJogo());
+
+			Set<Integer> terceiraLinha = new HashSet<Integer>(jogo.getJogo());
+			terceiraLinha.retainAll(estatisticas.buscarNumerosLinha3().getJogo());
+
+			Set<Integer> quartaLinha = new HashSet<Integer>(jogo.getJogo());
+			quartaLinha.retainAll(estatisticas.buscarNumerosLinha4().getJogo());
+
+			Set<Integer> quintaLinha = new HashSet<Integer>(jogo.getJogo());
+			quintaLinha.retainAll(estatisticas.buscarNumerosLinha5().getJogo());
+			
+			
+			Set<Integer> primeiraColuna = new HashSet<Integer>(jogo.getJogo());
+			primeiraColuna.retainAll(estatisticas.buscarNumerosColuna1().getJogo());
+
+			Set<Integer> segundaColuna = new HashSet<Integer>(jogo.getJogo());
+			segundaColuna.retainAll(estatisticas.buscarNumerosColuna2().getJogo());
+
+			Set<Integer> terceiraColuna = new HashSet<Integer>(jogo.getJogo());
+			terceiraColuna.retainAll(estatisticas.buscarNumerosColuna3().getJogo());
+
+			Set<Integer> quartaColuna = new HashSet<Integer>(jogo.getJogo());
+			quartaColuna.retainAll(estatisticas.buscarNumerosColuna4().getJogo());
+
+			Set<Integer> quintaColuna = new HashSet<Integer>(jogo.getJogo());
+			quintaColuna.retainAll(estatisticas.buscarNumerosColuna5().getJogo());
+
+
+			
+			String strJogos = "jogos.add(new Jogo(Arrays.asList("+ jogo.getJogo().toString().replace("[", "").replace("]", "") + ")));";
+			
+			if (true){
+			resultCSV.add(strJogos 
+					+ "#Repetidos#" + intersectionRepetidos.size() 
+					+ "#Pares#" + intersectionPares.size()
+					+ "#Primos#" + intersectionPrimos.size() 
+					+ "#Fibonacci#" + intersectionFibonacci.size()
+					+ "#Quadrado#" + intersectionQuadrado.size() 
+					+ "#Multiplos de Tres#" + intersectionNumerosImportantes.size() 
+					+ "#Dez Mais#" + intersectionDezMais.size()
+					+ "#Numeros Importantes#" + intersectionNumerosImportantes.size()
+					+ "#Linhas#" + primeiraLinha.size() + "" + segundaLinha.size() +  "" + terceiraLinha.size() +  "" + quartaLinha.size() +  "" + quintaLinha.size()
+				 	+ "#Colunas#" + primeiraColuna.size() + "" + segundaColuna.size() +  "" + terceiraColuna.size() +  "" + quartaColuna.size() +  "" + quintaColuna.size()
+					);
+			} else {
+				resultCSV.add(strJogos);
+			}
+		}
+
+		filtro.limpaListas();
+		estatisticas.limparListas();
+		if (true){ 
+		Utils.gerarCSV(resultCSV, "teste");
+		System.out.println("Arquivos salvos com sucesso!");
+		} else {
+			System.out.println("List<Jogo> jogos = new ArrayList<Jogo>();");
+			for (String string : resultCSV) {
+				System.out.println(string);
+				
+			}
+			System.out.println("consultaSorteio(jogos);");
+		}
 		
 	}
 	
