@@ -799,6 +799,22 @@ public class Estatisticas {
 			
 			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
+			
+			
+			List<Integer> lista = new ArrayList<>();
+			lista.add(intersectionPares.size());
+			lista.add(intersectionPrimos.size());
+			lista.add(intersectionFibonacci.size());
+			lista.add(intersectionQuadrado.size());
+			lista.add(intersectionMultiplosDeTres.size());
+			lista.add(intersectionDezMais.size());
+			lista.add(intersectionNumerosImportantes.size());
+			int maxNumeroFiltroRepetido = 0;
+			
+			for (int j = 1; j < 13;j++) { 
+				maxNumeroFiltroRepetido = (maxNumeroFiltroRepetido > Collections.frequency(lista, j)) ? maxNumeroFiltroRepetido : Collections.frequency(lista, j);
+			}
+			
 
 			Set<Integer> primeiraLinha = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			primeiraLinha.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
@@ -869,8 +885,10 @@ public class Estatisticas {
 						"#Primos#" + intersectionPrimos.size() + 
 						"#Fibonacci#" + intersectionFibonacci.size() + 
 						"#Quadrado#" + intersectionQuadrado.size()+ 
-						"#Multiplos de Tres#" + intersectionNumerosImportantes.size() + "#Dez Mais#" + intersectionDezMais.size() + 
+						"#Multiplos de Tres#" + intersectionMultiplosDeTres.size() + 
+						"#Dez Mais#" + intersectionDezMais.size() + 
 						"#Números Importantes#" +intersectionNumerosImportantes.size() +
+						"#Filtros Repetidos#" + maxNumeroFiltroRepetido +
 						"#Linhas#" + primeiraLinha.size() + " - " + segundaLinha.size() + " - " + terceiraLinha.size() + " - " + quartaLinha.size() + " - " + quintaLinha.size() + 
 						"#Colunas#" + primeiraColuna.size() + " - " + segundaColuna.size() + " - " + terceiraColuna.size() + " - " + quartaColuna.size() + " - " + quintaColuna.size());
 			} else {

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +22,161 @@ import br.com.loteria.lotofacil.Filtro;
 public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
+		
+		teste8();
+		
+		System.out.println("gerando jogos...");
+		Filtro filtro = new Filtro();
+		Estatisticas estatisticas = new Estatisticas();
+		estatisticas.iniciarListas();
+		filtro.iniciaListas();
+		filtro.setaListaTodosSorteios(estatisticas.lerTodosOsJogos());
+		
+//		Combinacoes combinacoes = new Combinacoes();
+//		filtro.setListaJogosCombinadosCompleto(combinacoes.todosCombinacoesLotoFacil());
+		
+//		List<Jogo> jogos = filtro.bucaListaJogosFiltrados();
+
+		List<Jogo> jogosSaida = new ArrayList<Jogo>();
+
+		Random random = new Random();
+		List<Integer> posicoes = new ArrayList<Integer>();
+
+		System.out.println("sorteando...");
+
+		//jogosSaida.addAll(estatisticas.lerTodosOsJogos());
+		jogosSaida.add(new Jogo (Arrays.asList(1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 10, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 5, 7, 8, 9, 10, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 6, 7, 8, 9, 10, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 4, 5, 6, 7, 8, 9, 10, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 3, 4, 5, 6, 7, 8, 9, 10, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 11, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 5, 7, 8, 9, 11, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 6, 7, 8, 9, 11, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 4, 5, 6, 7, 8, 9, 11, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 3, 4, 5, 6, 7, 8, 9, 11, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 6, 7, 8, 10, 11, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 3, 4, 5, 6, 7, 8, 10, 11, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 7, 8, 9, 10, 11, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 4, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 3, 4, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 4, 5, 6, 7, 8, 9, 10, 11, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 5, 6, 7, 9, 12, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 5, 6, 8, 9, 12, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 5, 6, 7, 8, 9, 12, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 12, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 5, 6, 7, 10, 12, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 5, 6, 7, 8, 10, 12, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 5, 7, 9, 10, 12, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 6, 7, 9, 10, 12, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 3, 4, 5, 6, 7, 9, 10, 12, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 5, 8, 9, 10, 12, 14, 15, 16, 17, 19, 22)));
+		jogosSaida.add(new Jogo (Arrays.asList(1, 2, 3, 4, 6, 8, 9, 10, 12, 14, 15, 16, 17, 19, 22)));
+		
+		
+
+		Jogo pares = estatisticas.buscarNumerosPares();
+		Jogo primos = estatisticas.buscarNumerosPrimos();
+		Jogo fibonacci = estatisticas.buscarNumerosSequenciaDeFibonacci();
+		Jogo quadrado = estatisticas.buscarNumerosQuadrado();
+		Jogo multiplosDeTres = estatisticas.buscarNumerosMultiplosDeTres();
+		Jogo numerosImportantes = estatisticas.buscarNumerosImportantes();
+
+		List<String> resultCSV = new ArrayList<String>();
+
+		for (Jogo jogo : jogosSaida) {
+
+			Set<Integer> intersectionRepetidos = new HashSet<Integer>(jogo.getJogo());
+			intersectionRepetidos.retainAll(
+					filtro.buscaListaTodosSorteios().get(filtro.buscaListaTodosSorteios().size() - 1).getJogo());
+
+			Set<Integer> intersectionPares = new HashSet<Integer>(jogo.getJogo());
+			intersectionPares.retainAll(pares.getJogo());
+
+			Set<Integer> intersectionPrimos = new HashSet<Integer>(jogo.getJogo());
+			intersectionPrimos.retainAll(primos.getJogo());
+
+			Set<Integer> intersectionFibonacci = new HashSet<Integer>(jogo.getJogo());
+			intersectionFibonacci.retainAll(fibonacci.getJogo());
+
+			Set<Integer> intersectionQuadrado = new HashSet<Integer>(jogo.getJogo());
+			intersectionQuadrado.retainAll(quadrado.getJogo());
+
+			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(jogo.getJogo());
+			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
+
+			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
+			intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios()).getJogo());
+			
+			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
+			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
+			
+			
+			List<Integer> list = new ArrayList<>();
+			list.add(intersectionPares.size());
+			list.add(intersectionPrimos.size());
+			list.add(intersectionFibonacci.size());
+			list.add(intersectionQuadrado.size());
+			list.add(intersectionMultiplosDeTres.size());
+			list.add(intersectionDezMais.size());
+			list.add(intersectionNumerosImportantes.size());
+			
+			int qtd = 5;
+			if ( Collections.frequency(list, 1) >  qtd
+				|| Collections.frequency(list, 2) > qtd
+				|| Collections.frequency(list, 3) > qtd
+				|| Collections.frequency(list, 4) > qtd
+				|| Collections.frequency(list, 5) > qtd
+				|| Collections.frequency(list, 6) > qtd
+				|| Collections.frequency(list, 7) > qtd
+				|| Collections.frequency(list, 8) > qtd
+				|| Collections.frequency(list, 9) > qtd
+				|| Collections.frequency(list, 10) > qtd
+				|| Collections.frequency(list, 11) > qtd
+				|| Collections.frequency(list, 12) > qtd
+				
+			) {
+				System.out.println("entrou no if");
+			}else {
+				System.out.println("entrou no else");
+			}
+			
+			
+			List<Integer> lista = new ArrayList<>(Arrays.asList(1,2,3,4,5)); 
+			if ( !lista.contains(Collections.frequency(list, 1))  
+					&&!lista.contains(Collections.frequency(list, 2)) 
+					&&!lista.contains(Collections.frequency(list, 3)) 
+					&&!lista.contains(Collections.frequency(list, 4)) 
+					&&!lista.contains(Collections.frequency(list, 5)) 
+					&&!lista.contains(Collections.frequency(list, 6)) 
+					&&!lista.contains(Collections.frequency(list, 7)) 
+					&&!lista.contains(Collections.frequency(list, 8)) 
+					&&!lista.contains(Collections.frequency(list, 9)) 
+					&&!lista.contains(Collections.frequency(list, 10)) 
+					&&!lista.contains(Collections.frequency(list, 11)) 
+					&&!lista.contains(Collections.frequency(list, 12)) 
+					
+				) {
+				System.out.println("entrou no if");
+			}else {
+				System.out.println("entrou no else");
+			}
+			
+			
+		}	
+			
+		
+		
+		
+	}
+	
+	public static void teste8() throws FileNotFoundException, IOException {
 		System.out.println("gerando jogos...");
 		Filtro filtro = new Filtro();
 		Estatisticas estatisticas = new Estatisticas();
@@ -199,7 +355,6 @@ public class Testes {
 			}
 			System.out.println("consultaSorteio(jogos);");
 		}
-		
 	}
 	
 	public void teste7() throws FileNotFoundException, IOException {

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -83,6 +84,19 @@ public class Gerador {
 				Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
 				intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
 				
+				List<Integer> lista = new ArrayList<>();
+				lista.add(intersectionPares.size());
+				lista.add(intersectionPrimos.size());
+				lista.add(intersectionFibonacci.size());
+				lista.add(intersectionQuadrado.size());
+				lista.add(intersectionMultiplosDeTres.size());
+				lista.add(intersectionDezMais.size());
+				lista.add(intersectionNumerosImportantes.size());
+				int maxNumeroFiltroRepetido = 0;
+				
+				for (int j = 1; j < 13;j++) { 
+					maxNumeroFiltroRepetido = (maxNumeroFiltroRepetido > Collections.frequency(lista, j)) ? maxNumeroFiltroRepetido : Collections.frequency(lista, j);
+				}
 				
 				Set<Integer> primeiraLinha = new HashSet<Integer>(jogo.getJogo());
 				primeiraLinha.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
@@ -147,9 +161,10 @@ public class Gerador {
 						+ "#Primos#" + intersectionPrimos.size() 
 						+ "#Fibonacci#" + intersectionFibonacci.size()
 						+ "#Quadrado#" + intersectionQuadrado.size() 
-						+ "#Multiplos de Tres#" + intersectionNumerosImportantes.size() 
+						+ "#Multiplos de Tres#" + intersectionMultiplosDeTres.size() 
 						+ "#Dez Mais#" + intersectionDezMais.size()
 						+ "#Numeros Importantes#" + intersectionNumerosImportantes.size()
+						+ "#Filtros Repetidos#" + maxNumeroFiltroRepetido 
 						+ "#Linhas#" + primeiraLinha.size() + "" + segundaLinha.size() +  "" + terceiraLinha.size() +  "" + quartaLinha.size() +  "" + quintaLinha.size()
 					 	+ "#Colunas#" + primeiraColuna.size() + "" + segundaColuna.size() +  "" + terceiraColuna.size() +  "" + quartaColuna.size() +  "" + quintaColuna.size()
 						);
