@@ -29,7 +29,9 @@ public class Gerador {
 			Combinacoes combinacoes = new Combinacoes();
 			filtro.setListaJogosCombinadosCompleto(combinacoes.todosCombinacoesLotoFacil());
 			
-			List<Jogo> jogos = filtro.bucaListaJogosFiltrados();
+			List<Jogo> jogos =  filtro.bucaListaJogosFiltrados();
+			
+			
 	
 			List<Jogo> jogosSaida = new ArrayList<Jogo>();
 	
@@ -54,7 +56,9 @@ public class Gerador {
 			Jogo numerosImportantes = estatisticas.buscarNumerosImportantes();
 	
 			List<String> resultCSV = new ArrayList<String>();
-	
+			
+			
+			 
 			for (
 	
 			Jogo jogo : jogosSaida) {
@@ -156,16 +160,18 @@ public class Gerador {
 				
 				if (gerarArquivos){
 				resultCSV.add(strJogos 
-						+ "#Repetidos#" + intersectionRepetidos.size() 
-						+ "#Pares#" + intersectionPares.size()
-						+ "#Primos#" + intersectionPrimos.size() 
-						+ "#Fibonacci#" + intersectionFibonacci.size()
-						+ "#Quadrado#" + intersectionQuadrado.size() 
-						+ "#Multiplos de Tres#" + intersectionMultiplosDeTres.size() 
-						+ "#Dez Mais#" + intersectionDezMais.size()
-						+ "#Numeros Importantes#" + intersectionNumerosImportantes.size()
+				//		+ "#Repetidos#" + intersectionRepetidos.size() 
+				//		+ "#Pares#" + intersectionPares.size()
+				//		+ "#Primos#" + intersectionPrimos.size() 
+				//		+ "#Fibonacci#" + intersectionFibonacci.size()
+				//		+ "#Quadrado#" + intersectionQuadrado.size() 
+				//		+ "#Multiplos de Tres#" + intersectionMultiplosDeTres.size() 
+				//		+ "#Dez Mais#" + intersectionDezMais.size()
+				//		+ "#Numeros Importantes#" + intersectionNumerosImportantes.size()
 						+ "#Filtros Repetidos#" + maxNumeroFiltroRepetido 
-						+ "#Linhas#" + primeiraLinha.size() + "" + segundaLinha.size() +  "" + terceiraLinha.size() +  "" + quartaLinha.size() +  "" + quintaLinha.size()
+						+ "#Dois em Dois#" + estatisticas.sequenciaDoisEmDois(jogo.getJogo())
+					 	+ "#Um em Um#" + estatisticas.sequenciaUmEmUm(jogo.getJogo())
+					 	+ "#Linhas#" + primeiraLinha.size() + "" + segundaLinha.size() +  "" + terceiraLinha.size() +  "" + quartaLinha.size() +  "" + quintaLinha.size()
 					 	+ "#Colunas#" + primeiraColuna.size() + "" + segundaColuna.size() +  "" + terceiraColuna.size() +  "" + quartaColuna.size() +  "" + quintaColuna.size()
 						);
 				} else {
@@ -190,6 +196,7 @@ public class Gerador {
 			
 	
 		}
+
 	public List<Jogo> listaJogosGerados(int quantidade, Filtro filtro) throws FileNotFoundException, IOException{
 		
 		System.out.println("gerando jogos...");

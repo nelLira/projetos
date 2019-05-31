@@ -81,19 +81,21 @@ public class Filtro {
 		
 		
 		repetidosJogoAnterior(Arrays.asList(8));
-		pares(Arrays.asList(5,6,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
+		pares(Arrays.asList(7)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
 		primos(Arrays.asList(5,6,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
 		sequenciaDeFibonacci(Arrays.asList(3,4,5,6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
-		quadrado(Arrays.asList(8,9,10)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
-		multiplosDeTres(Arrays.asList(3,4,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
+		quadrado(Arrays.asList(9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
+		multiplosDeTres(Arrays.asList(3,4,5,6)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
 		dezMais(Arrays.asList(4,5,6,7)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3} 
-		numerosImportantes(Arrays.asList(4,5,6,7,8));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
+		numerosImportantes(Arrays.asList(3,4,5,6,8));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
 		QtdFiltros(Arrays.asList(0,1,2,3,4));
+		sequenciaDoisEmDois(Arrays.asList(2,3,4)); //2a4 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
+		sequenciaUmEmUm(Arrays.asList(3,4,5)); //3a7 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
 		
 		linha(Arrays.asList(2, 3, 4, 5),
-			  Arrays.asList(2, 3, 4, 5),  
+			  Arrays.asList(1, 2, 3, 4, 5),  
 			  Arrays.asList(1, 2, 3, 4), 
-			  Arrays.asList(1, 2, 3, 4, 5),
+			  Arrays.asList(1, 2, 3, 4),
 			  Arrays.asList(2, 3, 4, 5));
 		
 		coluna(Arrays.asList(1, 2, 3, 4),
@@ -102,9 +104,12 @@ public class Filtro {
 			   Arrays.asList(1, 2, 3, 4), 
 			   Arrays.asList(1, 2, 3, 4, 5));
 		
+		incluir(Arrays.asList(3));//
+		retirar(Arrays.asList(2));
+		//naoIniciarCom(Arrays.asList( ));
+		//naoTerminarCom(Arrays.asList( ));
 		
 		
-//		
 //		repetidosJogoAnterior(Arrays.asList(7,8,9,10));
 //		pares(Arrays.asList(5,6,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
 //		primos(Arrays.asList(4,5,6,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
@@ -114,6 +119,8 @@ public class Filtro {
 //		dezMais(Arrays.asList(4,5,6,7,8)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3} 
 //		numerosImportantes(Arrays.asList(3,4,5,6,7,8));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
 //		QtdFiltros(Arrays.asList(0,1,2,3,4,5));
+//		sequenciaDoisEmDois(Arrays.asList(2,3,4)); //2a4 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
+//		sequenciaUmEmUm(Arrays.asList(3,4,5,6,7)); //3a7 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
 //		
 //		linha(Arrays.asList(1, 2, 3, 4, 5),
 //			  Arrays.asList(1, 2, 3, 4, 5),  
@@ -126,29 +133,13 @@ public class Filtro {
 //			   Arrays.asList(1, 2, 3, 4, 5),
 //			   Arrays.asList(1, 2, 3, 4, 5), 
 //			   Arrays.asList(1, 2, 3, 4, 5));
-//		
+//
+//		//incluir(Arrays.asList( ));
+//		//retirar(Arrays.asList( );
+//		//naoIniciarCom(Arrays.asList( ));
+//		//naoTerminarCom(Arrays.asList( ));
 		
 		
-		
-		//	cantos();
-		/*
-		 * numerosImportantes(3, 8); //{1=2,2=9,3=80,4=276,5=492,6=498,7=230,8=49,9=3}
-		 * 
-		 * sequencia(); 
-		 
-		
-		 posicoes();
-		 soma();
- 		 * cruz(3, 8);// {2=5, 3=75, 4=243, 5=493, 6=451, 7=218, 8=53,
-		 * 9=3} x(3, 8); // {2=8, 3=65, 4=269, 5=465, 6=473, 7=213, 8=47, 9=1}
-		 * dentro(3, 7); // {2=6, 3=89, 4=281, 5=522, 6=484, 7=212, 8=57, 9=2}
-		 * grupo20a25(2, 5); // 2=187;3=524;4=592;5=277 **** grupo8a11(1, 4); //
-		 * 180=4;612=3;571=2;261=1 
-		 * verificaNumerosPrioritarios(); numerosAnteriores();
-		 * PrimeiroESegundoGrupos(); gruposQuintos();
-		 * 
-		 * revisarJogosEliminados();
-		 */
 		return this.listaJogosCombinados;
 
 	}
@@ -223,32 +214,93 @@ public class Filtro {
 				continue;
 			}
 		
-//			if ( !lista.contains(Collections.frequency(list, 1))  
-//					||!lista.contains(Collections.frequency(list, 2)) 
-//					||!lista.contains(Collections.frequency(list, 3)) 
-//					||!lista.contains(Collections.frequency(list, 4)) 
-//					||!lista.contains(Collections.frequency(list, 5)) 
-//					||!lista.contains(Collections.frequency(list, 6)) 
-//					||!lista.contains(Collections.frequency(list, 7)) 
-//					||!lista.contains(Collections.frequency(list, 8)) 
-//					||!lista.contains(Collections.frequency(list, 9)) 
-//					||!lista.contains(Collections.frequency(list, 10)) 
-//					||!lista.contains(Collections.frequency(list, 11)) 
-//					||!lista.contains(Collections.frequency(list, 12)) 
-//					
-//				) {
-//					continue;
-//				} 
-					
-			
 			jogo.somaQuantidadeFiltros();
 			listaPorFiltro.add(jogo);
-			
-			
 			
 		}
 		atualizaListaFiltrada();
 		System.out.println("Tamanho da lista depois de filtrar filtros -> " + listaJogosCombinados.size());
+	}
+	
+	public void sequenciaDoisEmDois(List<Integer> lista ) {
+			
+		limpaListasAuxiliares();
+		listaParaAnalise.addAll(listaJogosCombinados);
+		
+		for (Jogo jogo : listaParaAnalise) {
+
+			int cont = 0;
+			int numero = 0;
+			int maiorSequencia = 0;
+			for (Integer n : jogo.getJogo()) {
+				
+				if (numero != 0) {
+					if (numero + 2 == n) {
+						cont++;
+						if (maiorSequencia < cont) {
+							maiorSequencia = cont;
+						}
+					} else {
+						cont = 0;
+					}
+				
+				}
+				numero = n;
+			}
+			
+			if (!lista.contains(maiorSequencia + 1)) {
+				continue;
+			}
+
+			jogo.somaQuantidadeFiltros();
+			listaPorFiltro.add(jogo);
+		
+		}
+		
+		atualizaListaFiltrada();
+		System.out.println("Tamanho da lista depois de filtrar dois em dois -> " + listaJogosCombinados.size());
+			
+	}
+	
+	
+	public void sequenciaUmEmUm(List<Integer> lista ) {
+		
+		limpaListasAuxiliares();
+		listaParaAnalise.addAll(listaJogosCombinados);
+		
+		for (Jogo jogo : listaParaAnalise) {
+
+			int cont = 0;
+			int numero = 0;
+			int maiorSequencia = 0;
+			for (Integer n : jogo.getJogo()) {
+				
+				if (numero != 0) {
+					if (numero + 1 == n) {
+						cont++;
+						if (maiorSequencia < cont) {
+							maiorSequencia = cont;
+						}
+					} else {
+						cont = 0;
+					}
+				
+				}
+				numero = n;
+			}
+			
+			if (!lista.contains(maiorSequencia + 1)) {
+				continue;
+			}
+
+			jogo.somaQuantidadeFiltros();
+			listaPorFiltro.add(jogo);
+		
+		}
+		
+		atualizaListaFiltrada();
+		System.out.println("Tamanho da lista depois de filtrar um em um -> " + listaJogosCombinados.size());
+			
 	}
 
 
@@ -278,26 +330,6 @@ public class Filtro {
 			   Arrays.asList(1, 2, 3, 5),
 			   Arrays.asList(1, 2, 3, 4));
 		
-		
-		//	cantos();
-		/*
-		 * numerosImportantes(3, 8); //{1=2,2=9,3=80,4=276,5=492,6=498,7=230,8=49,9=3}
-		 * 
-		 * sequencia(); 
-		 
-		
-		 posicoes();
-		 soma();
- 		 * cruz(3, 8);// {2=5, 3=75, 4=243, 5=493, 6=451, 7=218, 8=53,
-		 * 9=3} x(3, 8); // {2=8, 3=65, 4=269, 5=465, 6=473, 7=213, 8=47, 9=1}
-		 * dentro(3, 7); // {2=6, 3=89, 4=281, 5=522, 6=484, 7=212, 8=57, 9=2}
-		 * grupo20a25(2, 5); // 2=187;3=524;4=592;5=277 **** grupo8a11(1, 4); //
-		 * 180=4;612=3;571=2;261=1 
-		 * verificaNumerosPrioritarios(); numerosAnteriores();
-		 * PrimeiroESegundoGrupos(); gruposQuintos();
-		 * 
-		 * revisarJogosEliminados();
-		 */
 		return this.listaJogosCombinados;
 
 	}
@@ -499,40 +531,6 @@ public class Filtro {
 			int contQuartaLinhaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosLinha4());
 			int contQuintaLinhaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosLinha5());
 			
-//
-//			Set<Integer> primeiraLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-//			primeiraLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
-//
-//			Set<Integer> segundaLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-//			segundaLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha2().getJogo());
-//
-//			Set<Integer> terceiraLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-//			terceiraLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha3().getJogo());
-//
-//			Set<Integer> quartaLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-//			quartaLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha4().getJogo());
-//
-//			Set<Integer> quintaLinhaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-//			quintaLinhaAnterior.retainAll(estatisticas.buscarNumerosLinha5().getJogo());
-
-			///////////////////////
-
-//			Set<Integer> primeiraLinhaProximo = new HashSet<Integer>(jogo.getJogo());
-//			primeiraLinhaProximo.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
-//
-//			Set<Integer> segundaLinhaProximo = new HashSet<Integer>(jogo.getJogo());
-//			segundaLinhaProximo.retainAll(estatisticas.buscarNumerosLinha2().getJogo());
-//
-//			Set<Integer> terceiraLinhaProximo = new HashSet<Integer>(jogo.getJogo());
-//			terceiraLinhaProximo.retainAll(estatisticas.buscarNumerosLinha3().getJogo());
-//
-//			Set<Integer> quartaLinhaProximo = new HashSet<Integer>(jogo.getJogo());
-//			quartaLinhaProximo.retainAll(estatisticas.buscarNumerosLinha4().getJogo());
-//
-//			Set<Integer> quintaLinhaProximo = new HashSet<Integer>(jogo.getJogo());
-//			quintaLinhaProximo.retainAll(estatisticas.buscarNumerosLinha5().getJogo());
-//			
-			
 			if (contPrimeiraLinha == contPrimeiraLinhaJogoAnterior
 					&& contSegundaLinha == contSegundaLinhaJogoAnterior
 					&& contTerceiraLinha == contTerceiraLinhaJogoAnterior
@@ -540,14 +538,6 @@ public class Filtro {
 					&& contQuintaLinha == contQuintaLinhaJogoAnterior) {
 				continue;
 			}
-//			if (primeiraLinhaAnterior.size() == primeiraLinhaProximo.size()
-//					&& segundaLinhaAnterior.size() == segundaLinhaProximo.size()
-//					&& terceiraLinhaAnterior.size() == terceiraLinhaProximo.size()
-//					&& quartaLinhaAnterior.size() == quartaLinhaProximo.size()
-//					&& quintaLinhaAnterior.size() == quintaLinhaProximo.size()) {
-//				continue;
-//			}
-			
 
 			if ((contPrimeiraLinha == 1 && contPrimeiraLinhaJogoAnterior == 1)
 					|| (contPrimeiraLinha == 5 && contPrimeiraLinhaJogoAnterior == 5)) {
@@ -574,83 +564,13 @@ public class Filtro {
 				continue;
 			}
 
-//			if ((primeiraLinhaAnterior.size() == 1 && primeiraLinhaProximo.size() == 1)
-//					|| (primeiraLinhaAnterior.size() == 5 && primeiraLinhaProximo.size() == 5)) {
-//				continue;
-//			}
 
-//			if ((segundaLinhaAnterior.size() == 1 && segundaLinhaProximo.size() == 1)
-//					|| (segundaLinhaAnterior.size() == 5 && segundaLinhaProximo.size() == 5)) {
-//				continue;
-//			}
-//
-//			if ((terceiraLinhaAnterior.size() == 1 && terceiraLinhaProximo.size() == 1)
-//					|| (terceiraLinhaAnterior.size() == 5 && terceiraLinhaProximo.size() == 5)) {
-//				continue;
-//			}
-//
-//			if ((quartaLinhaAnterior.size() == 1 && quartaLinhaProximo.size() == 1)
-//					|| (quartaLinhaAnterior.size() == 5 && quartaLinhaProximo.size() == 5)) {
-//				continue;
-//			}
-//
-//			if ((quintaLinhaAnterior.size() == 1 && quintaLinhaProximo.size() == 1)
-//					|| (quintaLinhaAnterior.size() == 5 && quintaLinhaProximo.size() == 5)) {
-//				continue;
-//			}
-//
-			
-			
 			if (!primeiraLinha.contains(contPrimeiraLinha) || !segundaLinha.contains(contSegundaLinha) || !terceiraLinha.contains(contTerceiraLinha) || !quartaLinha.contains(contQuartaLinha) || !quintaLinha.contains(contQuintaLinha) ) {
 				continue;
 			}
 			
-//			if (primeiraLinhaProximo.size() == 0 || segundaLinhaProximo.size() == 0 || terceiraLinhaProximo.size() == 0
-//					|| quartaLinhaProximo.size() == 0 || quintaLinhaProximo.size() == 0) {
-//				continue;
-//			}
-
 			jogo.somaQuantidadeFiltros();
 			listaPorFiltro.add(jogo);
-
-			// int cont = 0;
-			// if (jogo.getJogo().contains(1) || jogo.getJogo().contains(2) ||
-			// jogo.getJogo().contains(3)
-			// || jogo.getJogo().contains(4) || jogo.getJogo().contains(5)) {
-			// cont++;
-			// }
-			//
-			// if (jogo.getJogo().contains(6) || jogo.getJogo().contains(7) ||
-			// jogo.getJogo().contains(8)
-			// || jogo.getJogo().contains(9) || jogo.getJogo().contains(10)) {
-			// cont++;
-			// }
-			//
-			// if (jogo.getJogo().contains(11) || jogo.getJogo().contains(12) ||
-			// jogo.getJogo().contains(13)
-			// || jogo.getJogo().contains(14) || jogo.getJogo().contains(15)) {
-			// cont++;
-			// }
-			//
-			// if (jogo.getJogo().contains(16) || jogo.getJogo().contains(17) ||
-			// jogo.getJogo().contains(18)
-			// || jogo.getJogo().contains(19) || jogo.getJogo().contains(20)) {
-			// cont++;
-			// }
-			//
-			// if (jogo.getJogo().contains(21) || jogo.getJogo().contains(22) ||
-			// jogo.getJogo().contains(23)
-			// || jogo.getJogo().contains(24) || jogo.getJogo().contains(25)) {
-			// cont++;
-			// }
-			//
-			// if (cont > 4)
-			//
-			// {
-			// jogo.somaQuantidadeFiltros();
-			// listaPorFiltro.add(jogo);
-			//
-			// }
 
 		}
 
@@ -679,40 +599,6 @@ public class Filtro {
 			int contQuartaColunaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosColuna4());
 			int contQuintaColunaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosColuna5());
 			
-//
-//			Set<Integer> primeiraColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-//			primeiraColunaAnterior.retainAll(estatisticas.buscarNumerosColuna1().getJogo());
-//
-//			Set<Integer> segundaColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-//			segundaColunaAnterior.retainAll(estatisticas.buscarNumerosColuna2().getJogo());
-//
-//			Set<Integer> terceiraColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-//			terceiraColunaAnterior.retainAll(estatisticas.buscarNumerosColuna3().getJogo());
-//
-//			Set<Integer> quartaColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-//			quartaColunaAnterior.retainAll(estatisticas.buscarNumerosColuna4().getJogo());
-//
-//			Set<Integer> quintaColunaAnterior = new HashSet<Integer>(strUltimoSorteio.getJogo());
-//			quintaColunaAnterior.retainAll(estatisticas.buscarNumerosColuna5().getJogo());
-
-			///////////////////////
-
-//			Set<Integer> primeiraColunaProximo = new HashSet<Integer>(jogo.getJogo());
-//			primeiraColunaProximo.retainAll(estatisticas.buscarNumerosColuna1().getJogo());
-//
-//			Set<Integer> segundaColunaProximo = new HashSet<Integer>(jogo.getJogo());
-//			segundaColunaProximo.retainAll(estatisticas.buscarNumerosColuna2().getJogo());
-//
-//			Set<Integer> terceiraColunaProximo = new HashSet<Integer>(jogo.getJogo());
-//			terceiraColunaProximo.retainAll(estatisticas.buscarNumerosColuna3().getJogo());
-//
-//			Set<Integer> quartaColunaProximo = new HashSet<Integer>(jogo.getJogo());
-//			quartaColunaProximo.retainAll(estatisticas.buscarNumerosColuna4().getJogo());
-//
-//			Set<Integer> quintaColunaProximo = new HashSet<Integer>(jogo.getJogo());
-//			quintaColunaProximo.retainAll(estatisticas.buscarNumerosColuna5().getJogo());
-//			
-			
 			if (contPrimeiraColuna == contPrimeiraColunaJogoAnterior
 					&& contSegundaColuna == contSegundaColunaJogoAnterior
 					&& contTerceiraColuna == contTerceiraColunaJogoAnterior
@@ -720,14 +606,6 @@ public class Filtro {
 					&& contQuintaColuna == contQuintaColunaJogoAnterior) {
 				continue;
 			}
-//			if (primeiraColunaAnterior.size() == primeiraColunaProximo.size()
-//					&& segundaColunaAnterior.size() == segundaColunaProximo.size()
-//					&& terceiraColunaAnterior.size() == terceiraColunaProximo.size()
-//					&& quartaColunaAnterior.size() == quartaColunaProximo.size()
-//					&& quintaColunaAnterior.size() == quintaColunaProximo.size()) {
-//				continue;
-//			}
-			
 
 			if ((contPrimeiraColuna == 1 && contPrimeiraColunaJogoAnterior == 1)
 					|| (contPrimeiraColuna == 5 && contPrimeiraColunaJogoAnterior == 5)) {
@@ -754,83 +632,13 @@ public class Filtro {
 				continue;
 			}
 
-//			if ((primeiraColunaAnterior.size() == 1 && primeiraColunaProximo.size() == 1)
-//					|| (primeiraColunaAnterior.size() == 5 && primeiraColunaProximo.size() == 5)) {
-//				continue;
-//			}
 
-//			if ((segundaColunaAnterior.size() == 1 && segundaColunaProximo.size() == 1)
-//					|| (segundaColunaAnterior.size() == 5 && segundaColunaProximo.size() == 5)) {
-//				continue;
-//			}
-//
-//			if ((terceiraColunaAnterior.size() == 1 && terceiraColunaProximo.size() == 1)
-//					|| (terceiraColunaAnterior.size() == 5 && terceiraColunaProximo.size() == 5)) {
-//				continue;
-//			}
-//
-//			if ((quartaColunaAnterior.size() == 1 && quartaColunaProximo.size() == 1)
-//					|| (quartaColunaAnterior.size() == 5 && quartaColunaProximo.size() == 5)) {
-//				continue;
-//			}
-//
-//			if ((quintaColunaAnterior.size() == 1 && quintaColunaProximo.size() == 1)
-//					|| (quintaColunaAnterior.size() == 5 && quintaColunaProximo.size() == 5)) {
-//				continue;
-//			}
-//
-			
-			
 			if (!primeiraColuna.contains(contPrimeiraColuna) || !segundaColuna.contains(contSegundaColuna) || !terceiraColuna.contains(contTerceiraColuna) || !quartaColuna.contains(contQuartaColuna) || !quintaColuna.contains(contQuintaColuna) ) {
 				continue;
 			}
 			
-//			if (primeiraColunaProximo.size() == 0 || segundaColunaProximo.size() == 0 || terceiraColunaProximo.size() == 0
-//					|| quartaColunaProximo.size() == 0 || quintaColunaProximo.size() == 0) {
-//				continue;
-//			}
-
 			jogo.somaQuantidadeFiltros();
 			listaPorFiltro.add(jogo);
-
-			// int cont = 0;
-			// if (jogo.getJogo().contains(1) || jogo.getJogo().contains(6) ||
-			// jogo.getJogo().contains(11)
-			// || jogo.getJogo().contains(16) || jogo.getJogo().contains(21)) {
-			// cont++;
-			// }
-			//
-			// if (jogo.getJogo().contains(2) || jogo.getJogo().contains(7) ||
-			// jogo.getJogo().contains(12)
-			// || jogo.getJogo().contains(17) || jogo.getJogo().contains(22)) {
-			// cont++;
-			// }
-			//
-			// if (jogo.getJogo().contains(3) || jogo.getJogo().contains(8) ||
-			// jogo.getJogo().contains(13)
-			// || jogo.getJogo().contains(18) || jogo.getJogo().contains(23)) {
-			// cont++;
-			// }
-			//
-			// if (jogo.getJogo().contains(4) || jogo.getJogo().contains(9) ||
-			// jogo.getJogo().contains(14)
-			// || jogo.getJogo().contains(19) || jogo.getJogo().contains(24)) {
-			// cont++;
-			// }
-			//
-			// if (jogo.getJogo().contains(5) || jogo.getJogo().contains(10) ||
-			// jogo.getJogo().contains(15)
-			// || jogo.getJogo().contains(20) || jogo.getJogo().contains(25)) {
-			// cont++;
-			// }
-			//
-			// if (cont > 4)
-			//
-			// {
-			// jogo.somaQuantidadeFiltros();
-			// listaPorFiltro.add(jogo);
-			//
-			// }
 
 		}
 
@@ -1570,6 +1378,93 @@ public class Filtro {
 		// }
 		atualizaListaFiltrada();
 	}
+	
+	private void incluir(List<Integer> lista) {
+		limpaListasAuxiliares();
+		listaParaAnalise.addAll(listaJogosCombinados);
+		
+		for (Jogo jogo : listaParaAnalise) {
+			boolean foi = false;
+			for (Integer numero : lista) {
+				if (!jogo.getJogo().contains(numero)) {
+					foi = true;
+				}
+				
+			}
+			if (foi) {
+				continue;
+			}
+			jogo.somaQuantidadeFiltros();
+			listaPorFiltro.add(jogo);
+		}
+
+		
+		atualizaListaFiltrada();
+		System.out.println("Tamanho da lista depois de filtrar inclusão de números -> " + listaJogosCombinados.size());
+	}
+	
+	private void retirar(List<Integer> lista) {
+		limpaListasAuxiliares();
+		listaParaAnalise.addAll(listaJogosCombinados);
+		
+		for (Jogo jogo : listaParaAnalise) {
+			boolean foi = false;
+			for (Integer numero : lista) {
+				if (jogo.getJogo().contains(numero)) {
+					foi = true;
+				}
+				
+			}
+			if (foi) {
+				continue;
+			}
+			jogo.somaQuantidadeFiltros();
+			listaPorFiltro.add(jogo);
+		}
+
+		
+		atualizaListaFiltrada();
+		System.out.println("Tamanho da lista depois de filtrar retirada de números -> " + listaJogosCombinados.size());
+	}
+	
+	private void naoIniciarCom(List<Integer> lista) {
+		limpaListasAuxiliares();
+		listaParaAnalise.addAll(listaJogosCombinados);
+		
+		for (Jogo jogo : listaParaAnalise) {
+			
+			if (lista.contains(jogo.getJogo().get(0))) {
+				continue;
+			}
+			
+			jogo.somaQuantidadeFiltros();
+			listaPorFiltro.add(jogo);
+		}
+
+		
+		atualizaListaFiltrada();
+		System.out.println("Tamanho da lista depois de filtrar não iniciar -> " + listaJogosCombinados.size());
+	}
+	
+	
+	private void naoTerminarCom(List<Integer> lista) {
+		limpaListasAuxiliares();
+		listaParaAnalise.addAll(listaJogosCombinados);
+		
+		for (Jogo jogo : listaParaAnalise) {
+			
+			if (lista.contains(jogo.getJogo().get(14))) {
+				continue;
+			}
+			
+			jogo.somaQuantidadeFiltros();
+			listaPorFiltro.add(jogo);
+		}
+
+		
+		atualizaListaFiltrada();
+		System.out.println("Tamanho da lista depois de filtrar não iniciar -> " + listaJogosCombinados.size());
+	}
 
 	public List<Jogo> buscarListaCambinacao() {
 		return listaCambinacoes;
@@ -1591,5 +1486,7 @@ public class Filtro {
 		}
 		return false;
 	}
+	
+	
 
 }

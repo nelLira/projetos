@@ -846,36 +846,6 @@ public class Estatisticas {
 			Set<Integer> quintaColuna = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			quintaColuna.retainAll(estatisticas.buscarNumerosColuna5().getJogo());
 
-			// Jogo dezPrimeiros =
-			// estatisticas.dezJogosMaisFrequentes(mapaEstatisticasJogos);
-			// Jogo cincoDoMeio = estatisticas.cincoJogosDoMeio(mapaEstatisticasJogos);
-			// Jogo dezUltimos =
-			// estatisticas.dezJogosMenosFrequentes(mapaEstatisticasJogos);
-			//
-			// Set<Integer> intersectionDezPrimeiros = new
-			// HashSet<Integer>(todosJogos.get(i).getJogo());
-			// intersectionDezPrimeiros.retainAll(dezPrimeiros.getJogo());
-			//
-			// Set<Integer> intersectionCincoDoMeio = new
-			// HashSet<Integer>(todosJogos.get(i).getJogo());
-			// intersectionCincoDoMeio.retainAll(cincoDoMeio.getJogo());
-			//
-			// Set<Integer> intersectionDezUltimos = new
-			// HashSet<Integer>(todosJogos.get(i).getJogo());
-			// intersectionDezUltimos.retainAll(dezUltimos.getJogo());
-
-			// resultCSV.add ((i + 1) +
-			// "#Repetidos#" + intersectionRepetidos.size()
-			// + "#Pares#" + intersectionPares.size()
-			// + "#Primos#" + intersectionPrimos.size()
-			// + "#Fibonacci#" + intersectionFibonacci.size()
-			// + "#Quadrado#" + intersectionQuadrado.size()
-			// + "#Multiplos de Tres#" + intersectionMultiplosDeTres.size()
-			// + "#Dez primeiros est.#" + intersectionDezPrimeiros.size()
-			// + "#Cinco do meio est.#" + intersectionCincoDoMeio.size()
-			// + "#Dez ultimos est.#" + intersectionDezUltimos.size()
-			// );
-
 			if (gerarAquivo) {
 				resultCSV.add((i + 1) + 
 						"#Repetidos#" + intersectionRepetidos.size()+ 
@@ -889,8 +859,11 @@ public class Estatisticas {
 						"#Dez Mais#" + intersectionDezMais.size() + 
 						"#Números Importantes#" +intersectionNumerosImportantes.size() +
 						"#Filtros Repetidos#" + maxNumeroFiltroRepetido +
+						"#Dois em Dois#" + sequenciaDoisEmDois(todosJogos.get(i).getJogo()) +
+						"#Um em Um#" + sequenciaUmEmUm(todosJogos.get(i).getJogo()) +
 						"#Linhas#" + primeiraLinha.size() + " - " + segundaLinha.size() + " - " + terceiraLinha.size() + " - " + quartaLinha.size() + " - " + quintaLinha.size() + 
-						"#Colunas#" + primeiraColuna.size() + " - " + segundaColuna.size() + " - " + terceiraColuna.size() + " - " + quartaColuna.size() + " - " + quintaColuna.size());
+						"#Colunas#" + primeiraColuna.size() + " - " + segundaColuna.size() + " - " + terceiraColuna.size() + " - " + quartaColuna.size() + " - " + quintaColuna.size() 
+						);
 			} else {
 
 				System.out.println(
@@ -1003,10 +976,62 @@ public class Estatisticas {
 			estatistica.setLinhas(String.valueOf(primeiraLinha.size() + "-" + segundaLinha.size() + "-"
 					+ terceiraLinha.size() + "-" + quartaLinha.size() + "-" + quintaLinha.size()));
 			estatistica.setColunas(String.valueOf(primeiraColuna.size() + "-" + segundaColuna.size() + "-"
-					+ terceiraColuna.size() + "-" + quartaColuna.size() + "-" + quintaColuna.size()));
+					+ terceiraColuna.size() + "-" + quartaColuna.size() + "-" + quintaColuna.size())
+			
+			);
 			listaEstatisticas.add(estatistica);
 		}
 		return listaEstatisticas;
+	}
+	
+	public int sequenciaDoisEmDois(List<Integer> jogo ) {
+		
+		int cont = 0;
+		int numero = 0;
+		int maiorSequencia = 0;
+		for (Integer n : jogo) {
+
+			if (numero != 0) {
+				if (numero + 2 == n) {
+					cont++;
+					if (maiorSequencia < cont) {
+						maiorSequencia = cont;
+					}
+				} else {
+					cont = 0;
+				}
+			
+			}
+			numero = n;
+
+		}
+		return maiorSequencia + 1;
+		
+	}
+	
+	public int sequenciaUmEmUm(List<Integer> jogo ) {
+		
+		int cont = 0;
+		int numero = 0;
+		int maiorSequencia = 0;
+		for (Integer n : jogo) {
+
+			if (numero != 0) {
+				if (numero + 1 == n) {
+					cont++;
+					if (maiorSequencia < cont) {
+						maiorSequencia = cont;
+					}
+				} else {
+					cont = 0;
+				}
+			
+			}
+			numero = n;
+
+		}
+		return maiorSequencia + 1;
+		
 	}
 
 }
