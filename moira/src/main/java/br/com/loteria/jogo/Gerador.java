@@ -132,29 +132,6 @@ public class Gerador {
 
 				Set<Integer> quintaColuna = new HashSet<Integer>(jogo.getJogo());
 				quintaColuna.retainAll(estatisticas.buscarNumerosColuna5().getJogo());
-	
-	//			Jogo dezPrimeiros = estatisticas.dezJogosMaisFrequentes(mapaEstatisticasJogos);
-	//			Jogo cincoDoMeio = estatisticas.cincoJogosDoMeio(mapaEstatisticasJogos);
-	//			Jogo dezUltimos = estatisticas.dezJogosMenosFrequentes(mapaEstatisticasJogos);
-	//
-	//			Set<Integer> intersectionDezPrimeiros = new HashSet<Integer>(jogo.getJogo());
-	//			intersectionDezPrimeiros.retainAll(dezPrimeiros.getJogo());
-	//
-	//			Set<Integer> intersectionCincoDoMeio = new HashSet<Integer>(jogo.getJogo());
-	//			intersectionCincoDoMeio.retainAll(cincoDoMeio.getJogo());
-	//
-	//			Set<Integer> intersectionDezUltimos = new HashSet<Integer>(jogo.getJogo());
-	//			intersectionDezUltimos.retainAll(dezUltimos.getJogo());
-	
-	//			String strJogos = "jogos.add(new Jogo(Arrays.asList("
-	//					+ jogo.getJogo().toString().replace("[", "").replace("]", "") + ")));";
-	//			resultCSV.add(strJogos + "#Repetidos#" + intersectionRepetidos.size() + "#Pares#" + intersectionPares.size()
-	//					+ "#Primos#" + intersectionPrimos.size() + "#Fibonacci#" + intersectionFibonacci.size()
-	//					+ "#Quadrado#" + intersectionQuadrado.size() + "#Multiplos de Tres#"
-	//					+ intersectionMultiplosDeTres.size() + "#Dez primeiros est.#" + intersectionDezPrimeiros.size()
-	//					+ "#Cinco do meio est.#" + intersectionCincoDoMeio.size() + "#Dez ultimos est.#" + intersectionDezUltimos.size()
-	//					
-	//					);
 				
 				String strJogos = "jogos.add(new Jogo(Arrays.asList("+ jogo.getJogo().toString().replace("[", "").replace("]", "") + ")));";
 				

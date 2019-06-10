@@ -22,21 +22,229 @@ import br.com.loteria.lotofacil.Filtro;
 public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
+	
+		teste12();
+		
+		Filtro filtro = new Filtro();
+		Estatisticas estatisticas = new Estatisticas();
+		estatisticas.iniciarListas();
+		filtro.iniciaListas();
+		filtro.setaListaTodosSorteios(estatisticas.lerTodosOsJogos());
+		
+		Jogo pares = estatisticas.buscarNumerosPares();
+		Jogo primos = estatisticas.buscarNumerosPrimos();
+		Jogo fibonacci = estatisticas.buscarNumerosSequenciaDeFibonacci();
+		Jogo quadrado = estatisticas.buscarNumerosQuadrado();
+		Jogo multiplosDeTres = estatisticas.buscarNumerosMultiplosDeTres();
+		Jogo numerosImportantes = estatisticas.buscarNumerosImportantes();
 
+	
+
+		for (Jogo jogo : estatisticas.lerTodosOsJogos()) {
+
+			Set<Integer> intersectionPares = new HashSet<Integer>(jogo.getJogo());
+			intersectionPares.retainAll(pares.getJogo());
+
+			Set<Integer> intersectionPrimos = new HashSet<Integer>(jogo.getJogo());
+			intersectionPrimos.retainAll(primos.getJogo());
+
+			Set<Integer> intersectionFibonacci = new HashSet<Integer>(jogo.getJogo());
+			intersectionFibonacci.retainAll(fibonacci.getJogo());
+
+			Set<Integer> intersectionQuadrado = new HashSet<Integer>(jogo.getJogo());
+			intersectionQuadrado.retainAll(quadrado.getJogo());
+
+			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(jogo.getJogo());
+			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
+
+			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
+			intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios()).getJogo());
+			
+			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
+			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
+			
+			List<Integer> list = new ArrayList<>();
+			list.add(intersectionPares.size());
+			list.add(intersectionPrimos.size());
+			list.add(intersectionFibonacci.size());
+			list.add(intersectionQuadrado.size());
+			list.add(intersectionMultiplosDeTres.size());
+			list.add(intersectionDezMais.size());
+			list.add(intersectionNumerosImportantes.size());
+			
+			
+			int maxNumeroFiltroRepetido = 0;
+			
+			for (int j = 1; j < 13;j++) { 
+				maxNumeroFiltroRepetido = (maxNumeroFiltroRepetido > Collections.frequency(list, j)) ? maxNumeroFiltroRepetido : Collections.frequency(list, j);
+			}
+		//System.out.println(list.toString() + " - " + maxNumeroFiltroRepetido);
+			System.out.println(maxNumeroFiltroRepetido);
+			
+		}
+	}
+	
+	public static void teste13() throws FileNotFoundException, IOException, URISyntaxException{
+		Filtro filtro = new Filtro();
+		Estatisticas estatisticas = new Estatisticas();
+		List<Jogo> todosJogos = estatisticas.lerTodosOsJogos();
+		Map<Integer, List<Integer>> mapaSequencias = new HashMap<Integer, List<Integer>>();
+		int contTotal = 0;
+		int numeroJogo = 0;
+		for (Jogo jogo : todosJogos) {
+			numeroJogo++;
+			int cont = 0;
+			int numero = 0;
+			int maiorSequencia = 0;
+			List<Integer> sequencias = new ArrayList<>();
+			for (Integer n : jogo.getJogo()) {
+
+				if (numero != 0) {
+					if (numero + 1 == n) {
+						cont++;
+//						if (maiorSequencia < cont) {
+//							maiorSequencia = cont;
+//						}
+					} else {
+						sequencias.add(cont + 1);
+						cont = 0;
+					}
+
+				}
+				numero = n;
+			}
+			sequencias.add(cont + 1);
+			//mapaSequencias.put(numeroJogo, sequencias);
+			List<Integer> verificar = new ArrayList<>(Arrays.asList(1));
+			Set<Integer> intersectionRepetidos = new HashSet<Integer>(sequencias);
+			int contRepetidos = 0;
+			intersectionRepetidos.retainAll(verificar);
+			for (Integer n : sequencias) 
+				if (n == 4) contRepetidos++;
+			
+			Collections.sort(sequencias);
+			//	System.out.println(numeroJogo + " - " + sequencias.toString() + " - " + contRepetidos);
+			System.out.println(contRepetidos);
+			sequencias.clear();
+			
+		}
+	//	System.out.println(mapaSequencias);
+		}
+	
+	public static void teste12() throws FileNotFoundException, IOException {
+		
+		Filtro filtro = new Filtro();
+		Estatisticas estatisticas = new Estatisticas();
+		List<Jogo> todosJogos = estatisticas.lerTodosOsJogos();
+		Jogo anterior = null;
+		int cont = 0;
+		for (Jogo atual : todosJogos) {
+
+			if (anterior != null) {
+				Set<Integer> intersectionRepetidos = new HashSet<Integer>(anterior.getJogo());
+				intersectionRepetidos.retainAll(atual.getJogo());
+
+				if (intersectionRepetidos.size() == 9) {
+					
+					cont++;
+				}
+			}
+			anterior = atual;
+		
+	}
+		System.out.println(cont);
+
+	}
+
+	public static void teste11() throws FileNotFoundException, IOException, URISyntaxException {
+		Filtro filtro = new Filtro();
+		Estatisticas estatisticas = new Estatisticas();
+		List<Jogo> todosJogos = estatisticas.lerTodosOsJogos();
+		// 1 [7,8];
+		// 2[7,8];3[6,7,8];4[8];5[8];6[7,8];7[6,7,8];8[7];9[7];10[8,9];11[7,8,9,10];12[7,8,9];13[8,9];14[7,8,9];15[6,7,8];16[7,8];17[6,7,8];18[7,8,9];19[7,8];20[7,8];21[7,8];22[6,7];23[7,8];24[7,8,9];25[7,8,9];
+
+		// int numero = 2;
+		List<Integer> listaNumeros = new ArrayList<>();
+
+		List<Integer> numeros = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+				18, 19, 20, 21, 22, 23, 24, 25));
+		for (Integer numero : numeros) {
+			Map<Integer, Integer> mapaNumeros = new TreeMap<Integer, Integer>();
+			int frequencia = 0;
+			for (Jogo jogo : todosJogos) {
+				if (jogo.getJogo().contains(numero)) {
+					frequencia++;
+				} else {
+					if (mapaNumeros.containsKey(frequencia)) {
+						mapaNumeros.put(frequencia, mapaNumeros.get(frequencia).intValue() + 1);
+					} else {
+						mapaNumeros.put(frequencia, 1);
+					}
+					frequencia = 0;
+				}
+
+			}
+			System.out.println(numero + " - " + mapaNumeros);
+		}
+
+		// 1 - {0=269, 1=172, 2=120, 3=62, 4=34, 5=19, 6=12, 7=10, 8=5, 9=3, 10=1, 11=4,
+		// 17=1}
+		// 2 - {0=291, 1=166, 2=92, 3=61, 4=43, 5=15, 6=22, 7=6, 8=9, 9=2, 10=3, 11=3}
+		// 3 - {0=263, 1=186, 2=120, 3=56, 4=41, 5=22, 6=9, 7=6, 8=5, 9=4, 11=3, 12=1,
+		// 18=1}
+		// 4 - {0=274, 1=177, 2=115, 3=56, 4=39, 5=20, 6=12, 7=15, 8=5, 9=1, 10=2, 12=2}
+		// 5 - {0=290, 1=160, 2=125, 3=64, 4=29, 5=21, 6=14, 7=7, 8=8, 9=2, 10=2, 11=2,
+		// 14=1}
+		// 6 - {0=311, 1=208, 2=99, 3=57, 4=28, 5=23, 6=16, 7=9, 8=5, 9=1, 10=1, 12=2,
+		// 14=1}
+		// 7 - {0=286, 1=200, 2=114, 3=70, 4=30, 5=24, 6=6, 7=10, 8=4, 9=1, 10=2, 11=1,
+		// 14=1}
+		// 8 - {0=322, 1=201, 2=135, 3=62, 4=27, 5=16, 6=12, 7=9, 8=3, 9=3}
+		// 9 - {0=302, 1=189, 2=106, 3=56, 4=35, 5=26, 6=15, 7=10, 8=3, 9=3, 10=1, 13=1}
+		// 10 - {0=262, 1=166, 2=120, 3=61, 4=30, 5=27, 6=9, 7=12, 8=7, 9=6, 10=1, 12=1}
+		// 11 - {0=283, 1=164, 2=98, 3=65, 4=31, 5=22, 6=18, 7=8, 8=4, 9=5, 10=6, 12=1,
+		// 13=1}
+		// 12 - {0=291, 1=185, 2=106, 3=73, 4=36, 5=17, 6=5, 7=11, 8=7, 9=4, 10=1, 14=1,
+		// 15=1}
+		// 13 - {0=268, 1=165, 2=81, 3=65, 4=42, 5=27, 6=17, 7=12, 8=6, 9=4, 10=1, 11=1,
+		// 12=1}
+		// 14 - {0=285, 1=192, 2=84, 3=65, 4=32, 5=21, 6=16, 7=7, 8=5, 9=4, 10=2, 11=2,
+		// 13=2, 17=1}
+		// 15 - {0=302, 1=163, 2=108, 3=60, 4=46, 5=20, 6=9, 7=12, 8=7, 9=2, 10=1, 11=1,
+		// 13=1}
+		// 16 - {0=320, 1=204, 2=121, 3=56, 4=40, 5=17, 6=10, 7=6, 8=4, 9=1, 10=2, 11=1}
+		// 17 - {0=301, 1=181, 2=88, 3=65, 4=41, 5=24, 6=12, 7=10, 8=5, 9=1, 10=3, 14=2}
+		// 18 - {0=290, 1=161, 2=112, 3=68, 4=38, 5=28, 6=13, 7=3, 8=6, 9=4, 10=2, 11=1}
+		// 19 - {0=280, 1=194, 2=92, 3=65, 4=44, 5=18, 6=14, 7=8, 8=4, 9=3, 10=3, 11=2}
+		// 20 - {0=274, 1=170, 2=111, 3=67, 4=35, 5=15, 6=10, 7=11, 8=8, 9=2, 10=2,
+		// 11=1, 12=2, 13=2}
+		// 21 - {0=317, 1=158, 2=102, 3=63, 4=34, 5=34, 6=15, 7=3, 8=7, 10=2, 11=2,
+		// 15=1}
+		// 22 - {0=289, 1=170, 2=110, 3=67, 4=44, 5=21, 6=12, 7=10, 8=3, 9=1, 10=2,
+		// 11=1, 12=1}
+		// 23 - {0=287, 1=176, 2=110, 3=64, 4=38, 5=23, 6=17, 7=9, 8=6, 9=1, 12=1}
+		// 24 - {0=271, 1=184, 2=79, 3=58, 4=32, 5=34, 6=18, 7=7, 8=6, 9=6, 10=1, 12=1,
+		// 13=1, 14=1}
+		// 25 - {0=281, 1=185, 2=96, 3=57, 4=25, 5=24, 6=19, 7=11, 8=6, 9=6, 10=2, 11=1,
+		// 13=1}
+
+	}
+
+	public static void teste10() throws FileNotFoundException, IOException, URISyntaxException {
 		Filtro filtro = new Filtro();
 		Estatisticas estatisticas = new Estatisticas();
 		List<Jogo> todosJogos = estatisticas.lerTodosOsJogos();
 
 		int contTotal = 0;
 		int numeroJogo = 0;
-		
+
 		for (Jogo jogo : todosJogos) {
-			numeroJogo ++;
+			numeroJogo++;
 			int cont = 0;
 			int numero = 0;
 			int maiorSequencia = 0;
 			for (Integer n : jogo.getJogo()) {
-				
+
 				if (numero != 0) {
 					if (numero + 1 == n) {
 						cont++;
@@ -46,16 +254,15 @@ public class Testes {
 					} else {
 						cont = 0;
 					}
-				
+
 				}
 				numero = n;
 			}
 			System.out.println(maiorSequencia + 1 + " - " + jogo.getJogo());
 		}
-
 	}
 
-	public static void texte9() throws FileNotFoundException, IOException {
+	public static void teste9() throws FileNotFoundException, IOException {
 		System.out.println("gerando jogos...");
 		Filtro filtro = new Filtro();
 		Estatisticas estatisticas = new Estatisticas();

@@ -65,8 +65,8 @@ public class Estatisticas {
 	public List<Jogo> lerTodosOsJogos() throws FileNotFoundException, IOException {
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
-		String path =  s + "\\target\\sorteios.txt";
-	
+		String path = s + "\\target\\sorteios.txt";
+
 		File file = new File(path.replace("\\target\\target", "\\target"));
 		byte[] bytes = new byte[(int) file.length()];
 		FileInputStream fis = new FileInputStream(file);
@@ -74,10 +74,9 @@ public class Estatisticas {
 		fis.read(bytes);
 		fis.close();
 
-		
 		List<Jogo> jogos = new ArrayList<Jogo>();
-	
-	    String[] valueStr = new String(bytes).trim().split("\\s+");
+
+		String[] valueStr = new String(bytes).trim().split("\\s+");
 		List<Integer> lista = new ArrayList<Integer>();
 		for (int i = 0; i < valueStr.length; i++) {
 			lista.add(Integer.parseInt(valueStr[i]));
@@ -86,7 +85,7 @@ public class Estatisticas {
 				lista = new ArrayList<Integer>();
 			}
 		}
-		
+
 		return jogos;
 
 	}
@@ -357,7 +356,7 @@ public class Estatisticas {
 	}
 
 	public Jogo buscarDezMais(List<Jogo> todosSorteios) throws FileNotFoundException, IOException {
-		
+
 		Map<Integer, Integer> jogosEst = estatisticasJogosListaDinamica(todosSorteios, 15);
 
 		Jogo dezMais = new Jogo();
@@ -512,6 +511,60 @@ public class Estatisticas {
 
 	}
 
+	public Map<Integer, Integer> estatisticasJogosQtdSeguidos(int QtdJogos) throws FileNotFoundException, IOException {
+
+		Estatisticas est = new Estatisticas();
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+
+		Map<Integer, Integer> mapaNumeros = new TreeMap<Integer, Integer>();
+		Integer qtdJogosAnalisados = 11;
+		List<Integer> numeros = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25));
+
+		for (Integer numero : numeros) {
+			if (numero == 14) {
+				System.out.println("");
+			}
+			int contaNumeroPresentes = 0;
+			int contaNumeroAusentes = 0;
+
+			for (int i = todosJogos.size() - 1; i > QtdJogos - qtdJogosAnalisados; i--) {
+				if (todosJogos.get(i).getJogo().contains(numero)) {
+					contaNumeroPresentes++;
+				} else {
+				//	mapaNumeros.put(numero, contaNumeroPresentes);
+					break;
+				}
+
+			}
+			//if (qtdJogosAnalisados == contaNumeroPresentes+1) {
+			//	mapaNumeros.put(numero, contaNumeroPresentes);
+		//	}
+
+			if (contaNumeroPresentes == 0) {
+				for (int i = todosJogos.size() - 1; i > QtdJogos - qtdJogosAnalisados; i--) {
+					if (!todosJogos.get(i).getJogo().contains(numero)) {
+						contaNumeroAusentes++;
+					} else {
+					//	mapaNumeros.put(numero, contaNumeroAusentes * -1);
+						break;
+					}
+				}
+				mapaNumeros.put(numero, contaNumeroAusentes * -1);
+			} else {
+				mapaNumeros.put(numero, contaNumeroPresentes);
+			}
+
+		}
+
+		Map<Integer, Integer> mapaNumerosOrdenados = Utils.sortByValue(mapaNumeros);
+
+		for (Integer chave : mapaNumerosOrdenados.keySet()) {
+			mapaNumerosOrdenados.put(chave, mapaNumerosOrdenados.get(chave).intValue());
+		}
+		return mapaNumerosOrdenados;
+
+	}
+
 	public Map<Integer, Integer> estatisticasJogosListaDinamica(List<Jogo> todosJogos, int QtdJogos)
 			throws FileNotFoundException, IOException {
 
@@ -646,8 +699,8 @@ public class Estatisticas {
 		System.out.println("FIM");
 
 	}
-	
-	public String estatSorteio(Jogo ultimoJogo, int numeroUltimoSorteio ) throws FileNotFoundException, IOException {
+
+	public String estatSorteio(Jogo ultimoJogo, int numeroUltimoSorteio) throws FileNotFoundException, IOException {
 
 		Filtro filtro = new Filtro();
 		filtro.iniciaListas();
@@ -655,12 +708,12 @@ public class Estatisticas {
 		estisticas.limparListas();
 		filtro.setaListaTodosSorteios(estisticas.lerTodosOsJogos());
 		String retorno = "";
-		while (filtro.buscaListaTodosSorteios().size() > numeroUltimoSorteio) { 
-		
+		while (filtro.buscaListaTodosSorteios().size() > numeroUltimoSorteio) {
+
 			filtro.buscaListaTodosSorteios().remove(filtro.buscaListaTodosSorteios().size() - 1);
-		
+
 		}
-		
+
 		System.out.println(filtro.buscaListaTodosSorteios().size());
 
 		Combinacoes combinacoes = new Combinacoes();
@@ -680,10 +733,10 @@ public class Estatisticas {
 				break;
 			}
 		}
-		
+
 		filtro.limpaListas();
 		estisticas.limparListas();
-		return retorno; 
+		return retorno;
 
 	}
 
@@ -753,8 +806,7 @@ public class Estatisticas {
 		System.out.println(estatisticas.estatisticasJogos(todosJogos.size()));
 	}
 
-	public void estatisticasUltimosSorteioCSV(int qtdJogos, boolean gerarAquivo)
-			throws IOException{
+	public void estatisticasUltimosSorteioCSV(int qtdJogos, boolean gerarAquivo) throws IOException {
 
 		System.out.println("gerando estatÃ­sticas dos Ãºltimos jogos...");
 		Estatisticas estatisticas = new Estatisticas();
@@ -769,6 +821,7 @@ public class Estatisticas {
 
 		List<String> resultCSV = new ArrayList<String>();
 		for (int i = todosJogos.size() - (qtdJogos); i < todosJogos.size(); i++) {
+		
 			Set<Integer> intersectionRepetidos = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			intersectionRepetidos.retainAll(todosJogos.get(i - 1).getJogo());
 
@@ -786,21 +839,18 @@ public class Estatisticas {
 
 			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
-			
-			
 
 			Set<Integer> intersectionDezMais = new HashSet<Integer>(todosJogos.get(i).getJogo());
-			
-			List<Jogo> todosJogosAux = new ArrayList(); 
+
+			List<Jogo> todosJogosAux = new ArrayList();
 			todosJogosAux.addAll(todosJogos);
 			todosJogosAux.remove(todosJogos.size() - 1);
-			
+
 			intersectionDezMais.retainAll(buscarDezMais(todosJogosAux).getJogo());
-			
+
 			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
-			
-			
+
 			List<Integer> lista = new ArrayList<>();
 			lista.add(intersectionPares.size());
 			lista.add(intersectionPrimos.size());
@@ -810,11 +860,12 @@ public class Estatisticas {
 			lista.add(intersectionDezMais.size());
 			lista.add(intersectionNumerosImportantes.size());
 			int maxNumeroFiltroRepetido = 0;
-			
-			for (int j = 1; j < 13;j++) { 
-				maxNumeroFiltroRepetido = (maxNumeroFiltroRepetido > Collections.frequency(lista, j)) ? maxNumeroFiltroRepetido : Collections.frequency(lista, j);
+
+			for (int j = 1; j < 13; j++) {
+				maxNumeroFiltroRepetido = (maxNumeroFiltroRepetido > Collections.frequency(lista, j))
+						? maxNumeroFiltroRepetido
+						: Collections.frequency(lista, j);
 			}
-			
 
 			Set<Integer> primeiraLinha = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			primeiraLinha.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
@@ -847,23 +898,18 @@ public class Estatisticas {
 			quintaColuna.retainAll(estatisticas.buscarNumerosColuna5().getJogo());
 
 			if (gerarAquivo) {
-				resultCSV.add((i + 1) + 
-						"#Repetidos#" + intersectionRepetidos.size()+ 
-						"#Jogo#" + todosJogos.get(i).getJogo()+ 
-						"#Saiu?#" + estatSorteio(todosJogos.get(i), i)+ 
-						"#Pares#"   + intersectionPares.size() + 
-						"#Primos#" + intersectionPrimos.size() + 
-						"#Fibonacci#" + intersectionFibonacci.size() + 
-						"#Quadrado#" + intersectionQuadrado.size()+ 
-						"#Multiplos de Tres#" + intersectionMultiplosDeTres.size() + 
-						"#Dez Mais#" + intersectionDezMais.size() + 
-						"#Números Importantes#" +intersectionNumerosImportantes.size() +
-						"#Filtros Repetidos#" + maxNumeroFiltroRepetido +
-						"#Dois em Dois#" + sequenciaDoisEmDois(todosJogos.get(i).getJogo()) +
-						"#Um em Um#" + sequenciaUmEmUm(todosJogos.get(i).getJogo()) +
-						"#Linhas#" + primeiraLinha.size() + " - " + segundaLinha.size() + " - " + terceiraLinha.size() + " - " + quartaLinha.size() + " - " + quintaLinha.size() + 
-						"#Colunas#" + primeiraColuna.size() + " - " + segundaColuna.size() + " - " + terceiraColuna.size() + " - " + quartaColuna.size() + " - " + quintaColuna.size() 
-						);
+				resultCSV.add((i + 1) + "#Repetidos#" + intersectionRepetidos.size() + "#Jogo#"
+						+ todosJogos.get(i).getJogo() + "#Saiu?#" + estatSorteio(todosJogos.get(i), i) + "#Pares#"
+						+ intersectionPares.size() + "#Primos#" + intersectionPrimos.size() + "#Fibonacci#"
+						+ intersectionFibonacci.size() + "#Quadrado#" + intersectionQuadrado.size()
+						+ "#Multiplos de Tres#" + intersectionMultiplosDeTres.size() + "#Dez Mais#"
+						+ intersectionDezMais.size() + "#Números Importantes#" + intersectionNumerosImportantes.size()
+						+ "#Filtros Repetidos#" + maxNumeroFiltroRepetido + "#Dois em Dois#"
+						+ sequenciaDoisEmDois(todosJogos.get(i).getJogo()) + "#Um em Um#"
+						+ sequenciaUmEmUm(todosJogos.get(i).getJogo()) + "#Linhas#" + primeiraLinha.size() + " - "
+						+ segundaLinha.size() + " - " + terceiraLinha.size() + " - " + quartaLinha.size() + " - "
+						+ quintaLinha.size() + "#Colunas#" + primeiraColuna.size() + " - " + segundaColuna.size()
+						+ " - " + terceiraColuna.size() + " - " + quartaColuna.size() + " - " + quintaColuna.size());
 			} else {
 
 				System.out.println(
@@ -882,6 +928,7 @@ public class Estatisticas {
 
 		}
 		resultCSV.add(estatisticas.estatisticasJogos(todosJogos.size()).toString());
+		resultCSV.add(estatisticas.estatisticasJogosQtdSeguidos(todosJogos.size()).toString());
 
 		if (gerarAquivo) {
 			System.out.println("gerando arquivo...");
@@ -977,15 +1024,15 @@ public class Estatisticas {
 					+ terceiraLinha.size() + "-" + quartaLinha.size() + "-" + quintaLinha.size()));
 			estatistica.setColunas(String.valueOf(primeiraColuna.size() + "-" + segundaColuna.size() + "-"
 					+ terceiraColuna.size() + "-" + quartaColuna.size() + "-" + quintaColuna.size())
-			
+
 			);
 			listaEstatisticas.add(estatistica);
 		}
 		return listaEstatisticas;
 	}
-	
-	public int sequenciaDoisEmDois(List<Integer> jogo ) {
-		
+
+	public int sequenciaDoisEmDois(List<Integer> jogo) {
+
 		int cont = 0;
 		int numero = 0;
 		int maiorSequencia = 0;
@@ -1000,38 +1047,65 @@ public class Estatisticas {
 				} else {
 					cont = 0;
 				}
-			
+
 			}
 			numero = n;
 
 		}
 		return maiorSequencia + 1;
-		
+
 	}
 	
-	public int sequenciaUmEmUm(List<Integer> jogo ) {
-		
+	public String sequenciaUmEmUm(List<Integer> jogo) {
+
 		int cont = 0;
 		int numero = 0;
 		int maiorSequencia = 0;
+		List<Integer> sequencias = new ArrayList<>();
 		for (Integer n : jogo) {
 
 			if (numero != 0) {
 				if (numero + 1 == n) {
 					cont++;
-					if (maiorSequencia < cont) {
-						maiorSequencia = cont;
-					}
+//					if (maiorSequencia < cont) {
+//						maiorSequencia = cont;
+//					}
 				} else {
+					sequencias.add(cont + 1);
 					cont = 0;
 				}
-			
+
 			}
 			numero = n;
-
 		}
-		return maiorSequencia + 1;
-		
+		sequencias.add(cont + 1);
+		return sequencias.toString();
+
 	}
+
+//	public int sequenciaUmEmUm(List<Integer> jogo) {
+//
+//		int cont = 0;
+//		int numero = 0;
+//		int maiorSequencia = 0;
+//		for (Integer n : jogo) {
+//
+//			if (numero != 0) {
+//				if (numero + 1 == n) {
+//					cont++;
+//					if (maiorSequencia < cont) {
+//						maiorSequencia = cont;
+//					}
+//				} else {
+//					cont = 0;
+//				}
+//
+//			}
+//			numero = n;
+//
+//		}
+//		return maiorSequencia + 1;
+//
+//	}
 
 }
