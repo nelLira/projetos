@@ -12,6 +12,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import javax.print.attribute.standard.JobOriginatingUserName;
+
 import br.com.loteria.jogo.Jogo;
 
 public class Filtro {
@@ -29,6 +31,7 @@ public class Filtro {
 	private List<Jogo> todosSorteios;
 	private List<Jogo> listaCambinacoes;
 	Estatisticas estatisticas;
+	private int jogoAtual;
 
 	public Filtro() {
 
@@ -74,73 +77,79 @@ public class Filtro {
 	}
 
 	public List<Jogo> filtrar() throws FileNotFoundException, IOException {
+		
 		this.listaJogosCheia = new ArrayList<Jogo>();
 		listaJogosCheia.addAll(listaJogosCombinados);
-		
-		repetidosJogoAnterior(Arrays.asList(9));
-		pares(Arrays.asList(5,6,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
-		primos(Arrays.asList(4,5,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
-		sequenciaDeFibonacci(Arrays.asList(3,4,5,6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
-		quadrado(Arrays.asList(8,9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
-		multiplosDeTres(Arrays.asList(4,5,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
-		dezMais(Arrays.asList(4,5,6,7,8)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3} 
-		numerosImportantes(Arrays.asList(4,5,6,7,8));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
-		QtdFiltros(Arrays.asList(2,3,5)); // {1=40; 2=993; 3=654; 4=120; 5=15}
-		maiorSequenciaDoisEmDois(Arrays.asList(2,3,4,5)); //2a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
-		maiorSequenciaUmEmUm(Arrays.asList(3,4,5,8,9,10)); //3a8 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
-		
-		linha(Arrays.asList(1, 2, 3, 4, 5),
-			  Arrays.asList(1, 2, 3, 4),  
-			  Arrays.asList(1, 2, 3, 4, 5), 
-			  Arrays.asList(1, 2, 3, 4, 5),
-			  Arrays.asList(2, 3, 4, 5));
-		
-		coluna(Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 4), 
-			   Arrays.asList(1, 2, 3, 4, 5));
-
-		//incluir(Arrays.asList( ));
-		retirar(Arrays.asList(16)); // 1 [7,8]; 2[7,8];3[6,7,8];4[8];5[8];6[7,8];7[6,7,8];8[7];9[7];10[8,9];11[7,8,9,10];12[7,8,9];13[8,9];14[7,8,9];15[6,7,8];16[7,8];17[6,7,8];18[7,8,9];19[7,8];20[7,8];21[7,8];22[6,7];23[7,8];24[7,8,9];25[7,8,9];
-		//naoIniciarCom(Arrays.asList( ));
-		//naoTerminarCom(Arrays.asList( ));
-		
-		
-//		repetidosJogoAnterior(Arrays.asList(9));
-//		pares(Arrays.asList(5,6,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
-//		primos(Arrays.asList(4,5,6,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
-//		sequenciaDeFibonacci(Arrays.asList(2,3,4,5,6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
-//		quadrado(Arrays.asList(8,9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
-//		multiplosDeTres(Arrays.asList(3,4,5,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
-//		dezMais(Arrays.asList(4,5,6,7,8)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3} 
-//		numerosImportantes(Arrays.asList(3,4,5,6,7,8));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
-//		QtdFiltros(Arrays.asList(1,2,3,4,5)); // {1=40; 2=993; 3=654; 4=120; 5=15}
-//		maiorSequenciaDoisEmDois(Arrays.asList(1,2,3,4,5)); //2a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
-//		maiorSequenciaUmEmUm(Arrays.asList(3,4,5,6,7,8,9,10)); //3a8 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
+//		
+//		repetidosJogoAnterior(Arrays.asList(8));
+//		pares(Arrays.asList(6,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
+//		primos(Arrays.asList(4,5,6)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
+//		sequenciaDeFibonacci(Arrays.asList(3,4,5));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
+//		quadrado(Arrays.asList(9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
+//		multiplosDeTres(Arrays.asList(3,4,5,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
+//		numerosImportantes(Arrays.asList(3,4,5,6,8));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
+//		QtdFiltros(Arrays.asList(1,2,3)); //1a4// {1=169; 2=1190; 3=366; 4=53; 5=1}
+//		maiorSequenciaDoisEmDois(Arrays.asList(2,3,4,5)); //2a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
+//		maiorSequenciaUmEmUm(Arrays.asList(3,4,6,9,10)); //3a8 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
 //		
 //		linha(Arrays.asList(1, 2, 3, 4, 5),
-//			  Arrays.asList(1, 2, 3, 4, 5),  
+//			  Arrays.asList(1, 2, 3, 4),  
 //			  Arrays.asList(1, 2, 3, 4, 5), 
-//			  Arrays.asList(1, 2, 3, 4, 5),
-//			  Arrays.asList(1, 2, 3, 4, 5));
+//			  Arrays.asList(2, 3, 4, 5),
+//			  Arrays.asList(1, 2, 4, 5));
 //		
 //		coluna(Arrays.asList(1, 2, 3, 4, 5),
 //			   Arrays.asList(1, 2, 3, 4, 5),
 //			   Arrays.asList(1, 2, 3, 4, 5),
 //			   Arrays.asList(1, 2, 3, 4, 5), 
-//			   Arrays.asList(1, 2, 3, 4, 5));
+//			   Arrays.asList(2, 3, 4, 5));
+		
+		
+		//incluir(Arrays.asList( ));
+		//retirar(Arrays.asList( )); // 1 [7,8]; 2[7,8];3[6,7,8];4[8];5[8];6[7,8];7[6,7,8];8[7];9[7];10[8,9];11[7,8,9,10];12[7,8,9];13[8,9];14[7,8,9];15[6,7,8];16[7,8];17[6,7,8];18[7,8,9];19[7,8];20[7,8];21[7,8];22[6,7];23[7,8];24[7,8,9];25[7,8,9];
+		//naoIniciarCom(Arrays.asList( ));
+		//naoTerminarCom(Arrays.asList( ));
+		
+		repetidosJogoAnterior(Arrays.asList(9));
+		pares(Arrays.asList(5,6,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
+		primos(Arrays.asList(4,5,6,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
+		sequenciaDeFibonacci(Arrays.asList(2,3,4,5,6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
+		quadrado(Arrays.asList(8,9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
+		multiplosDeTres(Arrays.asList(3,4,5,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
+		numerosImportantes(Arrays.asList(3,4,5,6,7,8));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
+		QtdFiltros(Arrays.asList(1,2,3,4)); //1a4// {1=169; 2=1190; 3=366; 4=53; 5=1}
+		maiorSequenciaDoisEmDois(Arrays.asList(1,2,3,4,5)); //2a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
+		maiorSequenciaUmEmUm(Arrays.asList(3,4,5,6,7,8,9,10)); //3a8 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
+		
+		linha(Arrays.asList(1, 2, 3, 4, 5),
+			  Arrays.asList(1, 2, 3, 4, 5),  
+			  Arrays.asList(1, 2, 3, 4, 5), 
+			  Arrays.asList(1, 2, 3, 4, 5),
+			  Arrays.asList(1, 2, 3, 4, 5));
+		
+		coluna(Arrays.asList(1, 2, 3, 4, 5),
+			   Arrays.asList(1, 2, 3, 4, 5),
+			   Arrays.asList(1, 2, 3, 4, 5),
+			   Arrays.asList(1, 2, 3, 4, 5), 
+			   Arrays.asList(1, 2, 3, 4, 5));
 //
-//		//incluir(Arrays.asList( ));
+//		//incluir(Arrays.asList( )); // 1[4];2[4];3[3,4];4[4];5[4];6[4];7[4];8[4];9[4];10[3,4];11[4];12[3,4];13[4];14[3,4];15[4];16[4];17[3,4];18[4];19[3,4];20[4];21[4];22[3,4];23[4];24[4];25[4];
 //		//retirar(Arrays.asList( )); // 1 [7,8]; 2[7,8];3[6,7,8];4[8];5[8];6[7,8];7[6,7,8];8[7];9[7];10[8,9];11[7,8,9,10];12[7,8,9];13[8,9];14[7,8,9];15[6,7,8];16[7,8];17[6,7,8];18[7,8,9];19[7,8];20[7,8];21[7,8];22[6,7];23[7,8];24[7,8,9];25[7,8,9];
 //		//naoIniciarCom(Arrays.asList( ));
 //		//naoTerminarCom(Arrays.asList( ));
 		
 		return this.listaJogosCombinados;
+		
+		
+//		dezMais(Arrays.asList(4,5,6,7,8)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3} 
 
 	}
 	
 	private void QtdFiltros(List<Integer> lista) throws FileNotFoundException, IOException {
+		
+		if (todosSorteios.size() < 15)
+			return;
+		
 		
 		//System.out.println("filtrando filtros");
 		// TODO Auto-generated method stub
@@ -162,9 +171,13 @@ public class Filtro {
 		Jogo numerosImportantes = estatisticas.buscarNumerosImportantes();
 
 		List<String> resultCSV = new ArrayList<String>();
-
+		
+		int numeroSorteio = 0;
+		
 		for (Jogo jogo : listaParaAnalise) {
-
+			
+			
+			
 			Set<Integer> intersectionPares = new HashSet<Integer>(jogo.getJogo());
 			intersectionPares.retainAll(pares.getJogo());
 
@@ -180,8 +193,11 @@ public class Filtro {
 			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(jogo.getJogo());
 			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
 
-			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
-			intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios()).getJogo());
+//			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
+//			
+//			List<Jogo> todosSorteios = filtro.buscaListaTodosSorteios();
+//			
+//			intersectionDezMais.retainAll(estatisticas.buscarDezMais(todosSorteios,jogoAtual).getJogo());
 			
 			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
 			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
@@ -192,7 +208,7 @@ public class Filtro {
 			list.add(intersectionFibonacci.size());
 			list.add(intersectionQuadrado.size());
 			list.add(intersectionMultiplosDeTres.size());
-			list.add(intersectionDezMais.size());
+//			list.add(intersectionDezMais.size());
 			list.add(intersectionNumerosImportantes.size());
 			
 			
@@ -306,7 +322,7 @@ public class Filtro {
 		/*6 � forte*/	pares(Arrays.asList(6, 7, 8)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
 		primos(Arrays.asList(5, 6, 7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4}
 		/*10 � forte*/ quadrado(Arrays.asList(8, 10)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
-		dezMais(Arrays.asList(4, 5, 6, 7)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3}
+		//dezMais(Arrays.asList(4, 5, 6, 7)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3}
 		/*5 � forte*/multiplosDeTres(Arrays.asList(5, 6)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
 		sequenciaDeFibonacci(Arrays.asList(4, 5, 6));// 2a6 {1=8, 2=85, 3=330,4=567,5=453,6=182,7=15}
 		
@@ -426,16 +442,16 @@ public class Filtro {
 
 	}
 
-	private void dezMais(List<Integer> lista) throws FileNotFoundException, IOException {
-
-		if (todosSorteios.size() < 15)
-			return;
-
-		analisaNumeros(lista, estatisticas.buscarDezMais(todosSorteios));
-
-		System.out.println("Tamanho da lista depois de filtrar dez melhores -> " + listaJogosCombinados.size());
-
-	}
+//	private void dezMais(List<Integer> lista) throws FileNotFoundException, IOException {
+//
+//		if (todosSorteios.size() < 15)
+//			return;
+//
+//		analisaNumeros(lista, estatisticas.buscarDezMais(todosSorteios, todosSorteios.size()));
+//
+//		System.out.println("Tamanho da lista depois de filtrar dez melhores -> " + listaJogosCombinados.size());
+//
+//	}
 
 	private void grupo20a25(List<Integer> lista) {
 
@@ -1477,6 +1493,32 @@ public class Filtro {
 			}
 		}
 		return false;
+	}
+	
+	public void testaJogo() {
+		
+		Jogo teste = new Jogo (Arrays.asList(3, 4, 5 ,6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 22, 25));
+		
+		for (Jogo jogo : listaCambinacoes) {
+			Set<Integer> intersection = new HashSet<Integer>(jogo.getJogo());
+			intersection.retainAll(teste.getJogo());
+
+			if (intersection.size() > 14) {
+				System.err.println("passou");
+			}
+			
+		}
+		
+	}
+
+
+	public int getJogoAtual() {
+		return jogoAtual;
+	}
+
+
+	public void setJogoAtual(int jogoAtual) {
+		this.jogoAtual = jogoAtual;
 	}
 	
 	

@@ -65,7 +65,7 @@ public class EstatisticasTableModel  extends AbstractTableModel {
             case 5 : valueObject = estatisticas.getFibonacci(); break;
             case 6 : valueObject = estatisticas.getQuadrado(); break;
             case 7 : valueObject = estatisticas.getMultiplosDeTres(); break;
-            case 8 : valueObject = estatisticas.getDezMais(); break;
+           // case 8 : valueObject = estatisticas.getDezMais(); break;
             case 9 : valueObject = estatisticas.getLinhas(); break;
             case 10 : valueObject = estatisticas.getColunas(); break;
 

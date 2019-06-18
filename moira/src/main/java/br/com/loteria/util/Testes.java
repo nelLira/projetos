@@ -14,6 +14,10 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.google.common.collect.Lists;
+
 import br.com.loteria.combinacoes.Combinacoes;
 import br.com.loteria.jogo.Jogo;
 import br.com.loteria.lotofacil.Estatisticas;
@@ -23,14 +27,33 @@ public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
 	
-		teste12();
+		teste14();
 		
+	
+	}
+	
+	public static void teste16() throws FileNotFoundException, IOException {
+		System.out.println("gerando jogos...");
 		Filtro filtro = new Filtro();
 		Estatisticas estatisticas = new Estatisticas();
 		estatisticas.iniciarListas();
 		filtro.iniciaListas();
 		filtro.setaListaTodosSorteios(estatisticas.lerTodosOsJogos());
-		
+
+		Combinacoes combinacoes = new Combinacoes();
+		filtro.setListaJogosCombinadosCompleto(combinacoes.todosCombinacoesLotoFacil());
+
+		//List<Jogo> jogos = filtro.bucaListaJogosFiltrados();
+
+		List<Jogo> jogosSaida = new ArrayList<Jogo>();
+
+		Random random = new Random();
+		List<Integer> posicoes = new ArrayList<Integer>();
+
+		System.out.println("sorteando...");
+
+		jogosSaida.addAll(estatisticas.lerTodosOsJogos());
+
 		Jogo pares = estatisticas.buscarNumerosPares();
 		Jogo primos = estatisticas.buscarNumerosPrimos();
 		Jogo fibonacci = estatisticas.buscarNumerosSequenciaDeFibonacci();
@@ -38,9 +61,9 @@ public class Testes {
 		Jogo multiplosDeTres = estatisticas.buscarNumerosMultiplosDeTres();
 		Jogo numerosImportantes = estatisticas.buscarNumerosImportantes();
 
-	
+		List<String> resultCSV = new ArrayList<String>();
 
-		for (Jogo jogo : estatisticas.lerTodosOsJogos()) {
+		for (Jogo jogo : jogosSaida) {
 
 			Set<Integer> intersectionPares = new HashSet<Integer>(jogo.getJogo());
 			intersectionPares.retainAll(pares.getJogo());
@@ -57,33 +80,137 @@ public class Testes {
 			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(jogo.getJogo());
 			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
 
-			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
-			intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios()).getJogo());
-			
 			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
 			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
+
+			List<Integer> lista = new ArrayList<>();
+			lista.add(intersectionPares.size());
+			lista.add(intersectionPrimos.size());
+			lista.add(intersectionFibonacci.size());
+			lista.add(intersectionQuadrado.size());
+			lista.add(intersectionMultiplosDeTres.size());
+			lista.add(intersectionNumerosImportantes.size());
+
+		
 			
-			List<Integer> list = new ArrayList<>();
-			list.add(intersectionPares.size());
-			list.add(intersectionPrimos.size());
-			list.add(intersectionFibonacci.size());
-			list.add(intersectionQuadrado.size());
-			list.add(intersectionMultiplosDeTres.size());
-			list.add(intersectionDezMais.size());
-			list.add(intersectionNumerosImportantes.size());
-			
-			
-			int maxNumeroFiltroRepetido = 0;
-			
-			for (int j = 1; j < 13;j++) { 
-				maxNumeroFiltroRepetido = (maxNumeroFiltroRepetido > Collections.frequency(list, j)) ? maxNumeroFiltroRepetido : Collections.frequency(list, j);
-			}
-		//System.out.println(list.toString() + " - " + maxNumeroFiltroRepetido);
-			System.out.println(maxNumeroFiltroRepetido);
-			
+			String strJogos = "jogos.add(new Jogo(Arrays.asList("
+					+ jogo.getJogo().toString().replace("[", "").replace("]", "") + ")));";
+
+
+				resultCSV.add(strJogos +  "#Pares#"
+						+ intersectionPares.size() + "#Primos#" + intersectionPrimos.size() + "#Fibonacci#"
+						+ intersectionFibonacci.size() + "#Quadrado#" + intersectionQuadrado.size()
+						+ "#Multiplos de Tres#" + intersectionMultiplosDeTres.size() +  "#Numeros Importantes#" + intersectionNumerosImportantes.size());
 		}
+
+		filtro.limpaListas();
+		estatisticas.limparListas();
+		if (true) {
+			Utils.gerarCSV(resultCSV, "teste");
+			System.out.println("Arquivos salvos com sucesso!");
+		} else {
+			System.out.println("List<Jogo> jogos = new ArrayList<Jogo>();");
+			for (String string : resultCSV) {
+				System.out.println(string);
+
+			}
+			System.out.println("consultaSorteio(jogos);");
+		}
+		
+		
+	
 	}
 	
+	public static void teste15() {
+		List<Jogo> listaParaAnalise = new ArrayList<>() ;
+		listaParaAnalise.add(new Jogo(Arrays.asList(9,10,11,12,13,14,15,16,17,20,21,22,23,24,25)));
+		
+		for (Jogo jogo : listaParaAnalise) {
+
+			int cont = 0;
+			int numero = 0;
+			int maiorSequencia = 0;
+			for (Integer n : jogo.getJogo()) {
+				
+				if (numero != 0) {
+					if (numero + 1 == n) {
+						cont++;
+						if (maiorSequencia < cont) {
+							maiorSequencia = cont;
+						}
+					} else {
+						
+						cont = 0;
+					}
+				
+				}
+				numero = n;
+			}
+			System.out.println(maiorSequencia);
+		}
+		
+		
+	}
+	
+	
+	public static void teste14() throws FileNotFoundException, IOException, URISyntaxException {
+		Filtro filtro = new Filtro();
+		Estatisticas estatisticas = new Estatisticas();
+		List<Jogo> todosJogos = estatisticas.lerTodosOsJogos();
+		// 1[4];2[4];3[3,4];4[4];5[4];6[4];7[4];8[4];9[4];10[3,4];11[4];12[3,4];13[4];14[3,4];15[4];16[4];17[3,4];18[4];19[3,4];20[4];21[4];22[3,4];23[4];24[4];25[4];
+
+		// int numero = 2;
+		List<Integer> listaNumeros = new ArrayList<>();
+
+		List<Integer> numeros = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+				18, 19, 20, 21, 22, 23, 24, 25));
+		for (Integer numero : numeros) {
+			Map<Integer, Integer> mapaNumeros = new TreeMap<Integer, Integer>();
+			int frequencia = 0;
+			for (Jogo jogo : todosJogos) {
+				if (!jogo.getJogo().contains(numero)) {
+					frequencia++;
+				} else {
+					if (mapaNumeros.containsKey(frequencia)) {
+						mapaNumeros.put(frequencia, mapaNumeros.get(frequencia).intValue() + 1);
+					} else {
+						mapaNumeros.put(frequencia, 1);
+					}
+					frequencia = 0;
+				}
+
+			}
+			System.out.println(numero + " - " + mapaNumeros);
+		}
+		/*
+		1 - {0=647, 1=277, 2=89, 3=41, 4=20, 5=4, 6=2, 7=1}
+		2 - {0=675, 1=241, 2=100, 3=43, 4=17, 5=7, 6=1, 7=2}
+		3 - {0=638, 1=288, 2=97, 3=37, 4=12, 5=5, 6=4, 7=1}
+		4 - {0=642, 1=275, 2=91, 3=43, 4=17, 5=7, 6=1, 7=1}
+		5 - {0=643, 1=253, 2=96, 3=50, 4=21, 5=3, 7=1, 9=1}
+		6 - {0=601, 1=262, 2=101, 3=46, 4=20, 5=5, 6=3, 7=2}
+		7 - {0=589, 1=283, 2=102, 3=43, 4=20, 5=4, 7=1, 10=1}
+		8 - {0=554, 1=274, 2=105, 3=40, 4=30, 5=5, 6=2, 7=1}
+		9 - {0=614, 1=255, 2=110, 3=40, 4=26, 5=2, 6=1, 7=2}
+		10 - {0=663, 1=266, 2=104, 3=44, 4=12, 5=2, 6=2, 8=1}
+		11 - {0=679, 1=256, 2=79, 3=44, 4=22, 5=6, 6=4}
+		12 - {0=627, 1=274, 2=98, 3=43, 4=12, 5=8, 8=2, 9=1}
+		13 - {0=692, 1=247, 2=101, 3=39, 4=18, 5=6, 6=1}
+		14 - {0=651, 1=256, 2=99, 3=46, 4=11, 5=6, 6=2, 7=2, 11=1}
+		15 - {0=635, 1=246, 2=108, 3=46, 4=17, 5=7, 6=1, 9=1}
+		16 - {0=560, 1=268, 2=108, 3=46, 4=17, 5=9, 6=5}
+		17 - {0=646, 1=238, 2=119, 3=37, 4=15, 5=7, 6=1, 7=2, 8=1}
+		18 - {0=643, 1=242, 2=113, 3=43, 4=15, 5=6, 6=2, 7=2}
+		19 - {0=628, 1=270, 2=105, 3=38, 4=14, 5=5, 6=2, 7=1, 8=1, 12=1}
+		20 - {0=655, 1=258, 2=104, 3=43, 4=14, 5=4, 6=2, 7=2}
+		21 - {0=648, 1=226, 2=104, 3=48, 4=17, 5=9, 6=4, 7=1}
+		22 - {0=638, 1=261, 2=109, 3=36, 4=14, 5=7, 6=4, 7=1}
+		23 - {0=631, 1=255, 2=107, 3=50, 4=17, 5=3, 6=2}
+		24 - {0=676, 1=252, 2=102, 3=45, 4=13, 5=3, 6=2, 7=2}
+		25 - {0=658, 1=268, 2=81, 3=46, 4=13, 5=11, 6=1, 7=1, 11=1}
+		*/
+	
+	}
 	public static void teste13() throws FileNotFoundException, IOException, URISyntaxException{
 		Filtro filtro = new Filtro();
 		Estatisticas estatisticas = new Estatisticas();
@@ -347,8 +474,8 @@ public class Testes {
 			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(jogo.getJogo());
 			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
 
-			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
-			intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios()).getJogo());
+//			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
+//			intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios(),filtro.buscaListaTodosSorteios().size() - 1).getJogo());
 
 			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
 			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
@@ -359,7 +486,7 @@ public class Testes {
 			list.add(intersectionFibonacci.size());
 			list.add(intersectionQuadrado.size());
 			list.add(intersectionMultiplosDeTres.size());
-			list.add(intersectionDezMais.size());
+		//	list.add(intersectionDezMais.size());
 			list.add(intersectionNumerosImportantes.size());
 
 			int qtd = 5;
@@ -453,8 +580,8 @@ public class Testes {
 			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(jogo.getJogo());
 			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
 
-			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
-			intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios()).getJogo());
+//			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
+//			intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios(),filtro.buscaListaTodosSorteios().size() - 1).getJogo());
 
 			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
 			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
@@ -465,7 +592,7 @@ public class Testes {
 			lista.add(intersectionFibonacci.size());
 			lista.add(intersectionQuadrado.size());
 			lista.add(intersectionMultiplosDeTres.size());
-			lista.add(intersectionDezMais.size());
+			//lista.add(intersectionDezMais.size());
 			lista.add(intersectionNumerosImportantes.size());
 
 			Integer contaUm = 0;
@@ -560,7 +687,7 @@ public class Testes {
 						+ intersectionPares.size() + "#Primos#" + intersectionPrimos.size() + "#Fibonacci#"
 						+ intersectionFibonacci.size() + "#Quadrado#" + intersectionQuadrado.size()
 						+ "#Multiplos de Tres#" + intersectionNumerosImportantes.size() + "#Dez Mais#"
-						+ intersectionDezMais.size() + "#Numeros Importantes#" + intersectionNumerosImportantes.size()
+					//	+ intersectionDezMais.size() + "#Numeros Importantes#" + intersectionNumerosImportantes.size()
 						+ "#Linhas#" + primeiraLinha.size() + "" + segundaLinha.size() + "" + terceiraLinha.size() + ""
 						+ quartaLinha.size() + "" + quintaLinha.size() + "#Colunas#" + primeiraColuna.size() + ""
 						+ segundaColuna.size() + "" + terceiraColuna.size() + "" + quartaColuna.size() + ""
@@ -766,8 +893,7 @@ public class Testes {
 				if (filtro.buscaListaTodosSorteios().size() < 15)
 					continue;
 
-				Map<Integer, Integer> jogosEst = estatisticas
-						.estatisticasJogosListaDinamica(filtro.buscaListaTodosSorteios(), 15);
+				Map<Integer, Integer> jogosEst = estatisticas.estatisticasJogosListaDinamica(filtro.buscaListaTodosSorteios(), 15,filtro.buscaListaTodosSorteios().size());
 
 				List<Integer> dezMais = new ArrayList<Integer>();
 				int j = 0;

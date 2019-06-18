@@ -31,7 +31,6 @@ public class Gerador {
 			
 			List<Jogo> jogos =  filtro.bucaListaJogosFiltrados();
 			
-			
 	
 			List<Jogo> jogosSaida = new ArrayList<Jogo>();
 	
@@ -82,8 +81,9 @@ public class Gerador {
 				Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(jogo.getJogo());
 				intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
 	
-				Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
-				intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios()).getJogo());
+//				Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
+//				List<Jogo> todosSorteios = filtro.buscaListaTodosSorteios();
+//				intersectionDezMais.retainAll(estatisticas.buscarDezMais(todosSorteios, todosSorteios.size()).getJogo());
 				
 				Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
 				intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
@@ -94,7 +94,7 @@ public class Gerador {
 				lista.add(intersectionFibonacci.size());
 				lista.add(intersectionQuadrado.size());
 				lista.add(intersectionMultiplosDeTres.size());
-				lista.add(intersectionDezMais.size());
+			//	lista.add(intersectionDezMais.size());
 				lista.add(intersectionNumerosImportantes.size());
 				int maxNumeroFiltroRepetido = 0;
 				
@@ -237,8 +237,9 @@ public class Gerador {
 			Map<Integer, Integer> mapaEstatisticasJogos = estatisticas
 					.estatisticasJogos(filtro.buscaListaTodosSorteios().size());
 			
-			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
-			intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios()).getJogo());
+//			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
+//			List<Jogo> todosSorteios = filtro.buscaListaTodosSorteios();
+//			intersectionDezMais.retainAll(estatisticas.buscarDezMais(todosSorteios, todosSorteios.size()).getJogo());
 			
 			Set<Integer> primeiraLinha = new HashSet<Integer>(jogo.getJogo());
 			primeiraLinha.retainAll(estatisticas.buscarNumerosLinha1().getJogo());

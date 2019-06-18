@@ -52,6 +52,7 @@ public class Simulacao {
 				filtro.iniciaListas();
 				filtro.setaJogoListaTodosSorteios(primeiroJogo);
 				qtdJogos++;
+				filtro.setJogoAtual((int)qtdJogos);
 				System.err.println("Jogo: " + qtdJogos + " de " + tamanhoListaTodosJogos);
 				List<Jogo> listOpcoesJogos = filtro.bucaListaJogosFiltrados();
 
