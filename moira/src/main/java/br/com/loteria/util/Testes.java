@@ -27,7 +27,7 @@ public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
 	
-		teste14();
+		teste12();
 		
 	
 	}
