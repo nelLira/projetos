@@ -83,14 +83,14 @@ public class Filtro {
 		
 		repetidosJogoAnterior(Arrays.asList(9));
 		pares(Arrays.asList(6,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
-		primos(Arrays.asList(4,5,6)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
-		sequenciaDeFibonacci(Arrays.asList(2,3,4,5));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
+		primos(Arrays.asList(5,6,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
+		sequenciaDeFibonacci(Arrays.asList(3,4,5,6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
 		quadrado(Arrays.asList(8,9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
-		multiplosDeTres(Arrays.asList(3,4,5,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
-		numerosImportantes(Arrays.asList(3,5,6,8));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
-		QtdFiltros(Arrays.asList(2,3)); //1a4// {1=169; 2=1190; 3=366; 4=53; 5=1}
+		multiplosDeTres(Arrays.asList(3,5,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
+		numerosImportantes(Arrays.asList(3,4,5,6,8));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
+		QtdFiltros(Arrays.asList(1,2,3)); //1a4// {1=169; 2=1190; 3=366; 4=53; 5=1}
 		maiorSequenciaDoisEmDois(Arrays.asList(2,3,4,5)); //1a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
-		maiorSequenciaUmEmUm(Arrays.asList(3,4,5,6,7,9,10)); //3a10 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
+		maiorSequenciaUmEmUm(Arrays.asList(3,4,5,9,10)); //3a10 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
 		
 		linha(Arrays.asList(1, 2, 3, 4, 5),
 			  Arrays.asList(1, 2, 3, 4, 5),  
@@ -102,7 +102,7 @@ public class Filtro {
 			   Arrays.asList(1, 2, 3, 4, 5),
 			   Arrays.asList(1, 2, 3, 4, 5),
 			   Arrays.asList(1, 2, 3, 4, 5), 
-			   Arrays.asList(2, 3, 4, 5));
+			   Arrays.asList(2, 4, 5));
 		
 		
 		incluir(Arrays.asList(25)); // 1[4];2[4];3[3,4];4[4];5[4];6[4];7[4];8[4];9[4];10[3,4];11[4];12[3,4];13[4];14[3,4];15[4];16[4];17[3,4];18[4];19[3,4];20[4];21[4];22[3,4];23[4];24[4];25[4];
