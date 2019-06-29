@@ -17,9 +17,9 @@ public class Lotofacil {
 	public static void main(String[] args) throws FileNotFoundException, IOException { 
 		
 	//simulacao(); //simulação com 9 -> 427 de 613 [19/06/2019]
-		gerarJogos(200,true);
+	//	gerarJogos(200,true);
 	//	 estisticasUltimoSorteio();
-	//	estatisticasUltimosSorteios(50, true);
+		estatisticasUltimosSorteios(1, true);
 /*
 		List<Jogo> jogos = new ArrayList<Jogo>();
 		jogos.add(new Jogo(Arrays.asList(2, 3, 6, 7, 10, 11, 12, 14, 15, 16, 17, 19, 22, 23, 24)));
@@ -34,7 +34,7 @@ public class Lotofacil {
 		jogos.add(new Jogo(Arrays.asList(2, 3, 5, 6, 7, 11, 13, 15, 16, 17, 18, 20, 21, 22, 24)));
 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 6, 7, 9, 11, 14, 15, 16, 17, 21, 22, 24, 25)));
 		consultaSorteio(jogos);
-*/
+  */    
 
 
 	}
