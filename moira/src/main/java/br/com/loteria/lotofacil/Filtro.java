@@ -86,10 +86,10 @@ public class Filtro {
 		primos(Arrays.asList(5,6,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
 		sequenciaDeFibonacci(Arrays.asList(3,4,5,6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
 		quadrado(Arrays.asList(8,9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
-		multiplosDeTres(Arrays.asList(4,5,6)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
-		numerosImportantes(Arrays.asList(3,4,5,6,7,8));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
+		multiplosDeTres(Arrays.asList(4,5,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
+		numerosImportantes(Arrays.asList(3,5,6,7,8));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
 		QtdFiltros(Arrays.asList(1,2,3,4)); //1a4// {1=169; 2=1190; 3=366; 4=53; 5=1}
-		maiorSequenciaDoisEmDois(Arrays.asList(1,2,3,5)); //1a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
+		maiorSequenciaDoisEmDois(Arrays.asList(1,2,3,4)); //1a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
 		maiorSequenciaUmEmUm(Arrays.asList(3,4,5,6,8,9,10)); //3a10 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
 		
 		linha(Arrays.asList(1, 2, 3, 4, 5),
