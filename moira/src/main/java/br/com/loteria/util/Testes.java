@@ -28,6 +28,7 @@ public class Testes {
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
 	
 		teste12();
+		//9 -> 619
 		
 	
 	}
@@ -259,7 +260,7 @@ public class Testes {
 		}
 	
 	public static void teste12() throws FileNotFoundException, IOException {
-		
+		//9->619; 8->472; 10->399
 		Filtro filtro = new Filtro();
 		Estatisticas estatisticas = new Estatisticas();
 		List<Jogo> todosJogos = estatisticas.lerTodosOsJogos();
@@ -271,7 +272,7 @@ public class Testes {
 				Set<Integer> intersectionRepetidos = new HashSet<Integer>(anterior.getJogo());
 				intersectionRepetidos.retainAll(atual.getJogo());
 
-				if (intersectionRepetidos.size() == 9) {
+				if (intersectionRepetidos.size() == 10) {
 					
 					cont++;
 				}
