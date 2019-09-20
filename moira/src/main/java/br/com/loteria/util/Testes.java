@@ -8,17 +8,21 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.collect.Lists;
 
 import br.com.loteria.combinacoes.Combinacoes;
+import br.com.loteria.jogo.Gerador;
 import br.com.loteria.jogo.Jogo;
 import br.com.loteria.lotofacil.Estatisticas;
 import br.com.loteria.lotofacil.Filtro;
@@ -27,7 +31,32 @@ public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
 	
-		teste12();
+		
+	//	teste17();
+		
+		Gerador g = new Gerador();
+		
+		
+		List<Jogo> retorno = new ArrayList<>();
+		Filtro filtro = g.gerarJogosCSVteste(1,true);
+		
+		Combinacoes combinacoes = new Combinacoes();
+		List<Jogo> jogosCombinados = combinacoes.todosCombinacoesLotoFacil18();
+		
+		
+		for (Jogo jogo : jogosCombinados) {
+			retorno = teste17(jogo);
+			filtro.setListaJogosCombinadosCompleto(retorno);
+			List<Jogo> jogos =  filtro.bucaListaJogosFiltrados();
+			
+			if (jogos.size() > 23) {
+				System.err.println(jogos);
+			}
+
+		}
+	
+		
+		
 		//9 -> 619
 		
 		/*	
@@ -123,6 +152,154 @@ public class Testes {
 	
 	}
 	
+	private static List<Jogo>  teste17(Jogo  jogo) {
+		   //List<Integer> jogo = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 6, 7, 9, 10, 11, 13, 14, 15, 17, 18, 19, 20, 21, 23, 24));
+	       
+	       List<Integer> primeiro = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4)
+	    		   														,jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(10),
+	    		   														jogo.getJogo().get(12),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> segundo = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4)
+																		,jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(10),
+																		jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(16)));
+	       
+	       List<Integer> terceiro = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4)
+																		,jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(11),
+																		jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> quarto = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(5)
+																		,jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),
+																		jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(15),jogo.getJogo().get(16)));
+	      
+	       List<Integer> cinco = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5)
+																		,jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),
+																		jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> seis = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5)
+																		,jogo.getJogo().get(6),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),
+																		jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> sete = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(7)
+																	,jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),
+																	jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> oito = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4)
+																	,jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(10),
+																	jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(15),jogo.getJogo().get(17)));
+	       
+	       List<Integer> nove = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4)
+					,jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),
+					jogo.getJogo().get(10),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15)));
+	       
+	       List<Integer> dez = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(4)
+					,jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(9),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14)
+					,jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> onze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(6)
+	    		   													,jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13)
+	    		   													,jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> doze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(2),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),
+					jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> treze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),
+					jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> quatorze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(11),
+					jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> quinze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(7),jogo.getJogo().get(9),jogo.getJogo().get(10),
+					jogo.getJogo().get(11),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+									       
+	       
+	       List<Integer> dezesseis = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),
+					jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> dezessete = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(4),jogo.getJogo().get(6),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),
+	    		   jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	      
+	       
+	       List<Integer> dezoito = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(5),jogo.getJogo().get(6),
+	    		   jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(17)));
+	       
+	       List<Integer> dezenove = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(6),
+	    		   jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> vinte = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(6),jogo.getJogo().get(7),
+	    		   jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> vinteEum = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(6)
+	    		   ,jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16)));
+	       
+	       List<Integer> vinteEDois = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(6)
+	    		   ,jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(17)));
+	       
+	       List<Integer> vinteETres = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(5),jogo.getJogo().get(6)
+	    		   ,jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       List<Integer> vinteEQuatro = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(6)
+	    		   ,jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
+	       
+	       Map<Integer, List<Integer>> jogos = new TreeMap<Integer, List<Integer>>();
+	       jogos.put(1, primeiro);
+	       jogos.put(2, segundo);
+	       jogos.put(3, terceiro);
+	       jogos.put(4, quarto);
+	       jogos.put(5, cinco);
+	       jogos.put(6, seis);
+	       jogos.put(7, sete);
+	       jogos.put(8, oito);
+	       jogos.put(9, nove);
+	       jogos.put(10, dez);
+	       jogos.put(11, onze);
+	       jogos.put(12, doze);
+	       jogos.put(13, treze);
+	       jogos.put(14, quatorze);
+	       jogos.put(15, quinze);
+	       jogos.put(16, dezesseis);
+	       jogos.put(17, dezessete);
+	       jogos.put(18, dezoito);
+	       jogos.put(19, dezenove);
+	       jogos.put(20, vinte);
+	       jogos.put(21, vinteEum);
+	       jogos.put(22, vinteEDois);
+	       jogos.put(23, vinteETres);
+	       jogos.put(23, vinteEQuatro);
+	       
+	       
+	       List<Jogo> listaJogos = new ArrayList<>();
+	       listaJogos.add(new Jogo(primeiro));
+	       listaJogos.add(new Jogo(segundo));
+	       listaJogos.add(new Jogo(terceiro));
+	       listaJogos.add(new Jogo(quarto));
+	       listaJogos.add(new Jogo(cinco));
+	       listaJogos.add(new Jogo(seis));
+	       listaJogos.add(new Jogo(sete));
+	       listaJogos.add(new Jogo(oito));
+	       listaJogos.add(new Jogo(nove));
+	       listaJogos.add(new Jogo(dez));
+	       listaJogos.add(new Jogo(onze));
+	       listaJogos.add(new Jogo(doze));
+	       listaJogos.add(new Jogo(treze));
+	       listaJogos.add(new Jogo(quatorze));
+	       listaJogos.add(new Jogo(quinze));
+	       listaJogos.add(new Jogo(dezesseis));
+	       listaJogos.add(new Jogo(dezessete));
+	       listaJogos.add(new Jogo(dezoito));
+	       listaJogos.add(new Jogo(dezenove));
+	       listaJogos.add(new Jogo(vinte));
+	       listaJogos.add(new Jogo(vinteEum));
+	       listaJogos.add(new Jogo(vinteEDois));
+	       listaJogos.add(new Jogo(vinteETres));
+	       listaJogos.add(new Jogo(vinteEQuatro));
+	       
+	    
+	       
+	       return listaJogos;
+	      
+		
+	}
+
 	public static void teste16() throws FileNotFoundException, IOException {
 		System.out.println("gerando jogos...");
 		Filtro filtro = new Filtro();
