@@ -41,6 +41,13 @@ public class Combinacoes {
 		combinar(todosNumeros,15);
 		return geraListaCombinacoes();
 	}
+	
+	public List<Jogo> todosCombinacoesLotoFacil18(Jogo jogo){
+		System.out.println("Combinando todos os números...");
+		
+		combinar(jogo.getJogo(),15);
+		return geraListaCombinacoes();
+	}
 
 	public List<Jogo> todosCombinacoesLotoFacil18(){
 		System.out.println("Combinando todos os números...");

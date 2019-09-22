@@ -30,274 +30,375 @@ import br.com.loteria.lotofacil.Filtro;
 public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
-	
-		
-	//	teste17();
-		
+
+		// teste17();
+
 		Gerador g = new Gerador();
-		
-		
+
 		List<Jogo> retorno = new ArrayList<>();
-		Filtro filtro = g.gerarJogosCSVteste(1,true);
-		
+		Filtro filtro = g.gerarJogosCSVteste(1, true);
+
 		Combinacoes combinacoes = new Combinacoes();
 		List<Jogo> jogosCombinados = combinacoes.todosCombinacoesLotoFacil18();
+
+		List<Jogo> jogosSaida = new ArrayList<Jogo>();
+
+		Random random = new Random();
+		List<Integer> posicoes = new ArrayList<Integer>();
+
+		System.out.println("sorteando...");
 		
-		
-		for (Jogo jogo : jogosCombinados) {
-			retorno = teste17(jogo);
-			filtro.setListaJogosCombinadosCompleto(retorno);
-			List<Jogo> jogos =  filtro.bucaListaJogosFiltrados();
-			
-			if (jogos.size() > 23) {
-				System.err.println(jogos);
+		List<Integer> tamanho = new ArrayList<>();
+
+		while (jogosSaida.size() < 24) {
+			Integer posicao = random.nextInt(jogosCombinados.size());
+			if (!posicoes.contains(posicao)) {
+				retorno = teste17(jogosCombinados.get(posicao));
+				filtro.setListaJogosCombinadosCompleto(retorno);
+				List<Jogo> jogos = filtro.bucaListaJogosFiltrados();
+				tamanho.add(jogos.size());
+				//System.out.println("final: " + jogos.size());
+//				for (Jogo jogo : jogos) {
+//					if (!filtro.repetido(jogo)) {
+//						jogosSaida.add(jogo);
+//					}
+//				}
+				posicoes.add(posicao);
 			}
-
 		}
-	
 		
-		
-		//9 -> 619
-		
-		/*	
- 		List<Jogo> jogos = new ArrayList<Jogo>();
- 		jogos.add(new Jogo(Arrays.asList(4, 5, 6, 8, 10, 12, 13, 15, 16, 17, 19, 20, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 4, 6, 7, 8, 12, 13, 14, 15, 17, 21, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 4, 6, 7, 9, 13, 14, 15, 17, 19, 20, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 6, 7, 9, 10, 11, 12, 16, 17, 18, 20, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 5, 6, 7, 8, 9, 15, 16, 17, 18, 20, 21, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 6, 7, 9, 13, 15, 16, 17, 20, 21, 22, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 3, 6, 7, 8, 11, 12, 15, 16, 17, 19, 20, 21, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 5, 6, 7, 8, 9, 10, 11, 12, 15, 17, 18, 20, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 17, 20, 21, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 8, 9, 13, 14, 15, 16, 17, 21, 22, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 4, 5, 6, 9, 11, 12, 14, 15, 16, 17, 20, 21, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 7, 8, 10, 12, 15, 16, 17, 18, 19, 20, 25)));
- 		jogos.add(new Jogo(Arrays.asList(4, 5, 6, 8, 10, 12, 13, 15, 16, 17, 19, 20, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 7, 8, 10, 12, 15, 16, 17, 18, 19, 20, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 4, 6, 7, 9, 13, 14, 15, 17, 19, 20, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 8, 9, 13, 14, 15, 16, 17, 21, 22, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 5, 6, 7, 8, 9, 10, 11, 12, 15, 17, 18, 20, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 17, 20, 21, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 4, 6, 7, 8, 12, 13, 14, 15, 17, 21, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 4, 5, 6, 9, 11, 12, 14, 15, 16, 17, 20, 21, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 5, 6, 7, 8, 9, 15, 16, 17, 18, 20, 21, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 6, 7, 9, 13, 15, 16, 17, 20, 21, 22, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 6, 7, 9, 10, 11, 12, 16, 17, 18, 20, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 3, 6, 7, 8, 11, 12, 15, 16, 17, 19, 20, 21, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 7, 9, 11, 13, 14, 15, 17, 18, 21, 22, 23, 24)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 7, 9, 13, 14, 15, 17, 18, 20, 21, 22, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(4, 5, 6, 7, 11, 13, 14, 15, 17, 18, 19, 20, 21, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(3, 4, 6, 7, 10, 12, 13, 15, 16, 17, 20, 21, 22, 23, 24)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 6, 9, 10, 11, 13, 14, 17, 18, 19, 20, 21, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(4, 5, 7, 9, 10, 11, 12, 13, 15, 16, 17, 20, 21, 22, 24)));
- 		jogos.add(new Jogo(Arrays.asList(1, 5, 6, 7, 8, 10, 11, 12, 13, 15, 16, 17, 22, 23, 24)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 8, 11, 13, 14, 15, 17, 18, 20, 21, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 7, 9, 14, 15, 16, 17, 19, 21, 22, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 6, 9, 10, 11, 12, 13, 15, 16, 17, 21, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 17, 20, 21, 22, 23)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 7, 9, 10, 11, 12, 14, 16, 17, 19, 21, 24)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 8, 9, 11, 12, 13, 14, 15, 17, 22, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 6, 7, 8, 14, 15, 17, 18, 20, 21, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 5, 6, 7, 9, 12, 14, 15, 16, 17, 18, 22, 23)));
- 		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 5, 6, 7, 9, 10, 12, 16, 17, 18, 21, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 3, 6, 10, 11, 12, 13, 14, 15, 16, 19, 20, 22, 23, 24)));
- 		jogos.add(new Jogo(Arrays.asList(4, 5, 7, 8, 9, 11, 13, 15, 16, 18, 21, 22, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(3, 4, 7, 9, 10, 11, 12, 13, 14, 16, 19, 21, 22, 23, 24)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 6, 8, 9, 10, 11, 13, 15, 19, 20, 21, 22, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(3, 4, 5, 7, 8, 11, 13, 14, 15, 18, 20, 21, 22, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 7, 8, 11, 13, 14, 15, 18, 19, 20, 21, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 4, 5, 8, 9, 10, 12, 13, 16, 18, 19, 21, 22, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 8, 10, 11, 12, 13, 15, 18, 20, 21, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 4, 5, 6, 8, 9, 10, 11, 12, 16, 19, 21, 22, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 5, 6, 7, 9, 10, 11, 13, 15, 16, 18, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 5, 9, 10, 12, 13, 14, 16, 19, 21, 22, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 4, 7, 8, 10, 12, 14, 15, 20, 21, 22, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 5, 6, 9, 10, 13, 14, 15, 16, 19, 20, 23, 24)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 5, 8, 9, 10, 11, 12, 14, 15, 16, 19, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 5, 6, 7, 8, 9, 10, 14, 16, 18, 19, 21, 22)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 4, 6, 7, 9, 10, 11, 14, 18, 20, 21, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(4, 5, 8, 10, 12, 13, 15, 16, 17, 18, 19, 21, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 8, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 24)));
- 		jogos.add(new Jogo(Arrays.asList(3, 4, 5, 7, 10, 11, 12, 14, 16, 17, 18, 19, 21, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 4, 5, 6, 7, 9, 11, 17, 18, 19, 20, 21, 22, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 4, 6, 9, 10, 12, 13, 15, 17, 21, 22, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 7, 8, 9, 15, 17, 18, 19, 21, 22, 23, 25)));
- 		jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 8, 9, 10, 13, 14, 15, 17, 19, 21, 22, 24)));
- 		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 5, 6, 9, 10, 13, 17, 19, 20, 21, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 4, 6, 8, 9, 11, 14, 15, 17, 18, 20, 21, 22)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 5, 6, 8, 9, 10, 13, 15, 16, 17, 19, 22, 24)));
- 		jogos.add(new Jogo(Arrays.asList(4, 5, 6, 8, 10, 11, 13, 15, 16, 18, 19, 20, 21, 22, 23)));
- 		jogos.add(new Jogo(Arrays.asList(4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 18, 19, 21, 22, 23)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 5, 7, 8, 11, 12, 15, 18, 19, 20, 22, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(2, 4, 5, 9, 10, 11, 12, 13, 15, 16, 19, 20, 21, 23, 24)));
- 		jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 9, 10, 11, 13, 16, 18, 19, 20, 22, 23, 24)));
- 		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 6, 7, 8, 9, 10, 11, 14, 15, 19, 21, 22, 24)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 5, 7, 9, 10, 12, 16, 18, 19, 20, 21, 23, 24)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 5, 6, 9, 10, 14, 15, 16, 18, 19, 21, 22, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 4, 5, 6, 7, 10, 12, 13, 15, 18, 19, 20, 21, 22)));
- 		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 5, 6, 8, 9, 10, 11, 12, 14, 18, 19, 22, 23)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 5, 7, 8, 11, 12, 13, 14, 15, 16, 21, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(3, 4, 5, 7, 8, 9, 10, 11, 12, 14, 16, 22, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 20, 21, 23)));
- 		jogos.add(new Jogo(Arrays.asList(3, 4, 6, 7, 8, 9, 11, 14, 17, 19, 20, 21, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(3, 5, 6, 9, 11, 12, 13, 14, 15, 16, 17, 18, 20, 22, 23)));
- 		jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 7, 9, 13, 14, 16, 17, 20, 21, 22, 23, 24)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 6, 8, 9, 13, 14, 15, 16, 17, 19, 20, 23, 24, 25)));
- 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 6, 7, 8, 9, 12, 14, 17, 19, 20, 21, 22, 23, 25)));
+		for (Integer integer : tamanho) {
+			System.out.println(integer);
+		}
+//		for (Jogo jogo2 : jogosSaida) {
+//			System.out.println("jogos.add(new Jogo(Arrays.asList("
+//					+ jogo2.getJogo().toString().replace("[", "").replace("]", "") + ")));");
+//		}
 
-		consultaSorteio(jogos);
-*/
 		
-	
+		System.err.println("fim");
+
+		// 9 -> 619
+
+		/*
+		 * List<Jogo> jogos = new ArrayList<Jogo>(); jogos.add(new Jogo(Arrays.asList(4,
+		 * 5, 6, 8, 10, 12, 13, 15, 16, 17, 19, 20, 23, 24, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(1, 2, 3, 4, 6, 7, 8, 12, 13, 14, 15, 17, 21, 24, 25)));
+		 * jogos.add(new Jogo(Arrays.asList(1, 2, 3, 4, 6, 7, 9, 13, 14, 15, 17, 19, 20,
+		 * 22, 25))); jogos.add(new Jogo(Arrays.asList(1, 2, 3, 6, 7, 9, 10, 11, 12, 16,
+		 * 17, 18, 20, 22, 25))); jogos.add(new Jogo(Arrays.asList(1, 2, 5, 6, 7, 8, 9,
+		 * 15, 16, 17, 18, 20, 21, 23, 25))); jogos.add(new Jogo(Arrays.asList(1, 2, 6,
+		 * 7, 9, 13, 15, 16, 17, 20, 21, 22, 23, 24, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(1, 3, 6, 7, 8, 11, 12, 15, 16, 17, 19, 20, 21, 22, 25)));
+		 * jogos.add(new Jogo(Arrays.asList(1, 5, 6, 7, 8, 9, 10, 11, 12, 15, 17, 18,
+		 * 20, 22, 25))); jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 7, 8, 9, 10, 11,
+		 * 12, 17, 20, 21, 24, 25))); jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 8, 9,
+		 * 13, 14, 15, 16, 17, 21, 22, 23, 25))); jogos.add(new Jogo(Arrays.asList(2, 4,
+		 * 5, 6, 9, 11, 12, 14, 15, 16, 17, 20, 21, 23, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(3, 4, 5, 6, 7, 8, 10, 12, 15, 16, 17, 18, 19, 20, 25)));
+		 * jogos.add(new Jogo(Arrays.asList(4, 5, 6, 8, 10, 12, 13, 15, 16, 17, 19, 20,
+		 * 23, 24, 25))); jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 7, 8, 10, 12, 15,
+		 * 16, 17, 18, 19, 20, 25))); jogos.add(new Jogo(Arrays.asList(1, 2, 3, 4, 6, 7,
+		 * 9, 13, 14, 15, 17, 19, 20, 22, 25))); jogos.add(new Jogo(Arrays.asList(2, 3,
+		 * 4, 6, 8, 9, 13, 14, 15, 16, 17, 21, 22, 23, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(1, 5, 6, 7, 8, 9, 10, 11, 12, 15, 17, 18, 20, 22, 25)));
+		 * jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 17, 20, 21,
+		 * 24, 25))); jogos.add(new Jogo(Arrays.asList(1, 2, 3, 4, 6, 7, 8, 12, 13, 14,
+		 * 15, 17, 21, 24, 25))); jogos.add(new Jogo(Arrays.asList(2, 4, 5, 6, 9, 11,
+		 * 12, 14, 15, 16, 17, 20, 21, 23, 25))); jogos.add(new Jogo(Arrays.asList(1, 2,
+		 * 5, 6, 7, 8, 9, 15, 16, 17, 18, 20, 21, 23, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(1, 2, 6, 7, 9, 13, 15, 16, 17, 20, 21, 22, 23, 24, 25)));
+		 * jogos.add(new Jogo(Arrays.asList(1, 2, 3, 6, 7, 9, 10, 11, 12, 16, 17, 18,
+		 * 20, 22, 25))); jogos.add(new Jogo(Arrays.asList(1, 3, 6, 7, 8, 11, 12, 15,
+		 * 16, 17, 19, 20, 21, 22, 25))); jogos.add(new Jogo(Arrays.asList(1, 2, 3, 7,
+		 * 9, 11, 13, 14, 15, 17, 18, 21, 22, 23, 24))); jogos.add(new
+		 * Jogo(Arrays.asList(1, 2, 7, 9, 13, 14, 15, 17, 18, 20, 21, 22, 23, 24, 25)));
+		 * jogos.add(new Jogo(Arrays.asList(4, 5, 6, 7, 11, 13, 14, 15, 17, 18, 19, 20,
+		 * 21, 24, 25))); jogos.add(new Jogo(Arrays.asList(3, 4, 6, 7, 10, 12, 13, 15,
+		 * 16, 17, 20, 21, 22, 23, 24))); jogos.add(new Jogo(Arrays.asList(1, 2, 6, 9,
+		 * 10, 11, 13, 14, 17, 18, 19, 20, 21, 24, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(4, 5, 7, 9, 10, 11, 12, 13, 15, 16, 17, 20, 21, 22, 24)));
+		 * jogos.add(new Jogo(Arrays.asList(1, 5, 6, 7, 8, 10, 11, 12, 13, 15, 16, 17,
+		 * 22, 23, 24))); jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 8, 11, 13, 14,
+		 * 15, 17, 18, 20, 21, 22, 25))); jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6,
+		 * 7, 9, 14, 15, 16, 17, 19, 21, 22, 23, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(1, 3, 4, 6, 9, 10, 11, 12, 13, 15, 16, 17, 21, 23, 25)));
+		 * jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 17, 20,
+		 * 21, 22, 23))); jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 7, 9, 10, 11, 12,
+		 * 14, 16, 17, 19, 21, 24))); jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 8, 9,
+		 * 11, 12, 13, 14, 15, 17, 22, 24, 25))); jogos.add(new Jogo(Arrays.asList(1, 2,
+		 * 3, 5, 6, 7, 8, 14, 15, 17, 18, 20, 21, 22, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(2, 3, 4, 5, 6, 7, 9, 12, 14, 15, 16, 17, 18, 22, 23)));
+		 * jogos.add(new Jogo(Arrays.asList(1, 3, 4, 5, 6, 7, 9, 10, 12, 16, 17, 18, 21,
+		 * 22, 25))); jogos.add(new Jogo(Arrays.asList(1, 3, 6, 10, 11, 12, 13, 14, 15,
+		 * 16, 19, 20, 22, 23, 24))); jogos.add(new Jogo(Arrays.asList(4, 5, 7, 8, 9,
+		 * 11, 13, 15, 16, 18, 21, 22, 23, 24, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(3, 4, 7, 9, 10, 11, 12, 13, 14, 16, 19, 21, 22, 23, 24)));
+		 * jogos.add(new Jogo(Arrays.asList(1, 2, 6, 8, 9, 10, 11, 13, 15, 19, 20, 21,
+		 * 22, 23, 25))); jogos.add(new Jogo(Arrays.asList(3, 4, 5, 7, 8, 11, 13, 14,
+		 * 15, 18, 20, 21, 22, 24, 25))); jogos.add(new Jogo(Arrays.asList(2, 3, 4, 7,
+		 * 8, 11, 13, 14, 15, 18, 19, 20, 21, 24, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(2, 4, 5, 8, 9, 10, 12, 13, 16, 18, 19, 21, 22, 23, 25)));
+		 * jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 8, 10, 11, 12, 13, 15, 18, 20,
+		 * 21, 22, 25))); jogos.add(new Jogo(Arrays.asList(1, 4, 5, 6, 8, 9, 10, 11, 12,
+		 * 16, 19, 21, 22, 23, 25))); jogos.add(new Jogo(Arrays.asList(1, 2, 5, 6, 7, 9,
+		 * 10, 11, 13, 15, 16, 18, 23, 24, 25))); jogos.add(new Jogo(Arrays.asList(2, 3,
+		 * 4, 5, 9, 10, 12, 13, 14, 16, 19, 21, 22, 24, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(1, 2, 3, 4, 7, 8, 10, 12, 14, 15, 20, 21, 22, 23, 25)));
+		 * jogos.add(new Jogo(Arrays.asList(2, 3, 4, 5, 6, 9, 10, 13, 14, 15, 16, 19,
+		 * 20, 23, 24))); jogos.add(new Jogo(Arrays.asList(2, 3, 4, 5, 8, 9, 10, 11, 12,
+		 * 14, 15, 16, 19, 22, 25))); jogos.add(new Jogo(Arrays.asList(1, 3, 4, 5, 6, 7,
+		 * 8, 9, 10, 14, 16, 18, 19, 21, 22))); jogos.add(new Jogo(Arrays.asList(1, 2,
+		 * 3, 4, 6, 7, 9, 10, 11, 14, 18, 20, 21, 22, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(4, 5, 8, 10, 12, 13, 15, 16, 17, 18, 19, 21, 23, 24,
+		 * 25))); jogos.add(new Jogo(Arrays.asList(1, 2, 8, 10, 11, 12, 13, 15, 16, 17,
+		 * 18, 19, 20, 21, 24))); jogos.add(new Jogo(Arrays.asList(3, 4, 5, 7, 10, 11,
+		 * 12, 14, 16, 17, 18, 19, 21, 24, 25))); jogos.add(new Jogo(Arrays.asList(1, 4,
+		 * 5, 6, 7, 9, 11, 17, 18, 19, 20, 21, 22, 23, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(1, 2, 4, 6, 9, 10, 12, 13, 15, 17, 21, 22, 23, 24, 25)));
+		 * jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 7, 8, 9, 15, 17, 18, 19, 21, 22,
+		 * 23, 25))); jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 8, 9, 10, 13, 14, 15,
+		 * 17, 19, 21, 22, 24))); jogos.add(new Jogo(Arrays.asList(1, 3, 4, 5, 6, 9, 10,
+		 * 13, 17, 19, 20, 21, 23, 24, 25))); jogos.add(new Jogo(Arrays.asList(1, 2, 3,
+		 * 4, 6, 8, 9, 11, 14, 15, 17, 18, 20, 21, 22))); jogos.add(new
+		 * Jogo(Arrays.asList(2, 3, 4, 5, 6, 8, 9, 10, 13, 15, 16, 17, 19, 22, 24)));
+		 * jogos.add(new Jogo(Arrays.asList(4, 5, 6, 8, 10, 11, 13, 15, 16, 18, 19, 20,
+		 * 21, 22, 23))); jogos.add(new Jogo(Arrays.asList(4, 5, 6, 7, 8, 9, 10, 11, 13,
+		 * 15, 18, 19, 21, 22, 23))); jogos.add(new Jogo(Arrays.asList(1, 2, 5, 7, 8,
+		 * 11, 12, 15, 18, 19, 20, 22, 23, 24, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(2, 4, 5, 9, 10, 11, 12, 13, 15, 16, 19, 20, 21, 23, 24)));
+		 * jogos.add(new Jogo(Arrays.asList(3, 4, 5, 6, 9, 10, 11, 13, 16, 18, 19, 20,
+		 * 22, 23, 24))); jogos.add(new Jogo(Arrays.asList(1, 3, 4, 6, 7, 8, 9, 10, 11,
+		 * 14, 15, 19, 21, 22, 24))); jogos.add(new Jogo(Arrays.asList(2, 3, 4, 5, 7, 9,
+		 * 10, 12, 16, 18, 19, 20, 21, 23, 24))); jogos.add(new Jogo(Arrays.asList(2, 3,
+		 * 4, 5, 6, 9, 10, 14, 15, 16, 18, 19, 21, 22, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(1, 2, 4, 5, 6, 7, 10, 12, 13, 15, 18, 19, 20, 21, 22)));
+		 * jogos.add(new Jogo(Arrays.asList(1, 3, 4, 5, 6, 8, 9, 10, 11, 12, 14, 18, 19,
+		 * 22, 23))); jogos.add(new Jogo(Arrays.asList(1, 2, 5, 7, 8, 11, 12, 13, 14,
+		 * 15, 16, 21, 23, 24, 25))); jogos.add(new Jogo(Arrays.asList(3, 4, 5, 7, 8, 9,
+		 * 10, 11, 12, 14, 16, 22, 23, 24, 25))); jogos.add(new Jogo(Arrays.asList(1, 2,
+		 * 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 20, 21, 23))); jogos.add(new
+		 * Jogo(Arrays.asList(3, 4, 6, 7, 8, 9, 11, 14, 17, 19, 20, 21, 23, 24, 25)));
+		 * jogos.add(new Jogo(Arrays.asList(3, 5, 6, 9, 11, 12, 13, 14, 15, 16, 17, 18,
+		 * 20, 22, 23))); jogos.add(new Jogo(Arrays.asList(2, 3, 4, 6, 7, 9, 13, 14, 16,
+		 * 17, 20, 21, 22, 23, 24))); jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 6, 8,
+		 * 9, 13, 14, 15, 16, 17, 19, 20, 23, 24, 25))); jogos.add(new
+		 * Jogo(Arrays.asList(1, 2, 3, 5, 6, 7, 8, 9, 12, 14, 17, 19, 20, 21, 22, 23,
+		 * 25)));
+		 * 
+		 * consultaSorteio(jogos);
+		 */
+
 	}
-	
-	private static List<Jogo>  teste17(Jogo  jogo) {
-		   //List<Integer> jogo = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 6, 7, 9, 10, 11, 13, 14, 15, 17, 18, 19, 20, 21, 23, 24));
-	       
-	       List<Integer> primeiro = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4)
-	    		   														,jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(10),
-	    		   														jogo.getJogo().get(12),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> segundo = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4)
-																		,jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(10),
-																		jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(16)));
-	       
-	       List<Integer> terceiro = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4)
-																		,jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(11),
-																		jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> quarto = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(5)
-																		,jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),
-																		jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(15),jogo.getJogo().get(16)));
-	      
-	       List<Integer> cinco = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5)
-																		,jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),
-																		jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> seis = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5)
-																		,jogo.getJogo().get(6),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),
-																		jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> sete = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(7)
-																	,jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),
-																	jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> oito = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4)
-																	,jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(10),
-																	jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(15),jogo.getJogo().get(17)));
-	       
-	       List<Integer> nove = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4)
-					,jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),
-					jogo.getJogo().get(10),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15)));
-	       
-	       List<Integer> dez = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(4)
-					,jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(9),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14)
-					,jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> onze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(6)
-	    		   													,jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13)
-	    		   													,jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> doze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(2),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),
-					jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> treze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),
-					jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> quatorze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(11),
-					jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> quinze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(7),jogo.getJogo().get(9),jogo.getJogo().get(10),
-					jogo.getJogo().get(11),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-									       
-	       
-	       List<Integer> dezesseis = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(5),jogo.getJogo().get(6),jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),
-					jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> dezessete = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(4),jogo.getJogo().get(6),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),
-	    		   jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	      
-	       
-	       List<Integer> dezoito = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(5),jogo.getJogo().get(6),
-	    		   jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(17)));
-	       
-	       List<Integer> dezenove = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(6),
-	    		   jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> vinte = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0),jogo.getJogo().get(1),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(6),jogo.getJogo().get(7),
-	    		   jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> vinteEum = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(6)
-	    		   ,jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16)));
-	       
-	       List<Integer> vinteEDois = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(6)
-	    		   ,jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(17)));
-	       
-	       List<Integer> vinteETres = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(5),jogo.getJogo().get(6)
-	    		   ,jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(10),jogo.getJogo().get(11),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(14),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       List<Integer> vinteEQuatro = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(1),jogo.getJogo().get(2),jogo.getJogo().get(3),jogo.getJogo().get(4),jogo.getJogo().get(5),jogo.getJogo().get(6)
-	    		   ,jogo.getJogo().get(7),jogo.getJogo().get(8),jogo.getJogo().get(9),jogo.getJogo().get(10),jogo.getJogo().get(12),jogo.getJogo().get(13),jogo.getJogo().get(15),jogo.getJogo().get(16),jogo.getJogo().get(17)));
-	       
-	       Map<Integer, List<Integer>> jogos = new TreeMap<Integer, List<Integer>>();
-	       jogos.put(1, primeiro);
-	       jogos.put(2, segundo);
-	       jogos.put(3, terceiro);
-	       jogos.put(4, quarto);
-	       jogos.put(5, cinco);
-	       jogos.put(6, seis);
-	       jogos.put(7, sete);
-	       jogos.put(8, oito);
-	       jogos.put(9, nove);
-	       jogos.put(10, dez);
-	       jogos.put(11, onze);
-	       jogos.put(12, doze);
-	       jogos.put(13, treze);
-	       jogos.put(14, quatorze);
-	       jogos.put(15, quinze);
-	       jogos.put(16, dezesseis);
-	       jogos.put(17, dezessete);
-	       jogos.put(18, dezoito);
-	       jogos.put(19, dezenove);
-	       jogos.put(20, vinte);
-	       jogos.put(21, vinteEum);
-	       jogos.put(22, vinteEDois);
-	       jogos.put(23, vinteETres);
-	       jogos.put(23, vinteEQuatro);
-	       
-	       
-	       List<Jogo> listaJogos = new ArrayList<>();
-	       listaJogos.add(new Jogo(primeiro));
-	       listaJogos.add(new Jogo(segundo));
-	       listaJogos.add(new Jogo(terceiro));
-	       listaJogos.add(new Jogo(quarto));
-	       listaJogos.add(new Jogo(cinco));
-	       listaJogos.add(new Jogo(seis));
-	       listaJogos.add(new Jogo(sete));
-	       listaJogos.add(new Jogo(oito));
-	       listaJogos.add(new Jogo(nove));
-	       listaJogos.add(new Jogo(dez));
-	       listaJogos.add(new Jogo(onze));
-	       listaJogos.add(new Jogo(doze));
-	       listaJogos.add(new Jogo(treze));
-	       listaJogos.add(new Jogo(quatorze));
-	       listaJogos.add(new Jogo(quinze));
-	       listaJogos.add(new Jogo(dezesseis));
-	       listaJogos.add(new Jogo(dezessete));
-	       listaJogos.add(new Jogo(dezoito));
-	       listaJogos.add(new Jogo(dezenove));
-	       listaJogos.add(new Jogo(vinte));
-	       listaJogos.add(new Jogo(vinteEum));
-	       listaJogos.add(new Jogo(vinteEDois));
-	       listaJogos.add(new Jogo(vinteETres));
-	       listaJogos.add(new Jogo(vinteEQuatro));
-	       
-	    
-	       
-	       return listaJogos;
-	      
-		
+
+	private static List<Jogo> teste18(Jogo jogo) {
+		// TODO Auto-generated method stub
+		Combinacoes combinacoes = new Combinacoes();
+		return combinacoes.todosCombinacoesLotoFacil18(jogo);
+	}
+
+	private static List<Jogo> teste17(Jogo jogo) {
+		// List<Integer> jogo = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 6, 7, 9,
+		// 10, 11, 13, 14, 15, 17, 18, 19, 20, 21, 23, 24));
+
+		List<Integer> primeiro = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(2), jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(5),
+				jogo.getJogo().get(6), jogo.getJogo().get(7), jogo.getJogo().get(8), jogo.getJogo().get(10),
+				jogo.getJogo().get(12), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> segundo = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(2), jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(5),
+				jogo.getJogo().get(6), jogo.getJogo().get(7), jogo.getJogo().get(8), jogo.getJogo().get(10),
+				jogo.getJogo().get(11), jogo.getJogo().get(12), jogo.getJogo().get(13), jogo.getJogo().get(14),
+				jogo.getJogo().get(16)));
+
+		List<Integer> terceiro = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(2), jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(6),
+				jogo.getJogo().get(7), jogo.getJogo().get(8), jogo.getJogo().get(9), jogo.getJogo().get(11),
+				jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> quarto = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(2), jogo.getJogo().get(3), jogo.getJogo().get(5), jogo.getJogo().get(6),
+				jogo.getJogo().get(7), jogo.getJogo().get(8), jogo.getJogo().get(9), jogo.getJogo().get(10),
+				jogo.getJogo().get(11), jogo.getJogo().get(12), jogo.getJogo().get(13), jogo.getJogo().get(15),
+				jogo.getJogo().get(16)));
+
+		List<Integer> cinco = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(2), jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(5),
+				jogo.getJogo().get(6), jogo.getJogo().get(7), jogo.getJogo().get(8), jogo.getJogo().get(9),
+				jogo.getJogo().get(10), jogo.getJogo().get(11), jogo.getJogo().get(12), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> seis = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(2),
+				jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(5), jogo.getJogo().get(6),
+				jogo.getJogo().get(9), jogo.getJogo().get(10), jogo.getJogo().get(11), jogo.getJogo().get(12),
+				jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> sete = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(4), jogo.getJogo().get(5), jogo.getJogo().get(7), jogo.getJogo().get(8),
+				jogo.getJogo().get(9), jogo.getJogo().get(10), jogo.getJogo().get(11), jogo.getJogo().get(12),
+				jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> oito = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(2), jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(5),
+				jogo.getJogo().get(6), jogo.getJogo().get(7), jogo.getJogo().get(8), jogo.getJogo().get(10),
+				jogo.getJogo().get(11), jogo.getJogo().get(12), jogo.getJogo().get(13), jogo.getJogo().get(15),
+				jogo.getJogo().get(17)));
+
+		List<Integer> nove = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(2), jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(5),
+				jogo.getJogo().get(6), jogo.getJogo().get(7), jogo.getJogo().get(8), jogo.getJogo().get(9),
+				jogo.getJogo().get(10), jogo.getJogo().get(12), jogo.getJogo().get(13), jogo.getJogo().get(14),
+				jogo.getJogo().get(15)));
+
+		List<Integer> dez = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(2), jogo.getJogo().get(4), jogo.getJogo().get(5), jogo.getJogo().get(6),
+				jogo.getJogo().get(7), jogo.getJogo().get(9), jogo.getJogo().get(11), jogo.getJogo().get(12),
+				jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> onze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(3),
+				jogo.getJogo().get(4), jogo.getJogo().get(5), jogo.getJogo().get(6), jogo.getJogo().get(7),
+				jogo.getJogo().get(8), jogo.getJogo().get(9), jogo.getJogo().get(11), jogo.getJogo().get(12),
+				jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> doze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(2),
+				jogo.getJogo().get(4), jogo.getJogo().get(5), jogo.getJogo().get(6), jogo.getJogo().get(7),
+				jogo.getJogo().get(8), jogo.getJogo().get(9), jogo.getJogo().get(10), jogo.getJogo().get(11),
+				jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> treze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(2),
+				jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(7), jogo.getJogo().get(8),
+				jogo.getJogo().get(9), jogo.getJogo().get(10), jogo.getJogo().get(11), jogo.getJogo().get(12),
+				jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> quatorze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(2), jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(5),
+				jogo.getJogo().get(8), jogo.getJogo().get(9), jogo.getJogo().get(11), jogo.getJogo().get(12),
+				jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> quinze = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(2), jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(5),
+				jogo.getJogo().get(7), jogo.getJogo().get(9), jogo.getJogo().get(10), jogo.getJogo().get(11),
+				jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> dezesseis = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(2), jogo.getJogo().get(3), jogo.getJogo().get(5), jogo.getJogo().get(6),
+				jogo.getJogo().get(7), jogo.getJogo().get(8), jogo.getJogo().get(9), jogo.getJogo().get(10),
+				jogo.getJogo().get(12), jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> dezessete = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(2), jogo.getJogo().get(4), jogo.getJogo().get(6), jogo.getJogo().get(8),
+				jogo.getJogo().get(9), jogo.getJogo().get(10), jogo.getJogo().get(11), jogo.getJogo().get(12),
+				jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> dezoito = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(2), jogo.getJogo().get(3), jogo.getJogo().get(5), jogo.getJogo().get(6),
+				jogo.getJogo().get(7), jogo.getJogo().get(8), jogo.getJogo().get(9), jogo.getJogo().get(10),
+				jogo.getJogo().get(11), jogo.getJogo().get(12), jogo.getJogo().get(14), jogo.getJogo().get(15),
+				jogo.getJogo().get(17)));
+
+		List<Integer> dezenove = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(5), jogo.getJogo().get(6),
+				jogo.getJogo().get(8), jogo.getJogo().get(9), jogo.getJogo().get(10), jogo.getJogo().get(11),
+				jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> vinte = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(0), jogo.getJogo().get(1),
+				jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(6), jogo.getJogo().get(7),
+				jogo.getJogo().get(9), jogo.getJogo().get(10), jogo.getJogo().get(11), jogo.getJogo().get(12),
+				jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> vinteEum = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(1), jogo.getJogo().get(2),
+				jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(5), jogo.getJogo().get(6),
+				jogo.getJogo().get(7), jogo.getJogo().get(8), jogo.getJogo().get(9), jogo.getJogo().get(10),
+				jogo.getJogo().get(11), jogo.getJogo().get(12), jogo.getJogo().get(14), jogo.getJogo().get(15),
+				jogo.getJogo().get(16)));
+
+		List<Integer> vinteEDois = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(1), jogo.getJogo().get(2),
+				jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(5), jogo.getJogo().get(6),
+				jogo.getJogo().get(7), jogo.getJogo().get(8), jogo.getJogo().get(9), jogo.getJogo().get(10),
+				jogo.getJogo().get(11), jogo.getJogo().get(12), jogo.getJogo().get(13), jogo.getJogo().get(14),
+				jogo.getJogo().get(17)));
+
+		List<Integer> vinteETres = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(1), jogo.getJogo().get(2),
+				jogo.getJogo().get(3), jogo.getJogo().get(5), jogo.getJogo().get(6), jogo.getJogo().get(7),
+				jogo.getJogo().get(8), jogo.getJogo().get(10), jogo.getJogo().get(11), jogo.getJogo().get(12),
+				jogo.getJogo().get(13), jogo.getJogo().get(14), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		List<Integer> vinteEQuatro = new ArrayList<Integer>(Arrays.asList(jogo.getJogo().get(1), jogo.getJogo().get(2),
+				jogo.getJogo().get(3), jogo.getJogo().get(4), jogo.getJogo().get(5), jogo.getJogo().get(6),
+				jogo.getJogo().get(7), jogo.getJogo().get(8), jogo.getJogo().get(9), jogo.getJogo().get(10),
+				jogo.getJogo().get(12), jogo.getJogo().get(13), jogo.getJogo().get(15), jogo.getJogo().get(16),
+				jogo.getJogo().get(17)));
+
+		Map<Integer, List<Integer>> jogos = new TreeMap<Integer, List<Integer>>();
+		jogos.put(1, primeiro);
+		jogos.put(2, segundo);
+		jogos.put(3, terceiro);
+		jogos.put(4, quarto);
+		jogos.put(5, cinco);
+		jogos.put(6, seis);
+		jogos.put(7, sete);
+		jogos.put(8, oito);
+		jogos.put(9, nove);
+		jogos.put(10, dez);
+		jogos.put(11, onze);
+		jogos.put(12, doze);
+		jogos.put(13, treze);
+		jogos.put(14, quatorze);
+		jogos.put(15, quinze);
+		jogos.put(16, dezesseis);
+		jogos.put(17, dezessete);
+		jogos.put(18, dezoito);
+		jogos.put(19, dezenove);
+		jogos.put(20, vinte);
+		jogos.put(21, vinteEum);
+		jogos.put(22, vinteEDois);
+		jogos.put(23, vinteETres);
+		jogos.put(23, vinteEQuatro);
+
+		List<Jogo> listaJogos = new ArrayList<>();
+		listaJogos.add(new Jogo(primeiro));
+		listaJogos.add(new Jogo(segundo));
+		listaJogos.add(new Jogo(terceiro));
+		listaJogos.add(new Jogo(quarto));
+		listaJogos.add(new Jogo(cinco));
+		listaJogos.add(new Jogo(seis));
+		listaJogos.add(new Jogo(sete));
+		listaJogos.add(new Jogo(oito));
+		listaJogos.add(new Jogo(nove));
+		listaJogos.add(new Jogo(dez));
+		listaJogos.add(new Jogo(onze));
+		listaJogos.add(new Jogo(doze));
+		listaJogos.add(new Jogo(treze));
+		listaJogos.add(new Jogo(quatorze));
+		listaJogos.add(new Jogo(quinze));
+		listaJogos.add(new Jogo(dezesseis));
+		listaJogos.add(new Jogo(dezessete));
+		listaJogos.add(new Jogo(dezoito));
+		listaJogos.add(new Jogo(dezenove));
+		listaJogos.add(new Jogo(vinte));
+		listaJogos.add(new Jogo(vinteEum));
+		listaJogos.add(new Jogo(vinteEDois));
+		listaJogos.add(new Jogo(vinteETres));
+		listaJogos.add(new Jogo(vinteEQuatro));
+
+		return listaJogos;
+
 	}
 
 	public static void teste16() throws FileNotFoundException, IOException {
@@ -311,7 +412,7 @@ public class Testes {
 		Combinacoes combinacoes = new Combinacoes();
 		filtro.setListaJogosCombinadosCompleto(combinacoes.todosCombinacoesLotoFacil());
 
-		//List<Jogo> jogos = filtro.bucaListaJogosFiltrados();
+		// List<Jogo> jogos = filtro.bucaListaJogosFiltrados();
 
 		List<Jogo> jogosSaida = new ArrayList<Jogo>();
 
@@ -359,16 +460,13 @@ public class Testes {
 			lista.add(intersectionMultiplosDeTres.size());
 			lista.add(intersectionNumerosImportantes.size());
 
-		
-			
 			String strJogos = "jogos.add(new Jogo(Arrays.asList("
 					+ jogo.getJogo().toString().replace("[", "").replace("]", "") + ")));";
 
-
-				resultCSV.add(strJogos +  "#Pares#"
-						+ intersectionPares.size() + "#Primos#" + intersectionPrimos.size() + "#Fibonacci#"
-						+ intersectionFibonacci.size() + "#Quadrado#" + intersectionQuadrado.size()
-						+ "#Multiplos de Tres#" + intersectionMultiplosDeTres.size() +  "#Numeros Importantes#" + intersectionNumerosImportantes.size());
+			resultCSV.add(strJogos + "#Pares#" + intersectionPares.size() + "#Primos#" + intersectionPrimos.size()
+					+ "#Fibonacci#" + intersectionFibonacci.size() + "#Quadrado#" + intersectionQuadrado.size()
+					+ "#Multiplos de Tres#" + intersectionMultiplosDeTres.size() + "#Numeros Importantes#"
+					+ intersectionNumerosImportantes.size());
 		}
 
 		filtro.limpaListas();
@@ -384,22 +482,20 @@ public class Testes {
 			}
 			System.out.println("consultaSorteio(jogos);");
 		}
-		
-		
-	
+
 	}
-	
+
 	public static void teste15() {
-		List<Jogo> listaParaAnalise = new ArrayList<>() ;
-		listaParaAnalise.add(new Jogo(Arrays.asList(9,10,11,12,13,14,15,16,17,20,21,22,23,24,25)));
-		
+		List<Jogo> listaParaAnalise = new ArrayList<>();
+		listaParaAnalise.add(new Jogo(Arrays.asList(9, 10, 11, 12, 13, 14, 15, 16, 17, 20, 21, 22, 23, 24, 25)));
+
 		for (Jogo jogo : listaParaAnalise) {
 
 			int cont = 0;
 			int numero = 0;
 			int maiorSequencia = 0;
 			for (Integer n : jogo.getJogo()) {
-				
+
 				if (numero != 0) {
 					if (numero + 1 == n) {
 						cont++;
@@ -407,20 +503,18 @@ public class Testes {
 							maiorSequencia = cont;
 						}
 					} else {
-						
+
 						cont = 0;
 					}
-				
+
 				}
 				numero = n;
 			}
 			System.out.println(maiorSequencia);
 		}
-		
-		
+
 	}
-	
-	
+
 	public static void teste14() throws FileNotFoundException, IOException, URISyntaxException {
 		Filtro filtro = new Filtro();
 		Estatisticas estatisticas = new Estatisticas();
@@ -451,35 +545,29 @@ public class Testes {
 			System.out.println(numero + " - " + mapaNumeros);
 		}
 		/*
-		1 - {0=647, 1=277, 2=89, 3=41, 4=20, 5=4, 6=2, 7=1}
-		2 - {0=675, 1=241, 2=100, 3=43, 4=17, 5=7, 6=1, 7=2}
-		3 - {0=638, 1=288, 2=97, 3=37, 4=12, 5=5, 6=4, 7=1}
-		4 - {0=642, 1=275, 2=91, 3=43, 4=17, 5=7, 6=1, 7=1}
-		5 - {0=643, 1=253, 2=96, 3=50, 4=21, 5=3, 7=1, 9=1}
-		6 - {0=601, 1=262, 2=101, 3=46, 4=20, 5=5, 6=3, 7=2}
-		7 - {0=589, 1=283, 2=102, 3=43, 4=20, 5=4, 7=1, 10=1}
-		8 - {0=554, 1=274, 2=105, 3=40, 4=30, 5=5, 6=2, 7=1}
-		9 - {0=614, 1=255, 2=110, 3=40, 4=26, 5=2, 6=1, 7=2}
-		10 - {0=663, 1=266, 2=104, 3=44, 4=12, 5=2, 6=2, 8=1}
-		11 - {0=679, 1=256, 2=79, 3=44, 4=22, 5=6, 6=4}
-		12 - {0=627, 1=274, 2=98, 3=43, 4=12, 5=8, 8=2, 9=1}
-		13 - {0=692, 1=247, 2=101, 3=39, 4=18, 5=6, 6=1}
-		14 - {0=651, 1=256, 2=99, 3=46, 4=11, 5=6, 6=2, 7=2, 11=1}
-		15 - {0=635, 1=246, 2=108, 3=46, 4=17, 5=7, 6=1, 9=1}
-		16 - {0=560, 1=268, 2=108, 3=46, 4=17, 5=9, 6=5}
-		17 - {0=646, 1=238, 2=119, 3=37, 4=15, 5=7, 6=1, 7=2, 8=1}
-		18 - {0=643, 1=242, 2=113, 3=43, 4=15, 5=6, 6=2, 7=2}
-		19 - {0=628, 1=270, 2=105, 3=38, 4=14, 5=5, 6=2, 7=1, 8=1, 12=1}
-		20 - {0=655, 1=258, 2=104, 3=43, 4=14, 5=4, 6=2, 7=2}
-		21 - {0=648, 1=226, 2=104, 3=48, 4=17, 5=9, 6=4, 7=1}
-		22 - {0=638, 1=261, 2=109, 3=36, 4=14, 5=7, 6=4, 7=1}
-		23 - {0=631, 1=255, 2=107, 3=50, 4=17, 5=3, 6=2}
-		24 - {0=676, 1=252, 2=102, 3=45, 4=13, 5=3, 6=2, 7=2}
-		25 - {0=658, 1=268, 2=81, 3=46, 4=13, 5=11, 6=1, 7=1, 11=1}
-		*/
-	
+		 * 1 - {0=647, 1=277, 2=89, 3=41, 4=20, 5=4, 6=2, 7=1} 2 - {0=675, 1=241, 2=100,
+		 * 3=43, 4=17, 5=7, 6=1, 7=2} 3 - {0=638, 1=288, 2=97, 3=37, 4=12, 5=5, 6=4,
+		 * 7=1} 4 - {0=642, 1=275, 2=91, 3=43, 4=17, 5=7, 6=1, 7=1} 5 - {0=643, 1=253,
+		 * 2=96, 3=50, 4=21, 5=3, 7=1, 9=1} 6 - {0=601, 1=262, 2=101, 3=46, 4=20, 5=5,
+		 * 6=3, 7=2} 7 - {0=589, 1=283, 2=102, 3=43, 4=20, 5=4, 7=1, 10=1} 8 - {0=554,
+		 * 1=274, 2=105, 3=40, 4=30, 5=5, 6=2, 7=1} 9 - {0=614, 1=255, 2=110, 3=40,
+		 * 4=26, 5=2, 6=1, 7=2} 10 - {0=663, 1=266, 2=104, 3=44, 4=12, 5=2, 6=2, 8=1} 11
+		 * - {0=679, 1=256, 2=79, 3=44, 4=22, 5=6, 6=4} 12 - {0=627, 1=274, 2=98, 3=43,
+		 * 4=12, 5=8, 8=2, 9=1} 13 - {0=692, 1=247, 2=101, 3=39, 4=18, 5=6, 6=1} 14 -
+		 * {0=651, 1=256, 2=99, 3=46, 4=11, 5=6, 6=2, 7=2, 11=1} 15 - {0=635, 1=246,
+		 * 2=108, 3=46, 4=17, 5=7, 6=1, 9=1} 16 - {0=560, 1=268, 2=108, 3=46, 4=17, 5=9,
+		 * 6=5} 17 - {0=646, 1=238, 2=119, 3=37, 4=15, 5=7, 6=1, 7=2, 8=1} 18 - {0=643,
+		 * 1=242, 2=113, 3=43, 4=15, 5=6, 6=2, 7=2} 19 - {0=628, 1=270, 2=105, 3=38,
+		 * 4=14, 5=5, 6=2, 7=1, 8=1, 12=1} 20 - {0=655, 1=258, 2=104, 3=43, 4=14, 5=4,
+		 * 6=2, 7=2} 21 - {0=648, 1=226, 2=104, 3=48, 4=17, 5=9, 6=4, 7=1} 22 - {0=638,
+		 * 1=261, 2=109, 3=36, 4=14, 5=7, 6=4, 7=1} 23 - {0=631, 1=255, 2=107, 3=50,
+		 * 4=17, 5=3, 6=2} 24 - {0=676, 1=252, 2=102, 3=45, 4=13, 5=3, 6=2, 7=2} 25 -
+		 * {0=658, 1=268, 2=81, 3=46, 4=13, 5=11, 6=1, 7=1, 11=1}
+		 */
+
 	}
-	public static void teste13() throws FileNotFoundException, IOException, URISyntaxException{
+
+	public static void teste13() throws FileNotFoundException, IOException, URISyntaxException {
 		Filtro filtro = new Filtro();
 		Estatisticas estatisticas = new Estatisticas();
 		List<Jogo> todosJogos = estatisticas.lerTodosOsJogos();
@@ -497,9 +585,9 @@ public class Testes {
 				if (numero != 0) {
 					if (numero + 1 == n) {
 						cont++;
-//						if (maiorSequencia < cont) {
-//							maiorSequencia = cont;
-//						}
+						// if (maiorSequencia < cont) {
+						// maiorSequencia = cont;
+						// }
 					} else {
 						sequencias.add(cont + 1);
 						cont = 0;
@@ -509,25 +597,27 @@ public class Testes {
 				numero = n;
 			}
 			sequencias.add(cont + 1);
-			//mapaSequencias.put(numeroJogo, sequencias);
+			// mapaSequencias.put(numeroJogo, sequencias);
 			List<Integer> verificar = new ArrayList<>(Arrays.asList(1));
 			Set<Integer> intersectionRepetidos = new HashSet<Integer>(sequencias);
 			int contRepetidos = 0;
 			intersectionRepetidos.retainAll(verificar);
-			for (Integer n : sequencias) 
-				if (n == 4) contRepetidos++;
-			
+			for (Integer n : sequencias)
+				if (n == 4)
+					contRepetidos++;
+
 			Collections.sort(sequencias);
-			//	System.out.println(numeroJogo + " - " + sequencias.toString() + " - " + contRepetidos);
+			// System.out.println(numeroJogo + " - " + sequencias.toString() + " - " +
+			// contRepetidos);
 			System.out.println(contRepetidos);
 			sequencias.clear();
-			
+
 		}
-	//	System.out.println(mapaSequencias);
-		}
-	
+		// System.out.println(mapaSequencias);
+	}
+
 	public static void teste12() throws FileNotFoundException, IOException {
-		//9->619; 8->472; 10->399
+		// 9->619; 8->472; 10->399
 		Filtro filtro = new Filtro();
 		Estatisticas estatisticas = new Estatisticas();
 		List<Jogo> todosJogos = estatisticas.lerTodosOsJogos();
@@ -540,13 +630,13 @@ public class Testes {
 				intersectionRepetidos.retainAll(atual.getJogo());
 
 				if (intersectionRepetidos.size() == 10) {
-					
+
 					cont++;
 				}
 			}
 			anterior = atual;
-		
-	}
+
+		}
 		System.out.println(cont);
 
 	}
@@ -742,8 +832,9 @@ public class Testes {
 			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(jogo.getJogo());
 			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
 
-//			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
-//			intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios(),filtro.buscaListaTodosSorteios().size() - 1).getJogo());
+			// Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
+			// intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios(),filtro.buscaListaTodosSorteios().size()
+			// - 1).getJogo());
 
 			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
 			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
@@ -754,7 +845,7 @@ public class Testes {
 			list.add(intersectionFibonacci.size());
 			list.add(intersectionQuadrado.size());
 			list.add(intersectionMultiplosDeTres.size());
-		//	list.add(intersectionDezMais.size());
+			// list.add(intersectionDezMais.size());
 			list.add(intersectionNumerosImportantes.size());
 
 			int qtd = 5;
@@ -848,8 +939,9 @@ public class Testes {
 			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(jogo.getJogo());
 			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
 
-//			Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
-//			intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios(),filtro.buscaListaTodosSorteios().size() - 1).getJogo());
+			// Set<Integer> intersectionDezMais = new HashSet<Integer>(jogo.getJogo());
+			// intersectionDezMais.retainAll(estatisticas.buscarDezMais(filtro.buscaListaTodosSorteios(),filtro.buscaListaTodosSorteios().size()
+			// - 1).getJogo());
 
 			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
 			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
@@ -860,7 +952,7 @@ public class Testes {
 			lista.add(intersectionFibonacci.size());
 			lista.add(intersectionQuadrado.size());
 			lista.add(intersectionMultiplosDeTres.size());
-			//lista.add(intersectionDezMais.size());
+			// lista.add(intersectionDezMais.size());
 			lista.add(intersectionNumerosImportantes.size());
 
 			Integer contaUm = 0;
@@ -955,7 +1047,8 @@ public class Testes {
 						+ intersectionPares.size() + "#Primos#" + intersectionPrimos.size() + "#Fibonacci#"
 						+ intersectionFibonacci.size() + "#Quadrado#" + intersectionQuadrado.size()
 						+ "#Multiplos de Tres#" + intersectionNumerosImportantes.size() + "#Dez Mais#"
-					//	+ intersectionDezMais.size() + "#Numeros Importantes#" + intersectionNumerosImportantes.size()
+						// + intersectionDezMais.size() + "#Numeros Importantes#" +
+						// intersectionNumerosImportantes.size()
 						+ "#Linhas#" + primeiraLinha.size() + "" + segundaLinha.size() + "" + terceiraLinha.size() + ""
 						+ quartaLinha.size() + "" + quintaLinha.size() + "#Colunas#" + primeiraColuna.size() + ""
 						+ segundaColuna.size() + "" + terceiraColuna.size() + "" + quartaColuna.size() + ""
@@ -1161,7 +1254,8 @@ public class Testes {
 				if (filtro.buscaListaTodosSorteios().size() < 15)
 					continue;
 
-				Map<Integer, Integer> jogosEst = estatisticas.estatisticasJogosListaDinamica(filtro.buscaListaTodosSorteios(), 15,filtro.buscaListaTodosSorteios().size());
+				Map<Integer, Integer> jogosEst = estatisticas.estatisticasJogosListaDinamica(
+						filtro.buscaListaTodosSorteios(), 15, filtro.buscaListaTodosSorteios().size());
 
 				List<Integer> dezMais = new ArrayList<Integer>();
 				int j = 0;
