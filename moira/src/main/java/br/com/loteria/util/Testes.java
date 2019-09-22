@@ -50,7 +50,7 @@ public class Testes {
 		
 		List<Integer> tamanho = new ArrayList<>();
 
-		while (jogosSaida.size() < 24) {
+		while (jogosSaida.size() < 10) {
 			Integer posicao = random.nextInt(jogosCombinados.size());
 			if (!posicoes.contains(posicao)) {
 				retorno = teste17(jogosCombinados.get(posicao));
