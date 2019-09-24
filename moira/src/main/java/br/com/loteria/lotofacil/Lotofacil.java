@@ -19,13 +19,39 @@ public class Lotofacil {
 	//  simulacao(); //simulação com 9 -> 427 de 613 [19/06/2019]
 	//	gerarJogos(200,true);
 	//	estisticasUltimoSorteio();
-	//	estatisticasUltimosSorteios(1,true);
+		//estatisticasUltimosSorteios(10,true);
 	 
 		//9->31; 8->24; 10->20
-	//	List<Jogo> jogos = new ArrayList<Jogo>();
+		List<Jogo> jogos = new ArrayList<Jogo>();
+		
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 6, 7, 9, 10, 11, 14, 17, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 6, 7, 9, 10, 11, 14, 15, 17, 18, 20, 24)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 6, 9, 10, 11, 12, 15, 18, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 7, 9, 10, 11, 12, 14, 15, 17, 18, 22, 24)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 14, 15, 17, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 3, 5, 6, 7, 9, 12, 14, 15, 17, 18, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 6, 7, 10, 11, 12, 14, 15, 17, 18, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 6, 7, 9, 10, 11, 14, 15, 17, 18, 22, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 14, 17, 18, 20, 22)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 6, 7, 9, 10, 12, 15, 17, 18, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 5, 6, 7, 9, 10, 11, 12, 15, 17, 18, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 3, 6, 7, 9, 10, 11, 12, 14, 15, 18, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 3, 5, 6, 10, 11, 12, 14, 15, 17, 18, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 6, 7, 11, 12, 15, 17, 18, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 6, 7, 10, 12, 14, 15, 18, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 7, 9, 10, 11, 12, 14, 17, 18, 20, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 6, 9, 11, 12, 14, 15, 17, 18, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 7, 9, 10, 11, 12, 14, 15, 17, 20, 22, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 5, 6, 7, 9, 11, 12, 14, 15, 18, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 5, 6, 9, 10, 12, 14, 15, 17, 18, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(2, 3, 5, 6, 7, 9, 10, 11, 12, 14, 15, 17, 20, 22, 24)));
+		jogos.add(new Jogo(Arrays.asList(2, 3, 5, 6, 7, 9, 10, 11, 12, 14, 15, 17, 18, 20, 25)));
+		jogos.add(new Jogo(Arrays.asList(2, 3, 5, 7, 9, 10, 11, 14, 15, 17, 18, 20, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(2, 3, 5, 6, 7, 9, 10, 11, 12, 14, 17, 18, 22, 24, 25)));
+
 		
 		
-	//	consultaSorteio(jogos);
+		consultaSorteio(jogos);
 /*		
 		List<Jogo> jogos = new ArrayList<Jogo>();
 

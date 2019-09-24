@@ -48,32 +48,33 @@ public class Testes {
 
 		System.out.println("sorteando...");
 		
-		List<Integer> tamanho = new ArrayList<>();
+		
 
-		while (jogosSaida.size() < 10) {
+		while (jogosSaida.size() < 24) {
 			Integer posicao = random.nextInt(jogosCombinados.size());
 			if (!posicoes.contains(posicao)) {
 				retorno = teste17(jogosCombinados.get(posicao));
 				filtro.setListaJogosCombinadosCompleto(retorno);
 				List<Jogo> jogos = filtro.bucaListaJogosFiltrados();
-				tamanho.add(jogos.size());
+				
 				//System.out.println("final: " + jogos.size());
-//				for (Jogo jogo : jogos) {
-//					if (!filtro.repetido(jogo)) {
-//						jogosSaida.add(jogo);
-//					}
-//				}
+				for (Jogo jogo : jogos) {
+					if (!filtro.repetido(jogo) && !jogosSaida.contains(jogo)) {
+						jogosSaida.add(jogo);
+						if (jogosSaida.size() > 23) {
+							break;
+						}
+					}
+				}
 				posicoes.add(posicao);
 			}
 		}
 		
-		for (Integer integer : tamanho) {
-			System.out.println(integer);
+	
+		for (Jogo jogo2 : jogosSaida) {
+			System.out.println("jogos.add(new Jogo(Arrays.asList("
+					+ jogo2.getJogo().toString().replace("[", "").replace("]", "") + ")));");
 		}
-//		for (Jogo jogo2 : jogosSaida) {
-//			System.out.println("jogos.add(new Jogo(Arrays.asList("
-//					+ jogo2.getJogo().toString().replace("[", "").replace("]", "") + ")));");
-//		}
 
 		
 		System.err.println("fim");
