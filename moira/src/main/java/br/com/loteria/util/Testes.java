@@ -31,8 +31,47 @@ public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
 
-		// teste17();
+		teste20();
 
+	}
+	
+	
+	public static void teste20() throws FileNotFoundException, IOException {
+		Estatisticas est = new Estatisticas();
+		
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+		
+		Combinacoes combinacoes = new Combinacoes();
+		
+		Map<Jogo, Integer> mapaNumeros = new HashMap<Jogo,Integer>();
+		
+		List<Jogo> jogosCombinados = combinacoes.todosCombinacoesLotoFacil();
+		
+		Boolean testado = false;
+		
+		for (Jogo jogoTestado : jogosCombinados) {
+			Integer frequencia = 0;
+			for (Jogo jogo : todosJogos) {
+				Set<Integer> intersectionRepetidos = new HashSet<Integer>(jogoTestado.getJogo());
+				intersectionRepetidos.retainAll(jogo.getJogo());
+				
+				if (intersectionRepetidos.size() == 14) {
+
+					frequencia++;
+				}
+				
+			}
+			if ( frequencia > 0) {
+				System.out.println(jogoTestado.getJogo() + " = " + frequencia);
+			}
+		}
+				
+	}
+	
+	
+	
+	
+	public static void teste19() throws FileNotFoundException, IOException {
 		Gerador g = new Gerador();
 
 		List<Jogo> retorno = new ArrayList<>();
