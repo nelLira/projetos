@@ -61,11 +61,11 @@ public class Testes {
 				}
 				
 			}
-			if ( frequencia > 0) {
+			if ( frequencia > 2) {
 				System.out.println(jogoTestado.getJogo() + " = " + frequencia);
 			}
 		}
-				
+				System.out.println("Fim");
 	}
 	
 	
