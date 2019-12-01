@@ -32,10 +32,10 @@ public class Lotofacil {
 //		jogos.add(new Jogo(Arrays.asList(3, 5, 6, 7, 8, 10, 11, 13, 14, 17, 18, 20, 21, 22, 24)));
 //		jogos.add(new Jogo(Arrays.asList(3, 5, 6, 7, 9, 11, 12, 13, 14, 15, 16, 17, 18, 20, 25)));
 //		jogos.add(new Jogo(Arrays.asList(1, 2, 4, 7, 9, 12, 13, 15, 16, 18, 19, 20, 23, 24, 25)));
-//		jogos.add(new Jogo(Arrays.asList(1, 4, 5, 7, 8, 12, 14, 15, 16, 17, 18, 19, 21, 22, 23)));
+//		jogos.add(new Jogo(Arrays.asList(1, 4, 5, 7, 8, 12, 14, 15, 16, 17, 18, 19, 21, 22, 23))); 11
 //		jogos.add(new Jogo(Arrays.asList(1, 3, 6, 7, 10, 12, 13, 14, 15, 16, 18, 19, 20, 21, 25)));
 //		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 6, 7, 9, 10, 11, 12, 14, 15, 17, 18, 21, 23)));
-
+//
 //	consultaSorteio(jogos);
 	
 	}
