@@ -81,30 +81,30 @@ public class Filtro {
 		this.listaJogosCheia = new ArrayList<Jogo>();
 		listaJogosCheia.addAll(listaJogosCombinados);
 		
-		repetidosJogoAnterior(Arrays.asList(9));
+		repetidosJogoAnterior(Arrays.asList(8));
 		pares(Arrays.asList(5,6,7,8)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
-		primos(Arrays.asList(5,6,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
-		sequenciaDeFibonacci(Arrays.asList(2,3,4,5));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
-		quadrado(Arrays.asList(8,9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
-		multiplosDeTres(Arrays.asList(3,4,5,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
+		primos(Arrays.asList(5,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
+		sequenciaDeFibonacci(Arrays.asList(3,4,5));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
+		quadrado(Arrays.asList(9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
+		multiplosDeTres(Arrays.asList(4,5,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
 		numerosImportantes(Arrays.asList(4,5,6));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
-		QtdFiltros(Arrays.asList(1,2,3)); //1a4// {1=169; 2=1190; 3=366; 4=53; 5=1}
-		maiorSequenciaDoisEmDois(Arrays.asList(1,2,3)); //1a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
-		maiorSequenciaUmEmUm(Arrays.asList(3,4,5,7,9,10)); //3a10 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
+		QtdFiltros(Arrays.asList(1,2,3,4)); //1a4// {1=169; 2=1190; 3=366; 4=53; 5=1}
+		maiorSequenciaDoisEmDois(Arrays.asList(1,2,3,4,5)); //1a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
+		maiorSequenciaUmEmUm(Arrays.asList(3,4,5,6,7,9,10)); //3a10 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
 		
 		linha(Arrays.asList(1, 2, 3, 4, 5),
-			  Arrays.asList(1, 2, 3, 4),  
-			  Arrays.asList(2, 3, 4), 
+			  Arrays.asList(2, 3, 4, 5),  
+			  Arrays.asList(2, 3, 4, 5), 
 			  Arrays.asList(2, 3, 4, 5),
 			  Arrays.asList(1, 2, 3, 4, 5));
 		
-		coluna(Arrays.asList(2, 3, 4, 5),
+		coluna(Arrays.asList(1, 2, 3, 4, 5),
 			   Arrays.asList(1, 2, 3, 4),
 			   Arrays.asList(2, 3, 4, 5),
 			   Arrays.asList(1, 2, 3, 4, 5), 
-			   Arrays.asList(1, 2, 3, 4, 5));
+			   Arrays.asList(1, 2, 3, 4));
 
-		//incluir(Arrays.asList( )); // 1[4];2[4];3[3,4];4[4];5[4];6[4];7[4];8[4];9[4];10[3,4];11[4];12[3,4];13[4];14[3,4];15[4];16[4];17[3,4];18[4];19[3,4];20[4];21[4];22[3,4];23[4];24[4];25[4];
+		incluir(Arrays.asList(16)); // 1[4];2[4];3[3,4];4[4];5[4];6[4];7[4];8[4];9[4];10[3,4];11[4];12[3,4];13[4];14[3,4];15[4];16[4];17[3,4];18[4];19[3,4];20[4];21[4];22[3,4];23[4];24[4];25[4];
 		//retirar(Arrays.asList(20)); // 1 [7,8]; 2[7,8];3[6,7,8];4[8];5[8];6[7,8];7[6,7,8];8[7];9[7];10[8,9];11[7,8,9,10];12[7,8,9];13[8,9];14[7,8,9];15[6,7,8];16[7,8];17[6,7,8];18[7,8,9];19[7,8];20[7,8];21[7,8];22[6,7];23[7,8];24[7,8,9];25[7,8,9];
 		//naoIniciarCom(Arrays.asList( ));
 		//naoTerminarCom(Arrays.asList( ));
