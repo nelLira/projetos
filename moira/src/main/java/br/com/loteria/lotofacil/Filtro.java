@@ -14,15 +14,13 @@ import java.util.stream.Collectors;
 
 import javax.print.attribute.standard.JobOriginatingUserName;
 
+import br.com.loteria.combinacoes.Combinacoes;
 import br.com.loteria.jogo.Jogo;
 
 public class Filtro {
 
 	private List<Integer> listaParametrosRepetidos;
-	
-	
-	
-	
+
 	private List<Jogo> listaJogosCombinados;
 	private List<Jogo> listaJogosCombinadosCompleto;
 	private List<Jogo> listaJogosCheia;
@@ -36,9 +34,8 @@ public class Filtro {
 	public Filtro() {
 
 	}
-	
-	
-	public void setParametrosRepetidos (List<Integer> listaParametrosRepetidos) {
+
+	public void setParametrosRepetidos(List<Integer> listaParametrosRepetidos) {
 		this.listaParametrosRepetidos = listaParametrosRepetidos;
 	}
 
@@ -77,40 +74,39 @@ public class Filtro {
 	}
 
 	public List<Jogo> filtrar() throws FileNotFoundException, IOException {
-		
+
 		this.listaJogosCheia = new ArrayList<Jogo>();
 		listaJogosCheia.addAll(listaJogosCombinados);
-		
+
 		repetidosJogoAnterior(Arrays.asList(9));
-		pares(Arrays.asList(5,6,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
-		primos(Arrays.asList(5,6,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
-		sequenciaDeFibonacci(Arrays.asList(3,4,5,6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
-		quadrado(Arrays.asList(8,9,10,11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
-		multiplosDeTres(Arrays.asList(3,4,5,6,7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
-		numerosImportantes(Arrays.asList(5,6));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
-		QtdFiltros(Arrays.asList(2,3,4)); //1a4// {1=169; 2=1190; 3=366; 4=53; 5=1}
-		maiorSequenciaDoisEmDois(Arrays.asList(1,2,3,5)); //1a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
-		maiorSequenciaUmEmUm(Arrays.asList(3,4,5,6,7,8,9,10)); //3a10 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
-		
-		linha(Arrays.asList(1, 2, 3, 4, 5),
-			  Arrays.asList(1, 2, 3, 4, 5),  
-			  Arrays.asList(1, 2, 3, 4, 5), 
-			  Arrays.asList(1, 2, 3, 4, 5),
-			  Arrays.asList(1, 2, 4, 5));
-		
-		coluna(Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 4, 5), 
-			   Arrays.asList(2, 3, 4));
+		pares(Arrays.asList(5, 6, 7, 8, 9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182, 10=41, 11=5}
+		primos(Arrays.asList(4, 5, 6, 7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4}
+		sequenciaDeFibonacci(Arrays.asList(2, 3, 4, 5, 6));// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
+		quadrado(Arrays.asList(8, 9, 10, 11)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6}
+		multiplosDeTres(Arrays.asList(3, 4, 5, 6, 7)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541, 6=317,7=111,8=14}
+		numerosImportantes(Arrays.asList(3, 4, 5, 6, 7, 8));// 3a8//{1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254,
+															// 8=50,// 9=3}
+		QtdFiltros(Arrays.asList(1, 2, 3, 4)); // 1a4// {1=169; 2=1190; 3=366; 4=53; 5=1}
+		maiorSequenciaDoisEmDois(Arrays.asList(1, 2, 3, 4, 5)); // 1a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
+		maiorSequenciaUmEmUm(Arrays.asList(3, 4, 5, 6, 7, 8, 9, 10)); // 3a10 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,
+																		// 8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
 
-		//incluir(Arrays.asList(16)); // 1[4];2[4];3[3,4];4[4];5[4];6[4];7[4];8[4];9[4];10[3,4];11[4];12[3,4];13[4];14[3,4];15[4];16[4];17[3,4];18[4];19[3,4];20[4];21[4];22[3,4];23[4];24[4];25[4];
-		//retirar(Arrays.asList(20)); // 1 [7,8]; 2[7,8];3[6,7,8];4[8];5[8];6[7,8];7[6,7,8];8[7];9[7];10[8,9];11[7,8,9,10];12[7,8,9];13[8,9];14[7,8,9];15[6,7,8];16[7,8];17[6,7,8];18[7,8,9];19[7,8];20[7,8];21[7,8];22[6,7];23[7,8];24[7,8,9];25[7,8,9];
-		//naoIniciarCom(Arrays.asList( ));
-		//naoTerminarCom(Arrays.asList( ));
+		linha(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(1, 2, 3, 4, 5),
+				Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(1, 2, 3, 4, 5));
 
-
+		coluna(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(1, 2, 3, 4, 5),
+				Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(1, 2, 3, 4, 5));
 		
+
+		melhoresCombinacoes();
+
+		// incluir(Arrays.asList(16)); //
+		// 1[4];2[4];3[3,4];4[4];5[4];6[4];7[4];8[4];9[4];10[3,4];11[4];12[3,4];13[4];14[3,4];15[4];16[4];17[3,4];18[4];19[3,4];20[4];21[4];22[3,4];23[4];24[4];25[4];
+		// retirar(Arrays.asList(20)); // 1 [7,8];
+		// 2[7,8];3[6,7,8];4[8];5[8];6[7,8];7[6,7,8];8[7];9[7];10[8,9];11[7,8,9,10];12[7,8,9];13[8,9];14[7,8,9];15[6,7,8];16[7,8];17[6,7,8];18[7,8,9];19[7,8];20[7,8];21[7,8];22[6,7];23[7,8];24[7,8,9];25[7,8,9];
+		// naoIniciarCom(Arrays.asList( ));
+		// naoTerminarCom(Arrays.asList( ));
+
 //		repetidosJogoAnterior(Arrays.asList(8,9,10));
 //		pares(Arrays.asList(5,6,7,8,9)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
 //		primos(Arrays.asList(4,5,6,7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
@@ -138,29 +134,26 @@ public class Filtro {
 //		//retirar(Arrays.asList( )); // 1 [7,8]; 2[7,8];3[6,7,8];4[8];5[8];6[7,8];7[6,7,8];8[7];9[7];10[8,9];11[7,8,9,10];12[7,8,9];13[8,9];14[7,8,9];15[6,7,8];16[7,8];17[6,7,8];18[7,8,9];19[7,8];20[7,8];21[7,8];22[6,7];23[7,8];24[7,8,9];25[7,8,9];
 //		//naoIniciarCom(Arrays.asList( ));
 //		//naoTerminarCom(Arrays.asList( ));
-		
+
 		return this.listaJogosCombinados;
-		
-		
+
 //		dezMais(Arrays.asList(4,5,6,7,8)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3} 
 
 	}
-	
+
 	private void QtdFiltros(List<Integer> lista) throws FileNotFoundException, IOException {
-		
+
 		if (todosSorteios.size() < 15)
 			return;
-		
-		
-		//System.out.println("filtrando filtros");
+
+		// System.out.println("filtrando filtros");
 		// TODO Auto-generated method stub
 		Filtro filtro = new Filtro();
 		Estatisticas estatisticas = new Estatisticas();
 		estatisticas.iniciarListas();
 		filtro.iniciaListas();
 		filtro.setaListaTodosSorteios(estatisticas.lerTodosOsJogos());
-		
-		
+
 		limpaListasAuxiliares();
 		listaParaAnalise.addAll(listaJogosCombinados);
 
@@ -172,13 +165,11 @@ public class Filtro {
 		Jogo numerosImportantes = estatisticas.buscarNumerosImportantes();
 
 		List<String> resultCSV = new ArrayList<String>();
-		
+
 		int numeroSorteio = 0;
-		
+
 		for (Jogo jogo : listaParaAnalise) {
-			
-			
-			
+
 			Set<Integer> intersectionPares = new HashSet<Integer>(jogo.getJogo());
 			intersectionPares.retainAll(pares.getJogo());
 
@@ -199,10 +190,10 @@ public class Filtro {
 //			List<Jogo> todosSorteios = filtro.buscaListaTodosSorteios();
 //			
 //			intersectionDezMais.retainAll(estatisticas.buscarDezMais(todosSorteios,jogoAtual).getJogo());
-			
+
 			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(jogo.getJogo());
 			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
-			
+
 			List<Integer> list = new ArrayList<>();
 			list.add(intersectionPares.size());
 			list.add(intersectionPrimos.size());
@@ -211,38 +202,39 @@ public class Filtro {
 			list.add(intersectionMultiplosDeTres.size());
 //			list.add(intersectionDezMais.size());
 			list.add(intersectionNumerosImportantes.size());
-			
-			
+
 			int maxNumeroFiltroRepetido = 0;
-			
-			for (int j = 1; j < 13;j++) { 
-				maxNumeroFiltroRepetido = (maxNumeroFiltroRepetido > Collections.frequency(list, j)) ? maxNumeroFiltroRepetido : Collections.frequency(list, j);
+
+			for (int j = 1; j < 13; j++) {
+				maxNumeroFiltroRepetido = (maxNumeroFiltroRepetido > Collections.frequency(list, j))
+						? maxNumeroFiltroRepetido
+						: Collections.frequency(list, j);
 			}
-			
+
 			if (!lista.contains(maxNumeroFiltroRepetido)) {
 				continue;
 			}
-		
+
 			jogo.somaQuantidadeFiltros();
 			listaPorFiltro.add(jogo);
-			
+
 		}
 		atualizaListaFiltrada();
 		System.out.println("Tamanho da lista depois de filtrar filtros -> " + listaJogosCombinados.size());
 	}
-	
-	public void maiorSequenciaDoisEmDois(List<Integer> lista ) {
-			
+
+	public void maiorSequenciaDoisEmDois(List<Integer> lista) {
+
 		limpaListasAuxiliares();
 		listaParaAnalise.addAll(listaJogosCombinados);
-		
+
 		for (Jogo jogo : listaParaAnalise) {
 
 			int cont = 0;
 			int numero = 0;
 			int maiorSequencia = 0;
 			for (Integer n : jogo.getJogo()) {
-				
+
 				if (numero != 0) {
 					if (numero + 2 == n) {
 						cont++;
@@ -252,38 +244,37 @@ public class Filtro {
 					} else {
 						cont = 0;
 					}
-				
+
 				}
 				numero = n;
 			}
-			
+
 			if (!lista.contains(maiorSequencia + 1)) {
 				continue;
 			}
 
 			jogo.somaQuantidadeFiltros();
 			listaPorFiltro.add(jogo);
-		
+
 		}
-		
+
 		atualizaListaFiltrada();
 		System.out.println("Tamanho da lista depois de filtrar dois em dois -> " + listaJogosCombinados.size());
-			
+
 	}
-	
-	
-	public void maiorSequenciaUmEmUm(List<Integer> lista ) {
-		
+
+	public void maiorSequenciaUmEmUm(List<Integer> lista) {
+
 		limpaListasAuxiliares();
 		listaParaAnalise.addAll(listaJogosCombinados);
-		
+
 		for (Jogo jogo : listaParaAnalise) {
 
 			int cont = 0;
 			int numero = 0;
 			int maiorSequencia = 0;
 			for (Integer n : jogo.getJogo()) {
-				
+
 				if (numero != 0) {
 					if (numero + 1 == n) {
 						cont++;
@@ -293,56 +284,50 @@ public class Filtro {
 					} else {
 						cont = 0;
 					}
-				
+
 				}
 				numero = n;
 			}
-			
+
 			if (!lista.contains(maiorSequencia + 1)) {
 				continue;
 			}
-			
+
 			jogo.somaQuantidadeFiltros();
 			listaPorFiltro.add(jogo);
-		
+
 		}
-		
+
 		atualizaListaFiltrada();
 		System.out.println("Tamanho da lista depois de filtrar um em um -> " + listaJogosCombinados.size());
-			
-	}
 
+	}
 
 	public List<Jogo> filtrarLista() throws FileNotFoundException, IOException {
 		this.listaJogosCheia = new ArrayList<Jogo>();
 		listaJogosCheia.addAll(listaJogosCombinados);
-		
-		
-		
+
 		repetidosJogoAnterior(listaParametrosRepetidos);
-		/*6 � forte*/	pares(Arrays.asList(6, 7, 8)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
-		primos(Arrays.asList(5, 6, 7)); // 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4}
-		/*10 � forte*/ quadrado(Arrays.asList(8, 10)); // 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6} 
-		//dezMais(Arrays.asList(4, 5, 6, 7)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567, 7=415, 8=165, 9=24, 10=3}
-		/*5 � forte*/multiplosDeTres(Arrays.asList(5, 6)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
+		/* 6 � forte */ pares(Arrays.asList(6, 7, 8)); // 5a9; // {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,
+															// 10=41, 11=5}
+		primos(Arrays.asList(5, 6, 7));
+		// 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4}
+		/* 10 � forte */ quadrado(Arrays.asList(8, 10));
+		// 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6}
+		// dezMais(Arrays.asList(4, 5, 6, 7)); // 4a8 {2=2, 3=24, 4=140, 5=387, 6=567,
+		// 7=415, 8=165, 9=24, 10=3}
+		/* 5 � forte */multiplosDeTres(Arrays.asList(5, 6)); // 3a7 {1=1, 2=33, 3=193, 4=430, 5=541, 6=317,7=111,8=14}
 		sequenciaDeFibonacci(Arrays.asList(4, 5, 6));// 2a6 {1=8, 2=85, 3=330,4=567,5=453,6=182,7=15}
-		
-		linha(Arrays.asList(1, 2, 3, 4, 5),
-			  Arrays.asList(2, 4, 5),
-			  Arrays.asList(1, 2, 4, 5),
-			  Arrays.asList(1, 3, 4),
-			  Arrays.asList(1, 2, 4));
-		
-		coluna(Arrays.asList(1, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 5),
-			   Arrays.asList(1, 2, 3, 4, 5),
-			   Arrays.asList(1, 2, 3, 5),
-			   Arrays.asList(1, 2, 3, 4));
-		
+
+		linha(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(2, 4, 5), Arrays.asList(1, 2, 4, 5), Arrays.asList(1, 3, 4),
+				Arrays.asList(1, 2, 4));
+
+		coluna(Arrays.asList(1, 3, 4, 5), Arrays.asList(1, 2, 3, 5), Arrays.asList(1, 2, 3, 4, 5),
+				Arrays.asList(1, 2, 3, 5), Arrays.asList(1, 2, 3, 4));
+
 		return this.listaJogosCombinados;
 
 	}
-	
 
 	private void repetidosJogoAnterior(List<Integer> lista) {
 
@@ -363,7 +348,7 @@ public class Filtro {
 		});
 
 		System.out.println("Tamaho da lista depois das combina��es ->" + listaJogosCombinados.size());
-		
+
 	}
 
 	private void limpaListasAuxiliares() {
@@ -406,7 +391,8 @@ public class Filtro {
 
 		analisaNumeros(lista, estatisticas.buscarNumerosMultiplosDeTres());
 
-		System.out.println("Tamanho da lista depois de filtrar a multiplos de tr�s -> " + listaJogosCombinados.size());
+		System.out
+				.println("Tamanho da lista depois de filtrar a multiplos de tr�s -> " + listaJogosCombinados.size());
 
 	}
 
@@ -414,7 +400,8 @@ public class Filtro {
 
 		analisaNumeros(lista, estatisticas.buscarNumerosSequenciaDeFibonacci());
 
-		System.out.println("Tamanho da lista depois de filtrar a SequenciaDeFibonacci -> " + listaJogosCombinados.size());
+		System.out
+				.println("Tamanho da lista depois de filtrar a SequenciaDeFibonacci -> " + listaJogosCombinados.size());
 
 	}
 
@@ -509,7 +496,7 @@ public class Filtro {
 		System.out.println("Tamanho da lista depois de filtrar cantos -> " + listaJogosCombinados.size());
 
 	}
-	
+
 	private void numerosImportantes(List<Integer> lista) {
 
 		analisaNumeros(lista, estatisticas.buscarNumerosImportantes());
@@ -518,30 +505,29 @@ public class Filtro {
 
 	}
 
-	private void linha(List<Integer> primeiraLinha, List<Integer> segundaLinha, List<Integer> terceiraLinha, List<Integer> quartaLinha, List<Integer> quintaLinha) {
+	private void linha(List<Integer> primeiraLinha, List<Integer> segundaLinha, List<Integer> terceiraLinha,
+			List<Integer> quartaLinha, List<Integer> quintaLinha) {
 
 		limpaListasAuxiliares();
 		listaParaAnalise.addAll(listaJogosCombinados);
 
 		Jogo strUltimoSorteio = todosSorteios.get(todosSorteios.size() - 1);
-		
-		
+
 		for (Jogo jogo : listaParaAnalise) {
-			
+
 			int contPrimeiraLinha = retornaIntersecao(jogo, estatisticas.buscarNumerosLinha1());
 			int contSegundaLinha = retornaIntersecao(jogo, estatisticas.buscarNumerosLinha2());
 			int contTerceiraLinha = retornaIntersecao(jogo, estatisticas.buscarNumerosLinha3());
 			int contQuartaLinha = retornaIntersecao(jogo, estatisticas.buscarNumerosLinha4());
 			int contQuintaLinha = retornaIntersecao(jogo, estatisticas.buscarNumerosLinha5());
-			
+
 			int contPrimeiraLinhaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosLinha1());
 			int contSegundaLinhaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosLinha2());
 			int contTerceiraLinhaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosLinha3());
 			int contQuartaLinhaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosLinha4());
 			int contQuintaLinhaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosLinha5());
-			
-			if (contPrimeiraLinha == contPrimeiraLinhaJogoAnterior
-					&& contSegundaLinha == contSegundaLinhaJogoAnterior
+
+			if (contPrimeiraLinha == contPrimeiraLinhaJogoAnterior && contSegundaLinha == contSegundaLinhaJogoAnterior
 					&& contTerceiraLinha == contTerceiraLinhaJogoAnterior
 					&& contQuartaLinha == contQuartaLinhaJogoAnterior
 					&& contQuintaLinha == contQuintaLinhaJogoAnterior) {
@@ -552,32 +538,33 @@ public class Filtro {
 					|| (contPrimeiraLinha == 5 && contPrimeiraLinhaJogoAnterior == 5)) {
 				continue;
 			}
-			
+
 			if ((contSegundaLinha == 1 && contSegundaLinhaJogoAnterior == 1)
 					|| (contSegundaLinha == 5 && contSegundaLinhaJogoAnterior == 5)) {
 				continue;
 			}
-			
+
 			if ((contTerceiraLinha == 1 && contTerceiraLinhaJogoAnterior == 1)
 					|| (contTerceiraLinha == 5 && contTerceiraLinhaJogoAnterior == 5)) {
 				continue;
 			}
-			
+
 			if ((contQuartaLinha == 1 && contQuartaLinhaJogoAnterior == 1)
 					|| (contQuartaLinha == 5 && contQuartaLinhaJogoAnterior == 5)) {
 				continue;
 			}
-			
+
 			if ((contQuintaLinha == 1 && contQuintaLinhaJogoAnterior == 1)
 					|| (contQuintaLinha == 5 && contQuintaLinhaJogoAnterior == 5)) {
 				continue;
 			}
 
-
-			if (!primeiraLinha.contains(contPrimeiraLinha) || !segundaLinha.contains(contSegundaLinha) || !terceiraLinha.contains(contTerceiraLinha) || !quartaLinha.contains(contQuartaLinha) || !quintaLinha.contains(contQuintaLinha) ) {
+			if (!primeiraLinha.contains(contPrimeiraLinha) || !segundaLinha.contains(contSegundaLinha)
+					|| !terceiraLinha.contains(contTerceiraLinha) || !quartaLinha.contains(contQuartaLinha)
+					|| !quintaLinha.contains(contQuintaLinha)) {
 				continue;
 			}
-			
+
 			jogo.somaQuantidadeFiltros();
 			listaPorFiltro.add(jogo);
 
@@ -588,8 +575,8 @@ public class Filtro {
 
 	}
 
-
-	private void coluna(List<Integer> primeiraColuna, List<Integer> segundaColuna, List<Integer> terceiraColuna, List<Integer> quartaColuna, List<Integer> quintaColuna) {
+	private void coluna(List<Integer> primeiraColuna, List<Integer> segundaColuna, List<Integer> terceiraColuna,
+			List<Integer> quartaColuna, List<Integer> quintaColuna) {
 		limpaListasAuxiliares();
 		listaParaAnalise.addAll(listaJogosCombinados);
 
@@ -601,13 +588,16 @@ public class Filtro {
 			int contTerceiraColuna = retornaIntersecao(jogo, estatisticas.buscarNumerosColuna3());
 			int contQuartaColuna = retornaIntersecao(jogo, estatisticas.buscarNumerosColuna4());
 			int contQuintaColuna = retornaIntersecao(jogo, estatisticas.buscarNumerosColuna5());
-			
-			int contPrimeiraColunaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosColuna1());
-			int contSegundaColunaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosColuna2());
-			int contTerceiraColunaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosColuna3());
+
+			int contPrimeiraColunaJogoAnterior = retornaIntersecao(strUltimoSorteio,
+					estatisticas.buscarNumerosColuna1());
+			int contSegundaColunaJogoAnterior = retornaIntersecao(strUltimoSorteio,
+					estatisticas.buscarNumerosColuna2());
+			int contTerceiraColunaJogoAnterior = retornaIntersecao(strUltimoSorteio,
+					estatisticas.buscarNumerosColuna3());
 			int contQuartaColunaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosColuna4());
 			int contQuintaColunaJogoAnterior = retornaIntersecao(strUltimoSorteio, estatisticas.buscarNumerosColuna5());
-			
+
 			if (contPrimeiraColuna == contPrimeiraColunaJogoAnterior
 					&& contSegundaColuna == contSegundaColunaJogoAnterior
 					&& contTerceiraColuna == contTerceiraColunaJogoAnterior
@@ -620,32 +610,33 @@ public class Filtro {
 					|| (contPrimeiraColuna == 5 && contPrimeiraColunaJogoAnterior == 5)) {
 				continue;
 			}
-			
+
 			if ((contSegundaColuna == 1 && contSegundaColunaJogoAnterior == 1)
 					|| (contSegundaColuna == 5 && contSegundaColunaJogoAnterior == 5)) {
 				continue;
 			}
-			
+
 			if ((contTerceiraColuna == 1 && contTerceiraColunaJogoAnterior == 1)
 					|| (contTerceiraColuna == 5 && contTerceiraColunaJogoAnterior == 5)) {
 				continue;
 			}
-			
+
 			if ((contQuartaColuna == 1 && contQuartaColunaJogoAnterior == 1)
 					|| (contQuartaColuna == 5 && contQuartaColunaJogoAnterior == 5)) {
 				continue;
 			}
-			
+
 			if ((contQuintaColuna == 1 && contQuintaColunaJogoAnterior == 1)
 					|| (contQuintaColuna == 5 && contQuintaColunaJogoAnterior == 5)) {
 				continue;
 			}
 
-
-			if (!primeiraColuna.contains(contPrimeiraColuna) || !segundaColuna.contains(contSegundaColuna) || !terceiraColuna.contains(contTerceiraColuna) || !quartaColuna.contains(contQuartaColuna) || !quintaColuna.contains(contQuintaColuna) ) {
+			if (!primeiraColuna.contains(contPrimeiraColuna) || !segundaColuna.contains(contSegundaColuna)
+					|| !terceiraColuna.contains(contTerceiraColuna) || !quartaColuna.contains(contQuartaColuna)
+					|| !quintaColuna.contains(contQuintaColuna)) {
 				continue;
 			}
-			
+
 			jogo.somaQuantidadeFiltros();
 			listaPorFiltro.add(jogo);
 
@@ -656,6 +647,25 @@ public class Filtro {
 
 	}
 
+	private void melhoresCombinacoes() throws FileNotFoundException, IOException {
+
+		limpaListasAuxiliares();
+		listaParaAnalise.addAll(listaJogosCombinados);
+
+		for (Jogo jogo : listaParaAnalise) {
+
+			Set<Integer> intersectionRepetidos = new HashSet<Integer>(jogo.getJogo());
+			intersectionRepetidos.retainAll(Arrays.asList(11,12,13,14));
+
+			if (Arrays.asList(2, 3, 4).contains(intersectionRepetidos.size())) {
+				jogo.somaQuantidadeFiltros();
+				listaPorFiltro.add(jogo);
+			}
+			
+		}
+		atualizaListaFiltrada();
+		System.out.println("Tamanho da lista depois de filtrar melhores combina��es -> " + listaJogosCombinados.size());
+	}
 
 	private void soma() {
 
@@ -685,8 +695,8 @@ public class Filtro {
 		/*
 		 * posição 1 [1,2,3] posição 2 [2 a 5] posição 3 [3 a 7] posição 4 [4 a
 		 * 9] posição 5 [5 a 11] posição 6 [6 a 13] posição 7 [8 a 15] posição 8
-		 * [9 a 17] posição 9 [11 a 18] posição 10 [13 a 19] posição 11 [15 a
-		 * 21] posição 12 [17 a 22] posição 13 [19 a 23] posição 14 [21 a 24]
+		 * [9 a 17] posição 9 [11 a 18] posição 10 [13 a 19] posição 11 [15 a 21]
+		 * posição 12 [17 a 22] posição 13 [19 a 23] posição 14 [21 a 24]
 		 * posição 15 [23 a 25]
 		 */
 
@@ -1306,10 +1316,11 @@ public class Filtro {
 	public List<Jogo> bucaListaJogosFiltrados() throws FileNotFoundException, IOException {
 		return filtrar();
 	}
-	
+
 	public List<Jogo> listaJogosFiltrados() throws FileNotFoundException, IOException {
 		return filtrarLista();
 	}
+
 	public List<Jogo> getListaJogosCombinadosCompleto() {
 		return listaJogosCombinadosCompleto;
 	}
@@ -1387,18 +1398,18 @@ public class Filtro {
 		// }
 		atualizaListaFiltrada();
 	}
-	
+
 	private void incluir(List<Integer> lista) {
 		limpaListasAuxiliares();
 		listaParaAnalise.addAll(listaJogosCombinados);
-		
+
 		for (Jogo jogo : listaParaAnalise) {
 			boolean foi = false;
 			for (Integer numero : lista) {
 				if (!jogo.getJogo().contains(numero)) {
 					foi = true;
 				}
-				
+
 			}
 			if (foi) {
 				continue;
@@ -1407,22 +1418,21 @@ public class Filtro {
 			listaPorFiltro.add(jogo);
 		}
 
-		
 		atualizaListaFiltrada();
 		System.out.println("Tamanho da lista depois de filtrar inclus�o de n�meros -> " + listaJogosCombinados.size());
 	}
-	
+
 	private void retirar(List<Integer> lista) {
 		limpaListasAuxiliares();
 		listaParaAnalise.addAll(listaJogosCombinados);
-		
+
 		for (Jogo jogo : listaParaAnalise) {
 			boolean foi = false;
 			for (Integer numero : lista) {
 				if (jogo.getJogo().contains(numero)) {
 					foi = true;
 				}
-				
+
 			}
 			if (foi) {
 				continue;
@@ -1431,46 +1441,42 @@ public class Filtro {
 			listaPorFiltro.add(jogo);
 		}
 
-		
 		atualizaListaFiltrada();
 		System.out.println("Tamanho da lista depois de filtrar retirada de n�meros -> " + listaJogosCombinados.size());
 	}
-	
+
 	private void naoIniciarCom(List<Integer> lista) {
 		limpaListasAuxiliares();
 		listaParaAnalise.addAll(listaJogosCombinados);
-		
+
 		for (Jogo jogo : listaParaAnalise) {
-			
+
 			if (lista.contains(jogo.getJogo().get(0))) {
 				continue;
 			}
-			
+
 			jogo.somaQuantidadeFiltros();
 			listaPorFiltro.add(jogo);
 		}
 
-		
 		atualizaListaFiltrada();
 		System.out.println("Tamanho da lista depois de filtrar n�o iniciar -> " + listaJogosCombinados.size());
 	}
-	
-	
+
 	private void naoTerminarCom(List<Integer> lista) {
 		limpaListasAuxiliares();
 		listaParaAnalise.addAll(listaJogosCombinados);
-		
+
 		for (Jogo jogo : listaParaAnalise) {
-			
+
 			if (lista.contains(jogo.getJogo().get(14))) {
 				continue;
 			}
-			
+
 			jogo.somaQuantidadeFiltros();
 			listaPorFiltro.add(jogo);
 		}
 
-		
 		atualizaListaFiltrada();
 		System.out.println("Tamanho da lista depois de filtrar n�o iniciar -> " + listaJogosCombinados.size());
 	}
@@ -1495,11 +1501,11 @@ public class Filtro {
 		}
 		return false;
 	}
-	
+
 	public void testaJogo() {
-		
-		Jogo teste = new Jogo (Arrays.asList(3, 4, 5 ,6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 22, 25));
-		
+
+		Jogo teste = new Jogo(Arrays.asList(3, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 22, 25));
+
 		for (Jogo jogo : listaCambinacoes) {
 			Set<Integer> intersection = new HashSet<Integer>(jogo.getJogo());
 			intersection.retainAll(teste.getJogo());
@@ -1507,21 +1513,17 @@ public class Filtro {
 			if (intersection.size() > 14) {
 				System.err.println("passou");
 			}
-			
-		}
-		
-	}
 
+		}
+
+	}
 
 	public int getJogoAtual() {
 		return jogoAtual;
 	}
 
-
 	public void setJogoAtual(int jogoAtual) {
 		this.jogoAtual = jogoAtual;
 	}
-	
-	
 
 }

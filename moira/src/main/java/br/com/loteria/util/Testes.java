@@ -8,18 +8,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
-
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
-import org.apache.commons.lang3.ArrayUtils;
-
-import com.google.common.collect.Lists;
 
 import br.com.loteria.combinacoes.Combinacoes;
 import br.com.loteria.jogo.Gerador;
@@ -31,46 +24,121 @@ public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
 
-		teste20();
+		teste22();
 
 	}
-	
-	
+
+	public static void teste21() throws FileNotFoundException, IOException {
+
+		Estatisticas est = new Estatisticas();
+
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+
+		Combinacoes combinacoes = new Combinacoes();
+
+		combinacoes.combinar(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+				22, 23, 24, 25), 3);
+
+		List<String> resultCSV = new ArrayList<String>();
+
+		for (Jogo numeros : combinacoes.geraListaCombinacoes()) {
+
+			Map<Integer, Integer> mapa = new HashMap<Integer, Integer>();
+
+			mapa.put(0, 0);
+			mapa.put(1, 0);
+			mapa.put(2, 0);
+			mapa.put(3, 0);
+//			mapa.put(4, 0);
+//			mapa.put(5, 0);
+//			mapa.put(6, 0);
+//			mapa.put(7, 0);
+
+			for (Jogo jogo : todosJogos) {
+
+				Set<Integer> intersectionRepetidos = new HashSet<Integer>(numeros.getJogo());
+				intersectionRepetidos.retainAll(jogo.getJogo());
+				int valor = mapa.get(intersectionRepetidos.size());
+				mapa.put(intersectionRepetidos.size(), ++valor);
+
+			}
+
+			// System.out.println(numeros.getJogo() + " " + mapa);
+
+			resultCSV.add(numeros.getJogo() + " # " + mapa.entrySet().toString().replace(",", " #").replace("[", "")
+					.replace("]", "").replace("0=", "").replace("1=", "").replace("2=", "").replace("3=", ""));
+
+		}
+
+		Utils.gerarCSV(resultCSV, "teste");
+	}
+
 	public static void teste20() throws FileNotFoundException, IOException {
 		Estatisticas est = new Estatisticas();
-		
+
 		List<Jogo> todosJogos = est.lerTodosOsJogos();
-		
+
 		Combinacoes combinacoes = new Combinacoes();
-		
-		Map<Jogo, Integer> mapaNumeros = new HashMap<Jogo,Integer>();
-		
+
+		Map<Jogo, Integer> mapaNumeros = new HashMap<Jogo, Integer>();
+
 		List<Jogo> jogosCombinados = combinacoes.todosCombinacoesLotoFacil();
-		
+
 		Boolean testado = false;
-		
+
 		for (Jogo jogoTestado : jogosCombinados) {
 			Integer frequencia = 0;
 			for (Jogo jogo : todosJogos) {
 				Set<Integer> intersectionRepetidos = new HashSet<Integer>(jogoTestado.getJogo());
 				intersectionRepetidos.retainAll(jogo.getJogo());
-				
+
 				if (intersectionRepetidos.size() == 14) {
 
 					frequencia++;
 				}
-				
+
 			}
-			if ( frequencia > 2) {
+			if (frequencia > 2) {
 				System.out.println(jogoTestado.getJogo() + " = " + frequencia);
 			}
 		}
-				System.out.println("Fim");
+		System.out.println("Fim");
 	}
-	
-	
-	
-	
+
+	public static void teste22() throws FileNotFoundException, IOException {
+
+		Estatisticas est = new Estatisticas();
+
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+
+		for (Jogo jogo : todosJogos) {
+			Set<Integer> intersectionRepetidos = new HashSet<Integer>(Arrays.asList(11, 12, 13, 14));
+			intersectionRepetidos.retainAll(jogo.getJogo());
+			System.out.println(intersectionRepetidos.size());
+
+		}
+
+	}
+
+	private static void soma() throws FileNotFoundException, IOException {
+
+		Estatisticas est = new Estatisticas();
+
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+
+		Integer soma = 0;
+
+		for (Jogo jogo : todosJogos) {
+			for (Integer numero : jogo.getJogo()) {
+				soma = soma + numero;
+			}
+
+			System.out.println(soma);
+
+			soma = 0;
+		}
+	}
+
 	public static void teste19() throws FileNotFoundException, IOException {
 		Gerador g = new Gerador();
 
@@ -86,8 +154,6 @@ public class Testes {
 		List<Integer> posicoes = new ArrayList<Integer>();
 
 		System.out.println("sorteando...");
-		
-		
 
 		while (jogosSaida.size() < 24) {
 			Integer posicao = random.nextInt(jogosCombinados.size());
@@ -95,8 +161,8 @@ public class Testes {
 				retorno = teste17(jogosCombinados.get(posicao));
 				filtro.setListaJogosCombinadosCompleto(retorno);
 				List<Jogo> jogos = filtro.bucaListaJogosFiltrados();
-				
-				//System.out.println("final: " + jogos.size());
+
+				// System.out.println("final: " + jogos.size());
 				for (Jogo jogo : jogos) {
 					if (!filtro.repetido(jogo) && !jogosSaida.contains(jogo)) {
 						jogosSaida.add(jogo);
@@ -108,14 +174,12 @@ public class Testes {
 				posicoes.add(posicao);
 			}
 		}
-		
-	
+
 		for (Jogo jogo2 : jogosSaida) {
 			System.out.println("jogos.add(new Jogo(Arrays.asList("
 					+ jogo2.getJogo().toString().replace("[", "").replace("]", "") + ")));");
 		}
 
-		
 		System.err.println("fim");
 
 		// 9 -> 619
@@ -669,7 +733,7 @@ public class Testes {
 				Set<Integer> intersectionRepetidos = new HashSet<Integer>(anterior.getJogo());
 				intersectionRepetidos.retainAll(atual.getJogo());
 
-				if (intersectionRepetidos.size() == 10) {
+				if (intersectionRepetidos.size() == 9) {
 
 					cont++;
 				}
