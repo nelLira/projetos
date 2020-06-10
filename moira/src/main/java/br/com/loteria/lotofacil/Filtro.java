@@ -98,7 +98,7 @@ public class Filtro {
 				Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(1, 2, 3, 4, 5));
 		
 
-		melhoresCombinacoes();
+	//	melhoresCombinacoes();
 
 		// incluir(Arrays.asList(16)); //
 		// 1[4];2[4];3[3,4];4[4];5[4];6[4];7[4];8[4];9[4];10[3,4];11[4];12[3,4];13[4];14[3,4];15[4];16[4];17[3,4];18[4];19[3,4];20[4];21[4];22[3,4];23[4];24[4];25[4];
