@@ -426,6 +426,57 @@ public class Filtro {
 		// analisaNumeros(maiorQue, menorQue,
 		// estatisticas.buscarNumerosPares());
 		analisaNumeros(lista, estatisticas.buscarNumerosPares());
+		
+		limpaListasAuxiliares();
+		listaParaAnalise.addAll(listaJogosCombinados);
+		
+		for (Jogo j : listaParaAnalise) {
+			
+			Set<Integer> intersectionRepetidos = new HashSet<Integer>(estatisticas.buscarNumerosPares().getJogo());
+			intersectionRepetidos.retainAll(j.getJogo());
+			
+			Integer numeroAux = 0;
+			
+			Integer cont = 1;
+			
+			boolean passou = true;
+			
+			for (Integer par : intersectionRepetidos) {
+				
+				if (numeroAux != 0) {
+					
+					if (numeroAux + 2 == par) {
+						
+						cont++;
+						
+					} else {
+						
+						cont = 1;
+						
+					}
+				}
+				
+				if (cont == 7) {
+					passou = false;
+					break;
+					
+				}
+				
+				numeroAux = par;
+				
+			}
+			
+			if (passou) {
+				
+				j.somaQuantidadeFiltros();
+				listaPorFiltro.add(j);
+				
+			}
+			
+		}
+		
+		atualizaListaFiltrada();
+		
 		System.out.println("Tamanho da lista depois de filtrar pares -> " + listaJogosCombinados.size());
 
 	}

@@ -24,9 +24,52 @@ public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
 
-		teste22();
+		teste23();
 
 	}
+	public static void teste23() throws FileNotFoundException, IOException {
+		
+		Jogo numeros = new Jogo(Arrays.asList(2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24));
+		
+		Estatisticas est = new Estatisticas();
+
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+		
+		int total = 0;
+		
+		for (Jogo j : todosJogos) {
+			
+			Set<Integer> intersectionRepetidos = new HashSet<Integer>(numeros.getJogo());
+			intersectionRepetidos.retainAll(j.getJogo());
+			
+			Integer numeroAux = 0;
+			
+			Integer cont = 1;
+			
+			for (Integer par : intersectionRepetidos) {
+				
+				if (numeroAux != 0) {
+					
+					if (numeroAux + 2 == par) {
+						cont++;
+					} else {
+						cont = 1;
+					}
+				}
+				
+				if (cont == 7) {
+					total ++;
+					break;
+				}
+				
+				numeroAux = par;
+				
+			}
+			
+		}
+		
+		System.out.println(total);
+}
 
 	public static void teste21() throws FileNotFoundException, IOException {
 
