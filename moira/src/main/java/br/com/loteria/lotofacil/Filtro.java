@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -382,6 +384,75 @@ public class Filtro {
 	private void quadrado(List<Integer> lista) {
 
 		analisaNumeros(lista, estatisticas.buscarNumerosQuadrado());
+		
+		limpaListasAuxiliares();
+		listaParaAnalise.addAll(listaJogosCombinados);
+		
+		Jogo quadrado = estatisticas.buscarNumerosQuadrado();
+		
+		Map<Integer, Integer> mapaQuadradosA = new HashMap<Integer, Integer>();
+		
+		Map<Integer, Integer> mapaQuadradosB = new HashMap<Integer, Integer>();
+		
+		int valor = 1;
+		
+		for (Integer integer : quadrado.getJogo()) {
+			mapaQuadradosA.put(integer, valor++);
+		}
+		
+		int chave = 1;
+		
+		for (Integer integer : quadrado.getJogo()) {
+			mapaQuadradosB.put(chave++,integer);
+		}
+		
+		for (Jogo j : listaParaAnalise) {
+
+			Set<Integer> intersectionRepetidos = new HashSet<Integer>(quadrado.getJogo());
+			intersectionRepetidos.retainAll(j.getJogo());
+
+			Integer numeroAux = 0;
+
+			Integer cont = 1;
+
+			boolean passou = true;
+			
+			for (Integer par : intersectionRepetidos) {
+
+				if (numeroAux != 0) {
+
+					if (mapaQuadradosB.get(mapaQuadradosA.get(numeroAux) + 1) == par) {
+
+						cont++;
+
+					} else {
+
+						cont = 1;
+
+					}
+				}
+
+				if (cont > 7) {
+				
+					passou = false;
+					break;
+
+				}
+
+				numeroAux = par;
+
+			}
+
+			if (passou) {
+
+				j.somaQuantidadeFiltros();
+				listaPorFiltro.add(j);
+
+			}
+
+		}
+		
+		atualizaListaFiltrada();
 
 		System.out.println("Tamanho da lista depois de filtrar a quadrado -> " + listaJogosCombinados.size());
 

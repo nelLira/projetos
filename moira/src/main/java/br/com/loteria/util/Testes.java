@@ -27,49 +27,92 @@ public class Testes {
 		teste23();
 
 	}
+
 	public static void teste23() throws FileNotFoundException, IOException {
-		
-		Jogo numeros = new Jogo(Arrays.asList(2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24));
-		
+
+		Jogo numeros = new Jogo(Arrays.asList(1, 2, 3, 4, 5, 6, 10, 11, 15, 16, 20, 21, 22, 23, 24, 25));
+
 		Estatisticas est = new Estatisticas();
 
 		List<Jogo> todosJogos = est.lerTodosOsJogos();
+
+//		for (Jogo j : todosJogos) {
+//			
+//			Set<Integer> intersectionRepetidos = new HashSet<Integer>(numeros.getJogo());
+//			intersectionRepetidos.retainAll(j.getJogo());
+//			
+//			System.out.println(j.getJogo() + "  ;   " 
+//			+ intersectionRepetidos.toString().replace(",", ";").replace("[", "").replace("]", ""));
+//			
+//		}
+		
+		Jogo listaQuadradosA = new Jogo(Arrays.asList(1, 2, 3, 4, 5, 6, 10, 11, 15, 16, 20, 21, 22, 23, 24, 25));
+				
+		Map<Integer, Integer> mapaQuadradosA = new HashMap<Integer, Integer>();
+		
+		Map<Integer, Integer> mapaQuadradosB = new HashMap<Integer, Integer>();
+		
+		int valor = 1;
 		
 		int total = 0;
 		
+		for (Integer integer : listaQuadradosA.getJogo()) {
+			mapaQuadradosA.put(integer, valor++);
+		}
+		
+		int chave = 1;
+		
+		for (Integer integer : listaQuadradosA.getJogo()) {
+			mapaQuadradosB.put(chave++,integer);
+		}
+		
 		for (Jogo j : todosJogos) {
-			
-			Set<Integer> intersectionRepetidos = new HashSet<Integer>(numeros.getJogo());
+
+			Set<Integer> intersectionRepetidos = new HashSet<Integer>(listaQuadradosA.getJogo());
 			intersectionRepetidos.retainAll(j.getJogo());
-			
+
 			Integer numeroAux = 0;
-			
+
 			Integer cont = 1;
+
+			boolean passou = true;
 			
 			for (Integer par : intersectionRepetidos) {
-				
+
 				if (numeroAux != 0) {
-					
-					if (numeroAux + 2 == par) {
+
+					if (mapaQuadradosB.get(mapaQuadradosA.get(numeroAux) + 1) == par) {
+
 						cont++;
+
 					} else {
+
 						cont = 1;
+
 					}
 				}
-				
-				if (cont == 7) {
+
+				if (cont > 7) {
 					total ++;
+					passou = false;
 					break;
+
 				}
-				
+
 				numeroAux = par;
-				
+
 			}
+
+			if (passou) {
+
 			
+
+			}
+
 		}
 		
 		System.out.println(total);
-}
+	}
 
 	public static void teste21() throws FileNotFoundException, IOException {
 
