@@ -16,7 +16,8 @@ public class Lotofacil {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 
-		 simulacao(); //simulação com 9 -> 458 de 657 [08/06/2020] [454 com pares]
+		 simulacao(); //simulação com 9 -> 458 de 657 [08/06/2020]
+		 //[458 com pares 4000 / Fibonacci 12000 / 458 com quadrado 200]
 		//gerarJogos(0, true);
 		// estisticasUltimoSorteio();
 		//estatisticasUltimosSorteios(1,true);

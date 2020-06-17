@@ -14,9 +14,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import javax.print.attribute.standard.JobOriginatingUserName;
-
-import br.com.loteria.combinacoes.Combinacoes;
 import br.com.loteria.jogo.Jogo;
 
 public class Filtro {
@@ -385,75 +382,8 @@ public class Filtro {
 
 		analisaNumeros(lista, estatisticas.buscarNumerosQuadrado());
 		
-		limpaListasAuxiliares();
-		listaParaAnalise.addAll(listaJogosCombinados);
+		retirarGrandesSequencias(10, estatisticas.buscarNumerosQuadrado());
 		
-		Jogo quadrado = estatisticas.buscarNumerosQuadrado();
-		
-		Map<Integer, Integer> mapaQuadradosA = new HashMap<Integer, Integer>();
-		
-		Map<Integer, Integer> mapaQuadradosB = new HashMap<Integer, Integer>();
-		
-		int valor = 1;
-		
-		for (Integer integer : quadrado.getJogo()) {
-			mapaQuadradosA.put(integer, valor++);
-		}
-		
-		int chave = 1;
-		
-		for (Integer integer : quadrado.getJogo()) {
-			mapaQuadradosB.put(chave++,integer);
-		}
-		
-		for (Jogo j : listaParaAnalise) {
-
-			Set<Integer> intersectionRepetidos = new HashSet<Integer>(quadrado.getJogo());
-			intersectionRepetidos.retainAll(j.getJogo());
-
-			Integer numeroAux = 0;
-
-			Integer cont = 1;
-
-			boolean passou = true;
-			
-			for (Integer par : intersectionRepetidos) {
-
-				if (numeroAux != 0) {
-
-					if (mapaQuadradosB.get(mapaQuadradosA.get(numeroAux) + 1) == par) {
-
-						cont++;
-
-					} else {
-
-						cont = 1;
-
-					}
-				}
-
-				if (cont > 7) {
-				
-					passou = false;
-					break;
-
-				}
-
-				numeroAux = par;
-
-			}
-
-			if (passou) {
-
-				j.somaQuantidadeFiltros();
-				listaPorFiltro.add(j);
-
-			}
-
-		}
-		
-		atualizaListaFiltrada();
-
 		System.out.println("Tamanho da lista depois de filtrar a quadrado -> " + listaJogosCombinados.size());
 
 	}
@@ -462,24 +392,22 @@ public class Filtro {
 
 		analisaNumeros(lista, estatisticas.buscarNumerosMultiplosDeTres());
 
-		System.out
-				.println("Tamanho da lista depois de filtrar a multiplos de tr�s -> " + listaJogosCombinados.size());
+		System.out.println("Tamanho da lista depois de filtrar a multiplos de tr�s -> " + listaJogosCombinados.size());
 
 	}
 
 	private void sequenciaDeFibonacci(List<Integer> lista) {
 
 		analisaNumeros(lista, estatisticas.buscarNumerosSequenciaDeFibonacci());
-
-		System.out
-				.println("Tamanho da lista depois de filtrar a SequenciaDeFibonacci -> " + listaJogosCombinados.size());
+		
+		System.out.println("Tamanho da lista depois de filtrar a SequenciaDeFibonacci -> " + listaJogosCombinados.size());
 
 	}
 
 	private void primos(List<Integer> lista) {
 
 		analisaNumeros(lista, estatisticas.buscarNumerosPrimos());
-
+		
 		System.out.println("Tamanho da lista depois de filtrar primos -> " + listaJogosCombinados.size());
 
 	}
@@ -498,55 +426,7 @@ public class Filtro {
 		// estatisticas.buscarNumerosPares());
 		analisaNumeros(lista, estatisticas.buscarNumerosPares());
 		
-		limpaListasAuxiliares();
-		listaParaAnalise.addAll(listaJogosCombinados);
-		
-		for (Jogo j : listaParaAnalise) {
-			
-			Set<Integer> intersectionRepetidos = new HashSet<Integer>(estatisticas.buscarNumerosPares().getJogo());
-			intersectionRepetidos.retainAll(j.getJogo());
-			
-			Integer numeroAux = 0;
-			
-			Integer cont = 1;
-			
-			boolean passou = true;
-			
-			for (Integer par : intersectionRepetidos) {
-				
-				if (numeroAux != 0) {
-					
-					if (numeroAux + 2 == par) {
-						
-						cont++;
-						
-					} else {
-						
-						cont = 1;
-						
-					}
-				}
-				
-				if (cont == 7) {
-					passou = false;
-					break;
-					
-				}
-				
-				numeroAux = par;
-				
-			}
-			
-			if (passou) {
-				
-				j.somaQuantidadeFiltros();
-				listaPorFiltro.add(j);
-				
-			}
-			
-		}
-		
-		atualizaListaFiltrada();
+		retirarGrandesSequencias(8, estatisticas.buscarNumerosPares());
 		
 		System.out.println("Tamanho da lista depois de filtrar pares -> " + listaJogosCombinados.size());
 
@@ -1646,6 +1526,76 @@ public class Filtro {
 
 	public void setJogoAtual(int jogoAtual) {
 		this.jogoAtual = jogoAtual;
+	}
+	
+	public void retirarGrandesSequencias(int seq, Jogo numeros) {
+		
+		limpaListasAuxiliares();
+		listaParaAnalise.addAll(listaJogosCombinados);
+		
+		Map<Integer, Integer> mapaSeqA = new HashMap<Integer, Integer>();
+		
+		Map<Integer, Integer> mapaSeqB = new HashMap<Integer, Integer>();
+		
+		int valor = 1;
+		
+		for (Integer integer : numeros.getJogo()) {
+			mapaSeqA.put(integer, valor++);
+		}
+		
+		int chave = 1;
+		
+		for (Integer integer : numeros.getJogo()) {
+			mapaSeqB.put(chave++,integer);
+		}
+		
+		for (Jogo j : listaParaAnalise) {
+
+			Set<Integer> intersectionRepetidos = new HashSet<Integer>(numeros.getJogo());
+			intersectionRepetidos.retainAll(j.getJogo());
+
+			Integer numeroAux = 0;
+
+			Integer cont = 1;
+
+			boolean passou = true;
+			
+			for (Integer proximo : intersectionRepetidos) {
+
+				if (numeroAux != 0) {
+
+					if (mapaSeqB.get(mapaSeqA.get(numeroAux) + 1) == proximo) {
+
+						cont++;
+
+					} else {
+
+						cont = 1;
+
+					}
+				}
+
+				if (cont > seq) {
+				
+					passou = false;
+					break;
+
+				}
+
+				numeroAux = proximo;
+
+			}
+
+			if (passou) {
+
+				j.somaQuantidadeFiltros();
+				listaPorFiltro.add(j);
+
+			}
+
+		}
+		
+		atualizaListaFiltrada();
 	}
 
 }
