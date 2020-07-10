@@ -819,6 +819,16 @@ public class Estatisticas {
 		Jogo quadrado = estatisticas.buscarNumerosQuadrado();
 		Jogo multiplosDeTres = estatisticas.buscarNumerosMultiplosDeTres();
 		Jogo numerosImportantes = estatisticas.buscarNumerosImportantes();
+		Jogo linha1 = new Jogo(estatisticas.buscarNumerosLinha1().getJogo());
+		Jogo linha2 = new Jogo(estatisticas.buscarNumerosLinha2().getJogo());
+		Jogo linha3 = new Jogo(estatisticas.buscarNumerosLinha3().getJogo());
+		Jogo linha4 = new Jogo(estatisticas.buscarNumerosLinha4().getJogo());
+		Jogo linha5 = new Jogo(estatisticas.buscarNumerosLinha5().getJogo());
+		Jogo coluna1 = new Jogo(estatisticas.buscarNumerosColuna1().getJogo());
+		Jogo coluna2 = new Jogo(estatisticas.buscarNumerosColuna2().getJogo());
+		Jogo coluna3 = new Jogo(estatisticas.buscarNumerosColuna3().getJogo());
+		Jogo coluna4 = new Jogo(estatisticas.buscarNumerosColuna4().getJogo());
+		Jogo coluna5 = new Jogo(estatisticas.buscarNumerosColuna5().getJogo());
 
 		List<String> resultCSV = new ArrayList<String>();
 		for (int i = todosJogos.size() - (qtdJogos); i < todosJogos.size(); i++) {
@@ -841,14 +851,6 @@ public class Estatisticas {
 			Set<Integer> intersectionMultiplosDeTres = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			intersectionMultiplosDeTres.retainAll(multiplosDeTres.getJogo());
 
-//			Set<Integer> intersectionDezMais = new HashSet<Integer>(todosJogos.get(i).getJogo());
-
-//			List<Jogo> todosJogosAux = new ArrayList();
-//			todosJogosAux.addAll(todosJogos);
-//			todosJogosAux.remove(todosJogos.size() - 1);
-//
-//			intersectionDezMais.retainAll(buscarDezMais(todosJogosAux,i).getJogo());
-
 			Set<Integer> intersectionNumerosImportantes = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			intersectionNumerosImportantes.retainAll(numerosImportantes.getJogo());
 
@@ -858,7 +860,6 @@ public class Estatisticas {
 			lista.add(intersectionFibonacci.size());
 			lista.add(intersectionQuadrado.size());
 			lista.add(intersectionMultiplosDeTres.size());
-		//	lista.add(intersectionDezMais.size());
 			lista.add(intersectionNumerosImportantes.size());
 			int maxNumeroFiltroRepetido = 0;
 
@@ -867,7 +868,8 @@ public class Estatisticas {
 						? maxNumeroFiltroRepetido
 						: Collections.frequency(lista, j);
 			}
-
+			
+			///linhas 
 			Set<Integer> primeiraLinha = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			primeiraLinha.retainAll(estatisticas.buscarNumerosLinha1().getJogo());
 
@@ -882,7 +884,8 @@ public class Estatisticas {
 
 			Set<Integer> quintaLinha = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			quintaLinha.retainAll(estatisticas.buscarNumerosLinha5().getJogo());
-
+			
+			//colunas
 			Set<Integer> primeiraColuna = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			primeiraColuna.retainAll(estatisticas.buscarNumerosColuna1().getJogo());
 
@@ -897,6 +900,69 @@ public class Estatisticas {
 
 			Set<Integer> quintaColuna = new HashSet<Integer>(todosJogos.get(i).getJogo());
 			quintaColuna.retainAll(estatisticas.buscarNumerosColuna5().getJogo());
+			
+			// linhas em sequência
+			List<Integer> linhas = new ArrayList<>();
+			
+			Set<Integer> l1 = new HashSet<Integer>(linha1.getJogo());
+			l1.retainAll(todosJogos.get(i).getJogo());
+			
+			linhas.add(l1.size());
+			
+			Set<Integer> l2 = new HashSet<Integer>(linha2.getJogo());
+			l2.retainAll(todosJogos.get(i).getJogo());
+			
+			linhas.add(l2.size());
+			
+			Set<Integer> l3 = new HashSet<Integer>(linha3.getJogo());
+			l3.retainAll(todosJogos.get(i).getJogo());
+			
+			linhas.add(l3.size());
+			
+			Set<Integer> l4 = new HashSet<Integer>(linha4.getJogo());
+			l4.retainAll(todosJogos.get(i).getJogo());
+			
+			linhas.add(l4.size());
+			
+			Set<Integer> l5 = new HashSet<Integer>(linha5.getJogo());
+			l5.retainAll(todosJogos.get(i).getJogo());
+			
+			linhas.add(l5.size());
+			
+			Collections.sort (linhas,Collections.reverseOrder());
+			
+			// colunas em sequência
+			List<Integer> colunas = new ArrayList<>();
+			
+			Set<Integer> c1 = new HashSet<Integer>(coluna1.getJogo());
+			c1.retainAll(todosJogos.get(i).getJogo());
+			
+			colunas.add(c1.size());
+			
+			Set<Integer> c2 = new HashSet<Integer>(coluna2.getJogo());
+			c2.retainAll(todosJogos.get(i).getJogo());
+			
+			colunas.add(c2.size());
+			
+			Set<Integer> c3 = new HashSet<Integer>(coluna3.getJogo());
+			c3.retainAll(todosJogos.get(i).getJogo());
+			
+			colunas.add(c3.size());
+			
+			Set<Integer> c4 = new HashSet<Integer>(coluna4.getJogo());
+			c4.retainAll(todosJogos.get(i).getJogo());
+			
+			colunas.add(c4.size());
+			
+			Set<Integer> c5 = new HashSet<Integer>(coluna5.getJogo());
+			c5.retainAll(todosJogos.get(i).getJogo());
+			
+			colunas.add(c5.size());
+			
+			Collections.sort (colunas,Collections.reverseOrder());
+			
+		
+			
 
 			if (gerarAquivo) {
 				resultCSV.add((i + 1) + "#Repetidos#" + intersectionRepetidos.size() + "#Jogo#"
@@ -911,7 +977,9 @@ public class Estatisticas {
 						+ sequenciaUmEmUm(todosJogos.get(i).getJogo()) + "#Linhas#" + primeiraLinha.size() + " - "
 						+ segundaLinha.size() + " - " + terceiraLinha.size() + " - " + quartaLinha.size() + " - "
 						+ quintaLinha.size() + "#Colunas#" + primeiraColuna.size() + " - " + segundaColuna.size()
-						+ " - " + terceiraColuna.size() + " - " + quartaColuna.size() + " - " + quintaColuna.size());
+						+ " - " + terceiraColuna.size() + " - " + quartaColuna.size() + " - " + quintaColuna.size()
+						+ "#Seq Linhas#" + linhas.toString().replace("[", "").replace("]","").replace(", ","")
+						+ "#Seq Colunas#" + colunas.toString().replace("[", "").replace("]","").replace(", ",""));
 			} else {
 
 				System.out.println(

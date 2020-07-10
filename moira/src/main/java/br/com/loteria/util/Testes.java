@@ -1,15 +1,21 @@
 package br.com.loteria.util;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
@@ -24,13 +30,377 @@ public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
 
-		teste23();
+		teste25();
+	
+	}
+	
+	public static void teste29() throws FileNotFoundException, IOException {
+		
+		Estatisticas est = new Estatisticas();
 
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+		
+		int numeroJogo = 1;
+		
+		for (Jogo jogo : todosJogos) {
+			
+			if (numeroJogo > 19) {
+				
+				List<Jogo> jogoAnteriores = ultimosJogos(numeroJogo);
+				
+				List<Integer> numeros = numerosQueMenosSaem (jogoAnteriores);
+				
+				Set<Integer> total = new HashSet<Integer>(numeros);
+				total.retainAll(jogo.getJogo());
+				
+				System.out.println(total.size());
+			
+			}
+			
+			numeroJogo ++;
+			
+		}
+		
+		
+		
+	}
+	
+	
+	public static List<Jogo> ultimosJogos (int jogoAtual) throws FileNotFoundException, IOException {
+		
+		Estatisticas est = new Estatisticas();
+
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+		
+		List<Jogo> jogos = new ArrayList<>();
+		
+		List<Integer> dezenas = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25));
+		
+		int posicaoInicial = jogoAtual - 20;
+		
+		for (int i = posicaoInicial; i < jogoAtual; i++) {
+			
+				jogos.add(todosJogos.get(i));
+		
+		}
+		
+		return jogos;
+		
+	}
+	
+	public static List<Integer> numerosQueMenosSaem(List<Jogo> jogos) throws FileNotFoundException, IOException {
+		
+		
+		//List<Jogo> jogos =  ultimosJogos(20);
+		
+		List<Integer> dezenas = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25));
+		
+		Map<Integer, Map<Integer, Integer>> mapaPorListaDezenas = new HashMap();
+		
+		Map<Integer, Integer> mapaResult = new HashMap();
+		
+		for (Integer d1 : dezenas) {
+			
+			int cont = 0;
+			
+			Map<Integer, Integer> mapaDezenas = new HashMap();
+			
+			mapaPorListaDezenas.put(d1, mapaDezenas);
+			
+			for (Jogo jogo : jogos) {
+				
+				if (jogo.getJogo().contains(d1)) {
+					
+					cont++;
+				
+					for (Integer d2 : dezenas) {
+						
+						if (d2 != d1 && jogo.getJogo().contains(d2)) {
+							
+							if (mapaDezenas.containsKey(d2)) {
+								int valor = mapaDezenas.get(d2).intValue();
+								mapaDezenas.put(d2, valor + 1);
+							} else {
+								mapaDezenas.put(d2, 1);
+							}
+						}
+				
+					}
+				}
+			}
+			
+			
+	        
+	        //System.out.println(String.format("%02d", d1) + " [" + cont + "] = > " + result);
+	        //System.out.println(cont);
+	        mapaResult.put(d1,cont);
+	        
+	       // mapaPorListaDezenas.put(d1, result);
+			
+		}
+		
+		List<Entry<Integer, Integer>> list = new ArrayList<>(mapaResult.entrySet());
+        list.sort(Entry.comparingByValue());
+
+        Map<Integer, Integer> result = new LinkedHashMap<>();
+        int qtd = 0;
+        List<Integer> numeros = new ArrayList<>();
+        
+        for (Entry<Integer, Integer> entry : list) {
+        	
+        	qtd++;
+        	
+            result.put(entry.getKey(), entry.getValue());
+            
+            numeros.add(entry.getKey());
+            
+            if (qtd == 5) break;
+            
+        }
+        
+        return numeros;
+		
+	//	System.out.println(numeros);
+//		
+//		for (Entry<Integer, Map<Integer, Integer>> mapa : mapaPorListaDezenas.entrySet()) {
+//			System.out.println(mapa);
+//		}
+	}
+	
+	
+	public static void teste28() throws FileNotFoundException, IOException {
+		
+		Estatisticas est = new Estatisticas();
+
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+		
+		Jogo coluna1 = new Jogo(Arrays.asList(1,6,11,16,21));
+		Jogo coluna2 = new Jogo(Arrays.asList(2,7,12,17,22));
+		Jogo coluna3 = new Jogo(Arrays.asList(3,8,13,18,23));
+		Jogo coluna4 = new Jogo(Arrays.asList(4,9,14,19,24));
+		Jogo coluna5 = new Jogo(Arrays.asList(5,10,15,20,25));
+		
+		Map<String, Integer> mapaColunas = new HashMap<String,Integer>();
+		
+		List<String> listaColunas = new ArrayList<>();
+		
+		listaColunas.add("43332");
+		listaColunas.add("44322");
+		listaColunas.add("44331");
+		listaColunas.add("53322");
+		listaColunas.add("54321");
+		listaColunas.add("44421");
+		listaColunas.add("54222");
+		listaColunas.add("33333");
+		listaColunas.add("53331");
+	//	listaColunas.add("54330");
+		listaColunas.add("54411");
+		listaColunas.add("55221");
+	//	listaColunas.add("54420");
+	//	listaColunas.add("44430");
+	//	listaColunas.add("55320");
+		listaColunas.add("55311");
+
+	    int cont = 0;
+		for (Jogo jogo : todosJogos) {
+			
+			List<Integer> colunas = new ArrayList<>();
+			
+			Set<Integer> c1 = new HashSet<Integer>(coluna1.getJogo());
+			c1.retainAll(jogo.getJogo());
+			
+			colunas.add(c1.size());
+			
+			Set<Integer> c2 = new HashSet<Integer>(coluna2.getJogo());
+			c2.retainAll(jogo.getJogo());
+			
+			colunas.add(c2.size());
+			
+			Set<Integer> c3 = new HashSet<Integer>(coluna3.getJogo());
+			c3.retainAll(jogo.getJogo());
+			
+			colunas.add(c3.size());
+			
+			Set<Integer> c4 = new HashSet<Integer>(coluna4.getJogo());
+			c4.retainAll(jogo.getJogo());
+			
+			colunas.add(c4.size());
+			
+			Set<Integer> c5 = new HashSet<Integer>(coluna5.getJogo());
+			c5.retainAll(jogo.getJogo());
+			
+			colunas.add(c5.size());
+			
+			Collections.sort (colunas,Collections.reverseOrder());
+			
+			String strLinhas = colunas.toString().replace("[", "").replace("]","").replace(", ","");
+			
+			if (listaColunas.contains(strLinhas)) {
+				cont++;
+			}
+//			if (mapaColunas.containsKey(strLinhas)) {
+//				mapaColunas.put(strLinhas, mapaColunas.get(strLinhas).intValue() + 1);
+//			} else {
+//				mapaColunas.put(strLinhas, 1);
+//			}
+//			
+		}
+		
+		System.out.println(mapaColunas);
+
+		
+	}
+	
+	
+	public static void teste27() throws FileNotFoundException, IOException {
+		
+		Estatisticas est = new Estatisticas();
+
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+		
+		Jogo linha1 = new Jogo(Arrays.asList(1,2,3,4,5));
+		Jogo linha2 = new Jogo(Arrays.asList(6,7,8,9,10));
+		Jogo linha3 = new Jogo(Arrays.asList(11,12,13,14,15));
+		Jogo linha4 = new Jogo(Arrays.asList(16,17,18,19,20));
+		Jogo linha5 = new Jogo(Arrays.asList(21,22,23,24,25));
+		
+		Map<String, Integer> mapaLinhas = new HashMap<String,Integer>();
+		
+		List<String> listaLinhas = new ArrayList<>();
+		
+		listaLinhas.add("43332");
+		listaLinhas.add("44322");
+		listaLinhas.add("44331");
+		listaLinhas.add("53322");
+		listaLinhas.add("54321");
+		listaLinhas.add("44421");
+		listaLinhas.add("33333");
+		listaLinhas.add("54222");
+		listaLinhas.add("53331");
+		/*listaLinhas.add("54411");
+		listaLinhas.add("44430");
+		listaLinhas.add("54330");
+		listaLinhas.add("54420");
+		listaLinhas.add("55221");
+		listaLinhas.add("55311");
+		listaLinhas.add("55320");*/
+
+	    int cont = 0;
+		for (Jogo jogo : todosJogos) {
+			
+			List<Integer> linhas = new ArrayList<>();
+			
+			Set<Integer> l1 = new HashSet<Integer>(linha1.getJogo());
+			l1.retainAll(jogo.getJogo());
+			
+			linhas.add(l1.size());
+			
+			Set<Integer> l2 = new HashSet<Integer>(linha2.getJogo());
+			l2.retainAll(jogo.getJogo());
+			
+			linhas.add(l2.size());
+			
+			Set<Integer> l3 = new HashSet<Integer>(linha3.getJogo());
+			l3.retainAll(jogo.getJogo());
+			
+			linhas.add(l3.size());
+			
+			Set<Integer> l4 = new HashSet<Integer>(linha4.getJogo());
+			l4.retainAll(jogo.getJogo());
+			
+			linhas.add(l4.size());
+			
+			Set<Integer> l5 = new HashSet<Integer>(linha5.getJogo());
+			l5.retainAll(jogo.getJogo());
+			
+			linhas.add(l5.size());
+			
+			Collections.sort (linhas,Collections.reverseOrder());
+			
+			String strLinhas = linhas.toString().replace("[", "").replace("]","").replace(", ","");
+			
+			if (listaLinhas.contains(strLinhas)) {
+				cont++;
+			}
+//			if (mapaLinhas.containsKey(strLinhas)) {
+//				mapaLinhas.put(strLinhas, mapaLinhas.get(strLinhas).intValue() + 1);
+//			} else {
+//				mapaLinhas.put(strLinhas, 1);
+//			}
+			
+		}
+		
+		System.out.println(cont);
+
+		
+	}
+	public static void teste26() throws FileNotFoundException, IOException {
+		Estatisticas est = new Estatisticas();
+
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+		
+
+		List<Jogo> jogos = new ArrayList<Jogo>();
+		
+		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 7, 9, 11, 12, 16, 17, 19, 20, 21, 22, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 7, 9, 10, 12, 13, 15, 18, 19, 20, 23, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 7, 9, 10, 12, 15, 17, 19, 20, 21, 23, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 5, 7, 9, 12, 15, 16, 18, 19, 20, 23, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 5, 7, 9, 12, 14, 15, 18, 19, 20, 23, 24, 25)));
+
+		for (Jogo jogoTestado : jogos) {
+			
+			for (Jogo jogo : todosJogos) {
+				Set<Integer> intersectionRepetidos = new HashSet<Integer>(jogoTestado.getJogo());
+				intersectionRepetidos.retainAll(jogo.getJogo());
+
+				if (intersectionRepetidos.size() > 14) {
+					System.out.println(jogoTestado.getJogo());
+				}
+
+			}
+			
+		}
+		System.out.println("Fim");
+	}
+	
+	public static void teste25() throws IOException {
+		
+		List<Jogo> jogosTeste = jogosTeste();
+		
+		Estatisticas est = new Estatisticas();
+
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+
+		Jogo ultimoJogo = todosJogos.get(todosJogos.size() - 1);
+		
+		for (Jogo j : jogosTeste) {
+			Set<Integer> intersectionRepetidos = new HashSet<Integer>(ultimoJogo.getJogo());
+			intersectionRepetidos.retainAll(j.getJogo());
+			
+			//if (intersectionRepetidos.size() == 9) {
+				System.out.println(intersectionRepetidos.size());
+			//}
+		}
+		
+		//System.out.println(jogosFiltrados.size());
 	}
 
+	
+	public static void teste24() {
+		
+		Combinacoes combinacoes = new Combinacoes();
+
+		combinacoes.combinar(Arrays.asList(5, 6, 8, 10, 13, 14, 16, 21), 6);
+		
+		for (Jogo j : combinacoes.geraListaCombinacoes()) {
+			System.out.println(j.getJogo());
+		}
+	}
+	
 	public static void teste23() throws FileNotFoundException, IOException {
 
-		Jogo numeros = new Jogo(Arrays.asList(3, 6, 9, 12, 15, 18, 21, 24));
+		//Jogo numeros = new Jogo(Arrays.asList(3, 6, 9, 12, 15, 18, 21, 24));
 
 		Estatisticas est = new Estatisticas();
 
@@ -46,7 +416,7 @@ public class Testes {
 //			
 //		}
 		
-		Jogo listaQuadradosA = new Jogo(Arrays.asList(1, 2, 3, 5, 8, 13, 21));
+		Jogo listaQuadradosA = new Jogo(Arrays.asList(3, 6, 9, 12, 15, 18, 21, 24));
 				
 		Map<Integer, Integer> mapaQuadradosA = new HashMap<Integer, Integer>();
 		
@@ -92,7 +462,7 @@ public class Testes {
 					}
 				}
 
-				if (cont > 5) {
+				if (cont > 4) {
 					total ++;
 					passou = false;
 					break;
@@ -1588,5 +1958,32 @@ public class Testes {
 
 		}
 	}
+	
+	public static List<Jogo> jogosTeste () throws IOException {
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		String path = s + "\\target\\jogosTeste.txt";
 
+		File file = new File(path.replace("\\target\\target", "\\target"));
+		byte[] bytes = new byte[(int) file.length()];
+		FileInputStream fis = new FileInputStream(file);
+
+		fis.read(bytes);
+		fis.close();
+
+		List<Jogo> jogos = new ArrayList<Jogo>();
+
+		String[] valueStr = new String(bytes).trim().split("\\s+");
+		List<Integer> lista = new ArrayList<Integer>();
+		for (int i = 0; i < valueStr.length; i++) {
+			lista.add(Integer.parseInt(valueStr[i]));
+			if (lista.size() == 15) {
+				jogos.add(new Jogo(lista));
+				lista = new ArrayList<Integer>();
+			}
+		}
+
+		return jogos;
+	}
+ 
 }
