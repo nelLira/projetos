@@ -505,7 +505,8 @@ public class Estatisticas {
 		Map<Integer, Integer> mapaNumerosOrdenados = Utils.sortByValue(mapaNumeros);
 
 		for (Integer chave : mapaNumerosOrdenados.keySet()) {
-			mapaNumerosOrdenados.put(chave, (mapaNumerosOrdenados.get(chave).intValue() * 100) / qtdJogosAnalisados);
+			//mapaNumerosOrdenados.put(chave, (mapaNumerosOrdenados.get(chave).intValue() * 100) / qtdJogosAnalisados);
+			mapaNumerosOrdenados.put(chave, mapaNumerosOrdenados.get(chave).intValue());
 		}
 		return mapaNumerosOrdenados;
 
@@ -962,8 +963,6 @@ public class Estatisticas {
 			Collections.sort (colunas,Collections.reverseOrder());
 			
 		
-			
-
 			if (gerarAquivo) {
 				resultCSV.add((i + 1) + "#Repetidos#" + intersectionRepetidos.size() + "#Jogo#"
 						+ todosJogos.get(i).getJogo() + "#Saiu?#" + estatSorteio(todosJogos.get(i), i) + "#Pares#"
