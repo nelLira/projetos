@@ -489,10 +489,40 @@ public class Estatisticas {
 		List<Jogo> todosJogos = est.lerTodosOsJogos();
 
 		Map<Integer, Integer> mapaNumeros = new TreeMap<Integer, Integer>();
-		Integer qtdJogosAnalisados = 9;
+		Integer qtdJogosAnalisados = 19;
 
 		for (int i = QtdJogos - qtdJogosAnalisados; i < QtdJogos; i++) {
 			for (Integer numero : todosJogos.get(i).getJogo()) {
+				if (mapaNumeros.containsKey(numero)) {
+					mapaNumeros.put(numero, mapaNumeros.get(numero).intValue() + 1);
+				} else {
+					mapaNumeros.put(numero, 1);
+				}
+			}
+
+		}
+
+		Map<Integer, Integer> mapaNumerosOrdenados = Utils.sortByValue(mapaNumeros);
+
+		for (Integer chave : mapaNumerosOrdenados.keySet()) {
+			//mapaNumerosOrdenados.put(chave, (mapaNumerosOrdenados.get(chave).intValue() * 100) / qtdJogosAnalisados);
+			mapaNumerosOrdenados.put(chave, mapaNumerosOrdenados.get(chave).intValue());
+		}
+		return mapaNumerosOrdenados;
+
+	}
+	
+	public Map<Integer, Integer> estatisticasJogosPorDemanda(int QtdJogos, List<Jogo> todosJogos) throws FileNotFoundException, IOException {
+
+		//Estatisticas est = new Estatisticas();
+		//List<Jogo> todosJogos = est.lerTodosOsJogos();
+
+		Map<Integer, Integer> mapaNumeros = new TreeMap<Integer, Integer>();
+		Integer qtdJogosAnalisados = 19;
+
+		for (int i = QtdJogos - qtdJogosAnalisados; i < QtdJogos; i++) {
+			for (Integer numero : todosJogos.get(i).getJogo()) {
+				
 				if (mapaNumeros.containsKey(numero)) {
 					mapaNumeros.put(numero, mapaNumeros.get(numero).intValue() + 1);
 				} else {

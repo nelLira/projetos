@@ -20,6 +20,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 import br.com.loteria.combinacoes.Combinacoes;
 import br.com.loteria.jogo.Gerador;
 import br.com.loteria.jogo.Jogo;
@@ -30,8 +32,90 @@ public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
 
-		teste25();
+		teste30();
 	
+	}
+	
+
+	public static void teste32() throws FileNotFoundException, IOException {
+		
+		Estatisticas est = new Estatisticas();
+
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+		
+		List<Integer> menores = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12));
+
+		int cont = 0;
+		
+		for (Jogo jogo : todosJogos) {
+			
+			Set<Integer> sairam = new HashSet<Integer>(jogo.getJogo());
+			sairam.retainAll(menores);
+			
+			System.out.println(sairam.size());
+		}
+		
+		
+	}
+	
+	public static void teste31() throws FileNotFoundException, IOException {
+		
+		Estatisticas est = new Estatisticas();
+
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+		
+		int i = 19;
+		while (i < todosJogos.size() - 1) {
+			
+			List<Jogo> subListaJogos = todosJogos.subList(i-19, i);
+			Map<Integer, Integer> mapa = est.estatisticasJogosPorDemanda(subListaJogos.size(), subListaJogos);
+			
+			List<Integer> numeros = new ArrayList<>();
+			
+			for (Entry<Integer, Integer> numero : mapa.entrySet()) {
+				if (numero.getValue() < 12) {
+					numeros.add(numero.getKey());
+				}
+			}
+			
+			Set<Integer> sairam = new HashSet<Integer>(todosJogos.get(i).getJogo());
+			sairam.retainAll(numeros);
+			
+			Set<Integer> naoSairam = new HashSet<Integer>(numeros);
+			naoSairam.removeAll(todosJogos.get(i).getJogo());
+			
+			Set<Integer> sairamNoProximo = new HashSet<Integer>(todosJogos.get(i+1).getJogo());
+			sairamNoProximo.retainAll(naoSairam);
+			
+			//System.out.println("estatisticas => " + mapa);
+			//System.out.println("jogo atual => " + todosJogos.get(i).getJogo());
+			//System.out.println("numeros = >" + numeros);
+			//System.out.println("saíram => " + sairam);
+			//System.out.println("não saíram => " + naoSairam);
+			//System.out.println("proximo jogo => " + todosJogos.get(i+1).getJogo());
+			//System.out.println("saíram próximo jogo => " + sairamNoProximo);
+			
+			if (naoSairam.size() == 5) {
+				//System.out.println(numeros.size() + " - " + sairam.size());
+				System.out.println(sairamNoProximo.size());
+			}
+			//System.out.println(naoSairam.size() + " - " + sairamNoProximo.size());
+			//System.out.println(naoSairam.size());
+			i++;
+		
+	}
+		
+	}
+
+	
+	public static void teste30() throws FileNotFoundException, IOException {
+		
+		Estatisticas est = new Estatisticas();
+
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+
+		System.out.println(est.estatisticasJogos(todosJogos.size()).toString());
+		System.out.println(est.estatisticasJogosQtdSeguidos(todosJogos.size()).toString());
 	}
 	
 	public static void teste29() throws FileNotFoundException, IOException {
