@@ -18,9 +18,9 @@ public class Lotofacil {
 
 		 //simulacao(); //simulação com 9 -> 459 de 660 [27/06/2020] [672]
 		 //[458 com pares 4000 / 458 com quadrado 200 / ]
-		gerarJogos(200, true);
+		//gerarJogos(200, true);
 		//estisticasUltimoSorteio();
-		//estatisticasUltimosSorteios(50,true);
+		estatisticasUltimosSorteios(1,true);
 		//
 	
 		List<Jogo> jogos = new ArrayList<Jogo>();
@@ -67,13 +67,15 @@ public class Lotofacil {
 		jogos.add(new Jogo(Arrays.asList(1, 2, 5, 8, 9, 10, 11, 12, 13, 14, 16, 19, 20, 21, 22, 24)));
 		
 		*/
+		
+		/*
 		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 6, 7, 9, 10, 11, 13, 14, 15, 17, 19, 23, 24)));
 		jogos.add(new Jogo(Arrays.asList(1, 2, 5, 6, 7, 9, 10, 12, 13, 14, 17, 20, 23, 24, 25)));
-		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 9, 12, 14, 15, 17, 19, 21, 22, 23, 24, 25)));
+		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 9, 12, 14, 15, 17, 19, 21, 22, 23, 24, 25))); ***
 		jogos.add(new Jogo(Arrays.asList(1, 3, 5, 6, 7, 8, 10, 11, 14, 15, 16, 18, 19, 22, 23)));
 		jogos.add(new Jogo(Arrays.asList(1, 3, 5, 7, 8, 12, 13, 14, 16, 17, 19, 20, 22, 23, 24)));
 		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 6, 8, 9, 10, 12, 16, 17, 19, 20, 21, 23, 24)));
-		
+		*/
 		consultaSorteio(jogos);
 	
 	}

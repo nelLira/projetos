@@ -162,17 +162,17 @@ public class Filtro {
 			
 				//dezMenos();
 			
-				 incluir(Arrays.asList(23)); //
+				// incluir(Arrays.asList(23)); //
 				// 1[4];2[4];3[3,4];4[4];5[4];6[4];7[4];8[4];9[4];10[3,4];11[4];12[3,4];13[4];14[3,4];15[4];16[4];17[3,4];18[4];19[3,4];20[4];21[4];22[3,4];23[4];24[4];25[4];
 				// retirar(Arrays.asList()); 
 				// 1 [7,8];2[7,8];3[6,7,8];4[8];5[8];6[7,8];7[6,7,8];8[7];9[7];10[8,9];11[7,8,9,10];12[7,8,9];13[8,9];14[7,8,9];15[6,7,8];16[7,8];17[6,7,8];18[7,8,9];19[7,8];20[7,8];21[7,8];22[6,7];23[7,8];24[7,8,9];25[7,8,9];
-				 naoIniciarCom(Arrays.asList(3,4,5 ));
+				// naoIniciarCom(Arrays.asList(3,4,5 ));
 				// naoTerminarCom(Arrays.asList( ));
 				
 				/*10=4 a 8*/
-				listaMaisSaem(Arrays.asList(3, 19, 22, 25, 13, 23, 11, 12, 14, 24));
-				listaMaisSaemNaoSairam(Arrays.asList(12, 14, 23, 2, 4));
-				listaMenosSaemNaoSairam(Arrays.asList(8, 9, 1, 7, 15));
+				//listaMaisSaem(Arrays.asList(3, 19, 22, 25, 13, 23, 11, 12, 14, 24));
+				//listaMaisSaemNaoSairam(Arrays.asList(12, 14, 23, 2, 4));
+				//listaMenosSaemNaoSairam(Arrays.asList(8, 9, 1, 7, 15));
 				//menores();
 				//soma();
 		
