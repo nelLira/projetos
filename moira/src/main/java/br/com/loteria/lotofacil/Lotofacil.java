@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import br.com.loteria.jogo.Gerador;
@@ -19,9 +20,9 @@ public class Lotofacil {
 		 //simulacao(); //simulação com 9 -> 459 de 660 [27/06/2020] [672]
 		 //[458 com pares 4000 / 458 com quadrado 200 / ]
 		//gerarJogos(200, true);
-		//estisticasUltimoSorteio();
-		estatisticasUltimosSorteios(1,true);
-		//
+		estisticasUltimoSorteio();
+		//estatisticasUltimosSorteios(1,true);
+		//ranking();
 	
 		List<Jogo> jogos = new ArrayList<Jogo>();
 		/*
@@ -68,14 +69,14 @@ public class Lotofacil {
 		
 		*/
 		
-		/*
-		jogos.add(new Jogo(Arrays.asList(1, 3, 4, 6, 7, 9, 10, 11, 13, 14, 15, 17, 19, 23, 24)));
-		jogos.add(new Jogo(Arrays.asList(1, 2, 5, 6, 7, 9, 10, 12, 13, 14, 17, 20, 23, 24, 25)));
-		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 5, 9, 12, 14, 15, 17, 19, 21, 22, 23, 24, 25))); ***
-		jogos.add(new Jogo(Arrays.asList(1, 3, 5, 6, 7, 8, 10, 11, 14, 15, 16, 18, 19, 22, 23)));
-		jogos.add(new Jogo(Arrays.asList(1, 3, 5, 7, 8, 12, 13, 14, 16, 17, 19, 20, 22, 23, 24)));
-		jogos.add(new Jogo(Arrays.asList(1, 2, 3, 6, 8, 9, 10, 12, 16, 17, 19, 20, 21, 23, 24)));
-		*/
+/*		
+jogos.add(new Jogo(Arrays.asList(4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 18, 20, 21, 23, 25)));
+jogos.add(new Jogo(Arrays.asList(1, 7, 8, 9, 11, 12, 15, 16, 18, 19, 20, 21, 23, 24, 25)));
+jogos.add(new Jogo(Arrays.asList(1, 2, 4, 5, 6, 8, 9, 10, 14, 17, 19, 20, 21, 22, 25)));
+jogos.add(new Jogo(Arrays.asList(1, 2, 5, 6, 7, 9, 10, 11, 12, 19, 20, 21, 22, 23, 25))); ***
+jogos.add(new Jogo(Arrays.asList(1, 5, 6, 7, 9, 14, 15, 17, 18, 19, 20, 21, 23, 24, 25)));
+jogos.add(new Jogo(Arrays.asList(3, 4, 6, 8, 9, 11, 12, 13, 16, 17, 19, 20, 21, 24, 25)));
+	*/	
 		consultaSorteio(jogos);
 	
 	}
@@ -127,6 +128,83 @@ public class Lotofacil {
 	public static void simulacao() throws FileNotFoundException, IOException {
 		Simulacao simulacao = new Simulacao();
 		simulacao.simularFiltrosTodosSorteios();
+	}
+	
+	public static void ranking() throws FileNotFoundException, IOException {
+		
+		Estatisticas est = new Estatisticas();
+
+		List<Jogo> todosJogos = est.lerTodosOsJogos();
+		
+		Jogo jogoAtual = todosJogos.get(todosJogos.size() - 1 );
+		
+		System.out.println("úlimo jogo: " + jogoAtual.getJogo());
+		
+		Map<Integer, Integer>  mapaRanking = est.estatisticasJogos(todosJogos.size());
+		 
+		List<Integer> maisSaem = new ArrayList<>();
+		 
+		 for (Integer chave : mapaRanking.keySet()) {
+			
+			 Integer valor = mapaRanking.get(chave);
+			 
+			 if (valor > 11) {
+				 
+				 maisSaem.add(chave); 
+			 }
+			 
+		}
+		
+
+		 
+		todosJogos.remove(todosJogos.size() - 1);
+		
+		System.out.println("Mais saem: " + maisSaem);
+		
+		mapaRanking = est.estatisticasJogos(todosJogos.size());
+		
+		List<Integer> maisSaemJogoAnterior = new ArrayList<>();
+		
+		List<Integer> menosSaemJogoAnterior = new ArrayList<Integer>();
+		
+		for (Integer chave : mapaRanking.keySet()) {
+			
+			 Integer valor = mapaRanking.get(chave);
+			 
+			 if (valor > 11) {
+				 
+				 maisSaemJogoAnterior.add(chave); 
+		
+			 } else {
+			
+				 menosSaemJogoAnterior.add(chave);
+			 
+			 }
+			 
+		}
+		
+		
+		List<Integer> maisSaemNaoSairam = new ArrayList<>();
+		
+		for (Integer n : maisSaemJogoAnterior) {
+			if (!jogoAtual.getJogo().contains(n)) {
+				maisSaemNaoSairam.add(n);
+			}
+		}
+		
+		List<Integer> menosSaemNaoSairam = new ArrayList<>();
+				
+		for (Integer n : menosSaemJogoAnterior) {
+			
+			if (!jogoAtual.getJogo().contains(n)) {
+				menosSaemNaoSairam.add(n);
+			}
+		}
+		
+		System.out.println("Mais saem não sairam: " + maisSaemNaoSairam);
+		
+		System.out.println("Menos saem não sairam: " + menosSaemNaoSairam);
+		
 	}
 
 }

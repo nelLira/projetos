@@ -32,7 +32,7 @@ public class Testes {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, URISyntaxException {
 
-		teste30();
+		teste31();
 	
 	}
 	
@@ -73,7 +73,7 @@ public class Testes {
 			List<Integer> numeros = new ArrayList<>();
 			
 			for (Entry<Integer, Integer> numero : mapa.entrySet()) {
-				if (numero.getValue() < 12) {
+				if (numero.getValue() >= 12) {
 					numeros.add(numero.getKey());
 				}
 			}
@@ -95,10 +95,16 @@ public class Testes {
 			//System.out.println("proximo jogo => " + todosJogos.get(i+1).getJogo());
 			//System.out.println("saíram próximo jogo => " + sairamNoProximo);
 			
-			if (naoSairam.size() == 5) {
+		//	if (naoSairam.size() == 8) {
 				//System.out.println(numeros.size() + " - " + sairam.size());
-				System.out.println(sairamNoProximo.size());
-			}
+			//	System.out.println(sairamNoProximo.size());
+		//	}
+			
+		if (numeros.size() == 13) {
+			System.out.println(sairam.size());
+	
+		}
+
 			//System.out.println(naoSairam.size() + " - " + sairamNoProximo.size());
 			//System.out.println(naoSairam.size());
 			i++;
@@ -113,9 +119,76 @@ public class Testes {
 		Estatisticas est = new Estatisticas();
 
 		List<Jogo> todosJogos = est.lerTodosOsJogos();
+		
+		Jogo jogoAtual = todosJogos.get(todosJogos.size() - 1 );
+		
+		System.out.println("úlimo jogo: " + jogoAtual.getJogo());
+		
+		Map<Integer, Integer>  mapaRanking = est.estatisticasJogos(todosJogos.size());
+		 
+		List<Integer> maisSaem = new ArrayList<>();
+		 
+		 for (Integer chave : mapaRanking.keySet()) {
+			
+			 Integer valor = mapaRanking.get(chave);
+			 
+			 if (valor > 11) {
+				 
+				 maisSaem.add(chave); 
+			 }
+			 
+		}
+		
 
-		System.out.println(est.estatisticasJogos(todosJogos.size()).toString());
-		System.out.println(est.estatisticasJogosQtdSeguidos(todosJogos.size()).toString());
+		 
+		todosJogos.remove(todosJogos.size() - 1);
+		
+		System.out.println("Mais saem: " + maisSaem);
+		
+		mapaRanking = est.estatisticasJogos(todosJogos.size());
+		
+		List<Integer> maisSaemJogoAnterior = new ArrayList<>();
+		
+		List<Integer> menosSaemJogoAnterior = new ArrayList<Integer>();
+		
+		for (Integer chave : mapaRanking.keySet()) {
+			
+			 Integer valor = mapaRanking.get(chave);
+			 
+			 if (valor > 11) {
+				 
+				 maisSaemJogoAnterior.add(chave); 
+		
+			 } else {
+			
+				 menosSaemJogoAnterior.add(chave);
+			 
+			 }
+			 
+		}
+		
+		
+		List<Integer> maisSaemNaoSairam = new ArrayList<>();
+		
+		for (Integer n : maisSaemJogoAnterior) {
+			if (!jogoAtual.getJogo().contains(n)) {
+				maisSaemNaoSairam.add(n);
+			}
+		}
+		
+		List<Integer> menosSaemNaoSairam = new ArrayList<>();
+				
+		for (Integer n : menosSaemJogoAnterior) {
+			
+			if (!jogoAtual.getJogo().contains(n)) {
+				menosSaemNaoSairam.add(n);
+			}
+		}
+		
+		System.out.println("Mais saem não sairam: " + maisSaemNaoSairam);
+		
+		System.out.println("Menos saem não sairam: " + menosSaemNaoSairam);
+		
 	}
 	
 	public static void teste29() throws FileNotFoundException, IOException {

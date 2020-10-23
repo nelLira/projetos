@@ -1181,6 +1181,9 @@ public class Estatisticas {
 		return sequencias.toString();
 
 	}
+	
+	
+
 
 //	public int sequenciaUmEmUm(List<Integer> jogo) {
 //
