@@ -79,49 +79,48 @@ public class Filtro {
 		this.listaJogosCheia = new ArrayList<Jogo>();
 		listaJogosCheia.addAll(listaJogosCombinados);
 		
-
 		//[9-> 1 em cada 2; 8-> 1 em cada 4 ;10-> 1 em cada 5]
-				repetidosJogoAnterior(Arrays.asList(7,9));
+				repetidosJogoAnterior(Arrays.asList(9));
 
 				// [7 -> 1 em cada 3; 8 -> 1 em cada 4; 6-> 1 em cada 5]
 				// 5a9; {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
-				pares(Arrays.asList(5,6,7,8)); 
+				pares(Arrays.asList(6,7,8)); 
 
 				// [5-> 1 em cada 3; 6-> 1 em cada 4 ;4-> 1 em cada 6; 7-> 1 em cada 7]
 				// 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
-				primos(Arrays.asList(4,5,6,7)); 
+				primos(Arrays.asList(5,6,7)); 
 
 				//[4-> 1 em cada 3; 5-> 1 em cada 4; 3-> 1 em cada 5]
 				// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
-				sequenciaDeFibonacci(Arrays.asList(3,4,5,6));
+				sequenciaDeFibonacci(Arrays.asList(2,3,4,5));
 
 				//[9-> 1 em cada 3; 10-> 1 em cada 4 ;11-> 1 em cada 6]
 				// 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6}
-				quadrado(Arrays.asList(8,9,10,11));  
+				quadrado(Arrays.asList(9,10,11));  
 
 				// [5-> 1 em cada 3; 4-> 1 em cada 4; 6-> 1 em cada 5]
 				// 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
-				multiplosDeTres(Arrays.asList(3,4,5,6,7)); 
+				multiplosDeTres(Arrays.asList(4,5,6)); 
 				
 				//1 a cada => [5-3; 6-3; 4-6; 7-7; 3-21; 8-35]
 				// 3a8 {1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
-				numerosImportantes(Arrays.asList(3,4,5,6,7,8));
+				numerosImportantes(Arrays.asList(4,5,6,7,8));
 				
-				QtdFiltros(Arrays.asList(1,2,3,4)); //1a4// {1=169; 2=1190; 3=366; 4=53; 5=1}
-				maiorSequenciaDoisEmDois(Arrays.asList(1,2,3,4)); //1a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
-				maiorSequenciaUmEmUm(Arrays.asList(3,4,5,6,8,9,10)); //3a10 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
+				QtdFiltros(Arrays.asList(2,3,4)); //1a4// {1=169; 2=1190; 3=366; 4=53; 5=1}
+				maiorSequenciaDoisEmDois(Arrays.asList(1,2,3,4,5)); //1a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
+				maiorSequenciaUmEmUm(Arrays.asList(3,4,5,6,7,8,9,10)); //3a10 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
 				
 				linha(Arrays.asList(1, 2, 3, 4, 5),
-					  Arrays.asList(1, 2, 3, 4),  
+					  Arrays.asList(1, 2, 3, 4, 5),  
 					  Arrays.asList(1, 2, 3, 4), 
-					  Arrays.asList(1, 2, 3, 4),
-					  Arrays.asList(1, 2, 3, 4));
+					  Arrays.asList(1, 2, 3, 4, 5),
+					  Arrays.asList(2, 3, 4, 5));
 				
-				coluna(Arrays.asList(2, 3, 4, 5),
+				coluna(Arrays.asList(1, 2, 4, 5),
 					   Arrays.asList(1, 2, 3, 4, 5),
 					   Arrays.asList(1, 2, 3, 4, 5),
-					   Arrays.asList(2, 3, 4), 
-					   Arrays.asList(1, 2, 3, 4, 5));
+					   Arrays.asList(2, 3, 4, 5), 
+					   Arrays.asList(1, 2, 3, 4));
 				
 				/*1 a cada => [ 43332-3; 44322-4; 44331-8; 53322-11; 54321-12; 44421-25; 33333-32; 54222-35; 53331-37; 54411-121; 55221-194; 55311-277]*/
 				/*43332=626 ; 44322=452; 44331=242; 53322=185; 54321=159; 44421=78; 33333=60; 54222=56; 53331=52
@@ -137,7 +136,7 @@ public class Filtro {
 						,"54222"
 						,"53331"
 						,"54411"
-						//,"55221"
+						,"55221"
 						,"55311"
 						));
 						
@@ -153,8 +152,8 @@ public class Filtro {
 						,"54321"
 						,"44421"
 						,"54222"
-						,"33333"
-						//,"53331"
+					//	,"33333"
+						,"53331"
 						,"54411"
 						,"55221"
 						,"55311"
@@ -162,19 +161,19 @@ public class Filtro {
 			
 				//dezMenos();
 			
-				incluir(Arrays.asList(25)); //
+				 incluir(Arrays.asList(25)); //
 				// 1[4];2[4];3[3,4];4[4];5[4];6[4];7[4];8[4];9[4];10[3,4];11[4];12[3,4];13[4];14[3,4];15[4];16[4];17[3,4];18[4];19[3,4];20[4];21[4];22[3,4];23[4];24[4];25[4];
 				// retirar(Arrays.asList()); 
 				// 1 [7,8];2[7,8];3[6,7,8];4[8];5[8];6[7,8];7[6,7,8];8[7];9[7];10[8,9];11[7,8,9,10];12[7,8,9];13[8,9];14[7,8,9];15[6,7,8];16[7,8];17[6,7,8];18[7,8,9];19[7,8];20[7,8];21[7,8];22[6,7];23[7,8];24[7,8,9];25[7,8,9];
 				// naoIniciarCom(Arrays.asList( ));
 				// naoTerminarCom(Arrays.asList( ));
-		
-		/*10=4 a 8*/
-		listaMaisSaem(Arrays.asList(20, 3, 21, 16, 10, 17, 18, 1, 4, 5, 12, 15, 19));
-		listaMaisSaemNaoSairam(Arrays.asList(21, 16, 17, 18, 5, 1, 13, 25));
-		//listaMenosSaemNaoSairam(Arrays.asList(8, 9, 1, 7, 15));
-		//menores();
-		//soma();
+				
+						/*10=4 a 8*/
+				listaMaisSaem(Arrays.asList(2, 8, 9, 14, 20, 1, 7, 18, 3, 6, 11, 12, 17, 23));
+				listaMaisSaemNaoSairam(Arrays.asList(7, 8, 11, 12, 16, 23));
+				//listaMenosSaemNaoSairam(Arrays.asList());
+				//menores();
+				//soma();
 
 		return this.listaJogosCombinados;
 
@@ -1964,9 +1963,12 @@ public void colunas(List<String> lista) throws FileNotFoundException, IOExceptio
 
 			Set<Integer> intersectionRepetidos = new HashSet<Integer>(lista);
 			intersectionRepetidos.retainAll(j.getJogo());
-			//quando tem 14 -> 6 a 11 
-			//quando tem 13 -> 6 a 6 
-			if (Arrays.asList(6,7,8,9).contains(intersectionRepetidos.size())) {
+			//quando tem 15 -> 6 a 10
+			//quando tem 14 -> 6 a 10  
+			//quando tem 13 -> 6 a 10 *revisar
+			//quando tem 12 -> 5 a 9 *revisar
+			//quando tem 10 -> 4 a 8 * revisar
+			if (Arrays.asList(6,7,8,9,10).contains(intersectionRepetidos.size())) {
 				j.somaQuantidadeFiltros();
 				listaPorFiltro.add(j);
 			}
@@ -1989,7 +1991,9 @@ public void colunas(List<String> lista) throws FileNotFoundException, IOExceptio
 			intersectionRepetidos.retainAll(j.getJogo());
 			//25%
 			//quando tem 8 -> 3 a 6
-			if (Arrays.asList(3,4,5,6).contains(intersectionRepetidos.size())) {
+			//quando tem 6 -> 2 a 5
+			//quando tem 5 -> 1 a 5
+			if (Arrays.asList(2,3,4,5).contains(intersectionRepetidos.size())) {
 				j.somaQuantidadeFiltros();
 				listaPorFiltro.add(j);
 			}
@@ -2006,13 +2010,15 @@ public void colunas(List<String> lista) throws FileNotFoundException, IOExceptio
 		limpaListasAuxiliares();
 		listaParaAnalise.addAll(listaJogosCombinados);
 		
-		//quando tem 2 -> não arriscar
+		//quando tem 8 -> 3 a 7
+		//quando tem 5 -> 1 a 4
+		//quando tem 2 3 e 4 -> não arriscar
 		for (Jogo j : listaParaAnalise) {
 
 			Set<Integer> intersectionRepetidos = new HashSet<Integer>(lista);
 			intersectionRepetidos.retainAll(j.getJogo());
 			
-			if (Arrays.asList(1).contains(intersectionRepetidos.size())) {
+			if (Arrays.asList(1,2,3,4).contains(intersectionRepetidos.size())) {
 				j.somaQuantidadeFiltros();
 				listaPorFiltro.add(j);
 			}

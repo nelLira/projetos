@@ -87,6 +87,13 @@
 		// naoIniciarCom(Arrays.asList( ));
 		// naoTerminarCom(Arrays.asList( ));
 		
+				/*10=4 a 8*/
+		//listaMaisSaem(Arrays.asList());
+		//listaMaisSaemNaoSairam(Arrays.asList());
+		//listaMenosSaemNaoSairam(Arrays.asList());
+		//menores();
+		//soma();
+		
 		
 		
 		

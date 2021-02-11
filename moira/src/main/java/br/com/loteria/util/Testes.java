@@ -73,7 +73,9 @@ public class Testes {
 			List<Integer> numeros = new ArrayList<>();
 			
 			for (Entry<Integer, Integer> numero : mapa.entrySet()) {
-				if (numero.getValue() >= 12) {
+				//>= 12 pega a lista dos que MAIS saem
+				//<= 12 pega a lista dos que MENOS saem
+				if (numero.getValue() <= 12) {
 					numeros.add(numero.getKey());
 				}
 			}
@@ -95,15 +97,14 @@ public class Testes {
 			//System.out.println("proximo jogo => " + todosJogos.get(i+1).getJogo());
 			//System.out.println("saíram próximo jogo => " + sairamNoProximo);
 			
-		//	if (naoSairam.size() == 8) {
+			if (naoSairam.size() == 4) {
 				//System.out.println(numeros.size() + " - " + sairam.size());
-			//	System.out.println(sairamNoProximo.size());
-		//	}
+				System.out.println(sairamNoProximo.size());
+			}
 			
-		if (numeros.size() == 13) {
-			System.out.println(sairam.size());
-	
-		}
+//		if (numeros.size() == 15) {
+//			System.out.println(sairam.size());
+//		}
 
 			//System.out.println(naoSairam.size() + " - " + sairamNoProximo.size());
 			//System.out.println(naoSairam.size());
