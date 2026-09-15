@@ -80,7 +80,7 @@ public class Filtro {
 		listaJogosCheia.addAll(listaJogosCombinados);
 		
 		//[9-> 1 em cada 2; 8-> 1 em cada 4 ;10-> 1 em cada 5]
-				repetidosJogoAnterior(Arrays.asList(9));
+				repetidosJogoAnterior(Arrays.asList(8,9,10,11,12));
 
 				// [7 -> 1 em cada 3; 8 -> 1 em cada 4; 6-> 1 em cada 5]
 				// 5a9; {3=3, 4=21, 5=117, 6=339, 7=516, 8=429, 9=182,  10=41, 11=5} 
@@ -88,38 +88,38 @@ public class Filtro {
 
 				// [5-> 1 em cada 3; 6-> 1 em cada 4 ;4-> 1 em cada 6; 7-> 1 em cada 7]
 				// 4a7 {2=5, 3=76, 4=278, 5=520, 6=451, 7=257, 8=62, 9=4} 
-				primos(Arrays.asList(5,6,7)); 
+				primos(Arrays.asList(4,5,6,7)); 
 
 				//[4-> 1 em cada 3; 5-> 1 em cada 4; 3-> 1 em cada 5]
 				// 2a6 {1=8, 2=94, 3=351, 4=610, 5=479, 6=200, 7=19}
-				sequenciaDeFibonacci(Arrays.asList(2,3,4,5));
+				sequenciaDeFibonacci(Arrays.asList(3,4,5));
 
 				//[9-> 1 em cada 3; 10-> 1 em cada 4 ;11-> 1 em cada 6]
 				// 8a11 {6=2, 7=52,8=199, 9=450, 10=483, 11=261, 12=88,13=6}
-				quadrado(Arrays.asList(9,10,11));  
+				quadrado(Arrays.asList(8,10,11));  
 
 				// [5-> 1 em cada 3; 4-> 1 em cada 4; 6-> 1 em cada 5]
 				// 3a7 {1=1, 2=33, 3=193, 4=430, 5=541,  6=317,7=111,8=14}
-				multiplosDeTres(Arrays.asList(4,5,6)); 
+				multiplosDeTres(Arrays.asList(3,4,5,6)); 
 				
 				//1 a cada => [5-3; 6-3; 4-6; 7-7; 3-21; 8-35]
 				// 3a8 {1=2, 2=12, 3=84, 4=303, 5=538, 6=549, 7=254, 8=50, 9=3} 
 				numerosImportantes(Arrays.asList(4,5,6,7,8));
 				
-				QtdFiltros(Arrays.asList(2,3,4)); //1a4// {1=169; 2=1190; 3=366; 4=53; 5=1}
+				QtdFiltros(Arrays.asList(1,2,3,4)); //1a4// {1=169; 2=1190; 3=366; 4=53; 5=1}
 				maiorSequenciaDoisEmDois(Arrays.asList(1,2,3,4,5)); //1a5 {1=29, 2=847, 3=686, 4=205, 5=41, 6=9, 7=2}
-				maiorSequenciaUmEmUm(Arrays.asList(3,4,5,6,7,8,9,10)); //3a10 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
+				maiorSequenciaUmEmUm(Arrays.asList(3,4,5,6,7,10)); //3a10 {2=8, 3=231, 4=572, 5=499, 6=287, 7=123,  8=54, 9=20, 10=19, 11=3, 12=2, 13=0, 14=1 }
 				
 				linha(Arrays.asList(1, 2, 3, 4, 5),
-					  Arrays.asList(1, 2, 3, 4, 5),  
-					  Arrays.asList(1, 2, 3, 4), 
+					  Arrays.asList(1, 2, 3, 4),  
+					  Arrays.asList(2, 3, 4, 5), 
 					  Arrays.asList(1, 2, 3, 4, 5),
 					  Arrays.asList(2, 3, 4, 5));
 				
-				coluna(Arrays.asList(1, 2, 4, 5),
+				coluna(Arrays.asList(2, 4, 4, 5),
 					   Arrays.asList(1, 2, 3, 4, 5),
-					   Arrays.asList(1, 2, 3, 4, 5),
-					   Arrays.asList(2, 3, 4, 5), 
+					   Arrays.asList(1, 2, 3, 5),
+					   Arrays.asList(1, 2, 3, 4, 5), 
 					   Arrays.asList(1, 2, 3, 4));
 				
 				/*1 a cada => [ 43332-3; 44322-4; 44331-8; 53322-11; 54321-12; 44421-25; 33333-32; 54222-35; 53331-37; 54411-121; 55221-194; 55311-277]*/
@@ -130,9 +130,9 @@ public class Filtro {
 						,"44322"
 						,"44331"
 						,"53322"
-						,"54321"
-						,"44421"
-						,"33333"
+						//,"54321"
+						//,"44421"
+						//,"33333"
 						,"54222"
 						,"53331"
 						,"54411"
@@ -152,8 +152,8 @@ public class Filtro {
 						,"54321"
 						,"44421"
 						,"54222"
-					//	,"33333"
-						,"53331"
+						,"33333"
+						//,"53331"
 						,"54411"
 						,"55221"
 						,"55311"
@@ -169,9 +169,9 @@ public class Filtro {
 				// naoTerminarCom(Arrays.asList( ));
 				
 						/*10=4 a 8*/
-				listaMaisSaem(Arrays.asList(2, 8, 9, 14, 20, 1, 7, 18, 3, 6, 11, 12, 17, 23));
-				listaMaisSaemNaoSairam(Arrays.asList(7, 8, 11, 12, 16, 23));
-				//listaMenosSaemNaoSairam(Arrays.asList());
+				listaMaisSaem(Arrays.asList(3, 5, 15, 23, 9, 17, 21, 25, 4, 13, 16, 24));
+				//listaMaisSaemNaoSairam(Arrays.asList(7, 8, 11, 12, 16, 23));
+				listaMenosSaemNaoSairam(Arrays.asList(2, 18, 1, 6, 12, 22, 20));
 				//menores();
 				//soma();
 
@@ -921,7 +921,7 @@ public void colunas(List<String> lista) throws FileNotFoundException, IOExceptio
 			
 		}
 		atualizaListaFiltrada();
-		System.out.println("Tamanho da lista depois de filtrar melhores combinações -> " + listaJogosCombinados.size());
+		System.out.println("Tamanho da lista depois de filtrar melhores combinaï¿½ï¿½es -> " + listaJogosCombinados.size());
 	}
 
 	private void soma() {
@@ -1676,7 +1676,7 @@ public void colunas(List<String> lista) throws FileNotFoundException, IOExceptio
 		}
 
 		atualizaListaFiltrada();
-		System.out.println("Tamanho da lista depois de filtrar inclusão de números -> " + listaJogosCombinados.size());
+		System.out.println("Tamanho da lista depois de filtrar inclusï¿½o de nï¿½meros -> " + listaJogosCombinados.size());
 	}
 
 	private void retirar(List<Integer> lista) {
@@ -1699,7 +1699,7 @@ public void colunas(List<String> lista) throws FileNotFoundException, IOExceptio
 		}
 
 		atualizaListaFiltrada();
-		System.out.println("Tamanho da lista depois de filtrar retirada de números -> " + listaJogosCombinados.size());
+		System.out.println("Tamanho da lista depois de filtrar retirada de nï¿½meros -> " + listaJogosCombinados.size());
 	}
 
 	private void naoIniciarCom(List<Integer> lista) {
@@ -1717,7 +1717,7 @@ public void colunas(List<String> lista) throws FileNotFoundException, IOExceptio
 		}
 
 		atualizaListaFiltrada();
-		System.out.println("Tamanho da lista depois de filtrar não iniciar -> " + listaJogosCombinados.size());
+		System.out.println("Tamanho da lista depois de filtrar nï¿½o iniciar -> " + listaJogosCombinados.size());
 	}
 
 	private void naoTerminarCom(List<Integer> lista) {
@@ -1735,7 +1735,7 @@ public void colunas(List<String> lista) throws FileNotFoundException, IOExceptio
 		}
 
 		atualizaListaFiltrada();
-		System.out.println("Tamanho da lista depois de filtrar não iniciar -> " + listaJogosCombinados.size());
+		System.out.println("Tamanho da lista depois de filtrar nï¿½o iniciar -> " + listaJogosCombinados.size());
 	}
 
 	public List<Jogo> buscarListaCambinacao() {
@@ -2001,7 +2001,7 @@ public void colunas(List<String> lista) throws FileNotFoundException, IOExceptio
 		
 	
 		atualizaListaFiltrada();
-		System.out.println("Tamanho da lista depois de filtrar os que mais saem e não saíram-> " + listaJogosCombinados.size());
+		System.out.println("Tamanho da lista depois de filtrar os que mais saem e nï¿½o saï¿½ram-> " + listaJogosCombinados.size());
 
 	}
 	
@@ -2012,13 +2012,13 @@ public void colunas(List<String> lista) throws FileNotFoundException, IOExceptio
 		
 		//quando tem 8 -> 3 a 7
 		//quando tem 5 -> 1 a 4
-		//quando tem 2 3 e 4 -> não arriscar
+		//quando tem 2 3 e 4 -> nï¿½o arriscar
 		for (Jogo j : listaParaAnalise) {
 
 			Set<Integer> intersectionRepetidos = new HashSet<Integer>(lista);
 			intersectionRepetidos.retainAll(j.getJogo());
 			
-			if (Arrays.asList(1,2,3,4).contains(intersectionRepetidos.size())) {
+			if (Arrays.asList(3,4,5,6,7).contains(intersectionRepetidos.size())) {
 				j.somaQuantidadeFiltros();
 				listaPorFiltro.add(j);
 			}
@@ -2026,7 +2026,7 @@ public void colunas(List<String> lista) throws FileNotFoundException, IOExceptio
 		
 	
 		atualizaListaFiltrada();
-		System.out.println("Tamanho da lista depois de filtrar os que menos saem e não saíram-> " + listaJogosCombinados.size());
+		System.out.println("Tamanho da lista depois de filtrar os que menos saem e nï¿½o saï¿½ram-> " + listaJogosCombinados.size());
 
 	}
 	
